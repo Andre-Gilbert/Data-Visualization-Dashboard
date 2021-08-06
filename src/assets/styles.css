@@ -1,8 +1,81 @@
 .navbar {
-  font-size: 1.4rem;
+  width: 100%;
+  height: 4.4rem;
+  padding: 0 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #354a5f;
 }
 
-.footer {
-  font-size: 1.4rem;
+.navbar .container {
+  height: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .logo {
+  width: 6rem;
+  height: 3rem;
+}
+
+.navbar .nav-container {
+  margin: 0 0 0 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.4rem;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.navbar .nav-container .arrow-down {
+  margin: 0 0 0 0.2rem;
+}
+
+.navbar .nav-container:hover {
+  background-color: #283848;
+}
+
+.navbar .user-icon {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #29313a;
+  background-color: #286eb4;
+}
+
+.navbar .user-icon .icon-text {
+  margin: 0;
 }
 /*# sourceMappingURL=styles.css.map */
