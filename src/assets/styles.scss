@@ -13,10 +13,19 @@ $side-padding-sm: 0 1.2rem;
   height: 4.4rem;
   padding: $side-padding-sm;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
   background-color: $sap-header-color;
+
+  .main-content {
+    max-width: 144rem;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .container {
     height: 3rem;
