@@ -94,8 +94,8 @@
   position: relative;
   padding: 4rem 1.2rem;
   background-color: #ffffff;
-  -webkit-box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
-          box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: inset 0 -0.1rem #d9d9d9, 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.08);
+          box-shadow: inset 0 -0.1rem #d9d9d9, 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.08);
 }
 
 .header .main-content {
@@ -138,7 +138,7 @@
 .page {
   display: block;
   position: relative;
-  padding: 2rem 1.2rem;
+  padding: 0 1.2rem 2rem;
 }
 
 .page .main-content {
@@ -149,18 +149,37 @@
 }
 
 .page .chart-container {
-  margin: 0 0 2rem;
-  padding: 3rem;
+  width: 100%;
+  margin: 2rem 0 0;
+  padding: 2rem;
   border-radius: 0.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   color: #32363a;
   background-color: #ffffff;
-  -webkit-box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
-          box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.page .chart-container .chart-title {
+  margin: 0 0 2rem;
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: #32363a;
+}
+
+.page .chart-container .chart-one {
+  margin: 0 0 2rem;
 }
 
 /* large size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media (min-width: 1024px) {
+@media screen and (min-width: 1024px) {
   .filter-bar {
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
@@ -169,6 +188,23 @@
   }
   .filter-bar .filter-bar-container:not(:last-child) {
     margin: 0 2rem 0 0 !important;
+  }
+  .chart-container {
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+            flex-direction: row !important;
+  }
+  .chart-container .chart-one {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 50%;
+            flex: 1 1 50%;
+    margin: 0 2rem 0 0 !important;
+  }
+  .chart-container .chart-two {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 50%;
+            flex: 1 1 50%;
   }
 }
 /*# sourceMappingURL=styles.css.map */
