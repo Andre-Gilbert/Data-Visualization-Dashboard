@@ -21,6 +21,8 @@ body {
 }
 
 button {
+  font-size: 1.6rem;
+  font-family: '72', '72full', Arial, Helvetica, sans-serif;
   background-color: transparent;
   border: none;
 }
@@ -28,3 +30,4 @@ button {
 p {
   margin: 0;
 }
+/*# sourceMappingURL=global_styles.css.map */

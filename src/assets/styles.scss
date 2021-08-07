@@ -1,4 +1,3 @@
-// colors
 $sap-base-color: #ffffff;
 $sap-text-color: #32363a;
 $sap-label-color: #89919a;
@@ -7,7 +6,8 @@ $sap-header-color: #354a5f;
 $sap-user-icon-color: #29313a;
 $sap-user-icon-background-color: #286eb4;
 
-// navbar section
+/* navigation section
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .navbar {
   width: 100%;
   height: 4.4rem;
@@ -76,14 +76,15 @@ $sap-user-icon-background-color: #286eb4;
   }
 }
 
-// header section
+/* header section
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .header {
   display: block;
   position: relative;
   padding: 4rem 1.2rem;
 
   background-color: $sap-base-color;
-  box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 -0.1rem #d9d9d9, 0 0.2rem 0.4rem 0 rgb(0 0 0 / 8%);
 
   .main-content {
     max-width: 144rem;
@@ -116,7 +117,8 @@ $sap-user-icon-background-color: #286eb4;
   }
 }
 
-// pages section
+/* page section
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page {
   display: block;
   position: relative;
@@ -136,17 +138,18 @@ $sap-user-icon-background-color: #286eb4;
 
     color: $sap-text-color;
     background-color: $sap-base-color;
-    box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 0 0.1rem rgb(0 0 0 / 10%), 0 0.2rem 0.8rem 0 rgb(0 0 0 / 10%);
   }
 }
 
-// large size screen
-@media screen and (min-width: 102.4rem) {
+/* large size screen
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (min-width: 1024px) {
   .filter-bar {
-    flex-direction: row;
+    flex-direction: row !important;
 
     .filter-bar-container:not(:last-child) {
-      margin: 0 0 0 2rem;
+      margin: 0 2rem 0 0 !important;
     }
   }
 }
