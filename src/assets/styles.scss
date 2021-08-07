@@ -53,10 +53,10 @@ $sap-user-icon-background-color: #286eb4;
 
     cursor: pointer;
     transition: all 0.2s;
+  }
 
-    .arrow-down {
-      margin: 0 0 0 0.2rem;
-    }
+  .arrow-down {
+    margin: 0 0 0 0.2rem;
   }
 
   .nav-container:hover {
@@ -105,16 +105,38 @@ $sap-user-icon-background-color: #286eb4;
     margin: 0 0 4rem;
     display: flex;
     flex-direction: column;
+  }
 
-    .filter-bar-container:not(:last-child) {
-      margin: 0 0 3rem;
-    }
+  .filter-bar-container:not(:last-child) {
+    margin: 0 0 3rem;
+  }
 
-    .filter-bar-label {
-      margin: 0 0 0.4rem;
-      font-size: 1.4rem;
-      color: $sap-label-color;
-    }
+  .filter-bar-label {
+    margin: 0 0 0.4rem;
+    font-size: 1.4rem;
+    color: $sap-label-color;
+  }
+}
+
+/* numeric point chart section
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.numeric-point-chart {
+  display: block;
+  position: relative;
+
+  .npc-container-one {
+    margin: 0 0 3rem;
+  }
+
+  .npc-title {
+    margin: 0 0 2rem;
+    font-size: 2rem;
+    font-weight: 400;
+    color: $sap-text-color;
+  }
+
+  .npc-chart-one {
+    margin: 0 0 3rem;
   }
 }
 
@@ -144,41 +166,70 @@ $sap-user-icon-background-color: #286eb4;
     color: $sap-text-color;
     background-color: $sap-base-color;
     box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+  }
 
-    .chart-title {
-      margin: 0 0 2rem;
-      font-size: 2.4rem;
-      font-weight: 400;
-      color: $sap-text-color;
-    }
+  .chart-title {
+    margin: 0 0 2rem;
+    font-size: 2rem;
+    font-weight: 400;
+    color: $sap-text-color;
+  }
 
-    .chart-one {
-      margin: 0 0 2rem;
-    }
+  .chart-one {
+    margin: 0 0 2rem;
+  }
+}
+
+/* medium size screen
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 60rem) {
+  .npc-container-one .npc-container-two {
+    display: flex;
+  }
+
+  .npc-chart-one {
+    flex: 1 1 50%;
+  }
+
+  .npc-chart-two {
+    flex: 1 1 50%;
   }
 }
 
 /* large size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 102.4rem) {
   .filter-bar {
     flex-direction: row !important;
+  }
 
-    .filter-bar-container:not(:last-child) {
-      margin: 0 2rem 0 0 !important;
-    }
+  .filter-bar-container:not(:last-child) {
+    margin: 0 2rem 0 0 !important;
+  }
+
+  .numeric-point-chart {
+    display: flex;
+  }
+
+  .npc-container-one {
+    flex: 1 1 50%;
+    margin: 0 2rem 0 0 !important;
+  }
+
+  .npc-container-two {
+    flex: 1 1 50%;
   }
 
   .chart-container {
     flex-direction: row !important;
+  }
 
-    .chart-one {
-      flex: 1 1 50%;
-      margin: 0 2rem 0 0 !important;
-    }
+  .chart-one {
+    flex: 1 1 50%;
+    margin: 0 2rem 0 0 !important;
+  }
 
-    .chart-two {
-      flex: 1 1 50%;
-    }
+  .chart-two {
+    flex: 1 1 50%;
   }
 }

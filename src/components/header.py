@@ -1,11 +1,13 @@
 import dash_core_components as dcc
 import dash_html_components as html
 
+from components.os_numeric_point_chart import os_numeric_point_chart
 
-def header(page_name: str = 'Ordered Spend'):
+
+def header():
     header = html.Div([
         html.Div([
-            html.H1(page_name, className='page-title'),
+            html.H1('Ordered Spend', className='page-title'),
             html.Div([
                 html.Div([
                     html.P('Company Code:', className='filter-bar-label'),
@@ -26,7 +28,8 @@ def header(page_name: str = 'Ordered Spend'):
                 ],
                          className='filter-bar-container')
             ],
-                     className='filter-bar')
+                     className='filter-bar'),
+            os_numeric_point_chart()
         ],
                  className='main-content')
     ],
