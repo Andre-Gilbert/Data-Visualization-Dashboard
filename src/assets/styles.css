@@ -128,7 +128,37 @@
   color: #89919a;
 }
 
-.header .filter-bar .filter-bar-input {
-  border-radius: 0.02rem;
+.page {
+  display: block;
+  position: relative;
+  padding: 2rem 1.2rem;
 }
-/*# sourceMappingURL=styles.css.map */
+
+.page .main-content {
+  max-width: 144rem;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.page .chart-container {
+  margin: 0 0 2rem;
+  padding: 3rem;
+  border-radius: 0.4rem;
+  color: #32363a;
+  background-color: #ffffff;
+  -webkit-box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
+          box-shadow: inset 0 -0.0625rem #d9d9d9, 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.08);
+}
+
+@media screen and (min-width: 102.4rem) {
+  .filter-bar {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .filter-bar .filter-bar-container:not(:last-child) {
+    margin: 0 0 0 2rem;
+  }
+}
