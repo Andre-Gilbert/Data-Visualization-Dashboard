@@ -19,7 +19,7 @@ $sap-user-icon-background-color: #286eb4;
   background-color: $sap-header-color;
 
   .main-content {
-    max-width: 144rem;
+    max-width: 160rem;
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -88,7 +88,7 @@ $sap-user-icon-background-color: #286eb4;
   box-shadow: inset 0 -0.1rem rgb(217, 217, 217), 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.08);
 
   .main-content {
-    max-width: 144rem;
+    max-width: 160rem;
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -148,7 +148,7 @@ $sap-user-icon-background-color: #286eb4;
   padding: 0 1.2rem 2rem;
 
   .main-content {
-    max-width: 144rem;
+    max-width: 164rem;
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -183,12 +183,13 @@ $sap-user-icon-background-color: #286eb4;
 /* medium size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 60rem) {
-  .npc-container-one .npc-container-two {
+  .npc-chart-container {
     display: flex;
   }
 
   .npc-chart-one {
     flex: 1 1 50%;
+    margin: 0 2rem 0 0;
   }
 
   .npc-chart-two {
