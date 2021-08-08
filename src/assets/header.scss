@@ -1,0 +1,103 @@
+@import 'theme';
+
+.header {
+  display: block;
+  position: relative;
+  padding: 4rem 1.2rem;
+
+  background-color: $sap-base-color;
+  box-shadow: inset 0 -0.1rem rgb(217, 217, 217), 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.08);
+}
+
+.header-main {
+  max-width: 160rem;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.page-title {
+  margin: 0 0 2rem;
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: $sap-text-color;
+}
+
+.filter-bar {
+  margin: 0 0 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-bar-container:not(:last-child) {
+  margin: 0 0 3rem;
+}
+
+.filter-bar-label {
+  margin: 0 0 0.4rem;
+  font-size: 1.4rem;
+  color: $sap-label-color;
+}
+
+.numeric-point-chart {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.npc-container-current-year {
+  margin: 0 0 3rem;
+}
+
+.npc-title {
+  margin: 0 0 2rem;
+  font-size: 2rem;
+  font-weight: 400;
+  color: $sap-text-color;
+}
+
+.npc-chart-current-year {
+  margin: 0 0 3rem;
+}
+
+/* medium size screen
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 768px) {
+  .filter-bar {
+    flex-direction: row;
+  }
+
+  .filter-bar-container:not(:last-child) {
+    margin: 0 2rem 0 0;
+  }
+
+  .npc-chart-container {
+    display: flex;
+  }
+
+  .npc-chart-current-year {
+    flex: 1 1 50%;
+    margin: 0 2rem 0 0;
+  }
+
+  .npc-chart-prior-year {
+    flex: 1 1 50%;
+  }
+}
+
+/* large size screen
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 1024px) {
+  .numeric-point-chart {
+    flex-direction: row;
+  }
+
+  .npc-container-current-year {
+    flex: 1 1 50%;
+    margin: 0 2rem 0 0;
+  }
+
+  .npc-container-prior-year {
+    flex: 1 1 50%;
+  }
+}

@@ -27,7 +27,7 @@ def ordered_spend(df: pd.DataFrame) -> html.Div:
             ],
                      className='chart-container')
         ],
-                 className='main-content')
+                 className='page-main')
     ],
                              className='page')
     return ordered_spend

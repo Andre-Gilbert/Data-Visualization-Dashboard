@@ -6,7 +6,7 @@ def navbar(app):
     navbar = html.Div([
         html.Div([
             html.Div([
-                html.Img(src=app.get_asset_url("logo.svg")),
+                html.Img(src=app.get_asset_url("logo.svg"), className='logo'),
                 dcc.Dropdown(id='display-switch',
                              options=[{
                                  'label': 'Ordered Spend',
@@ -19,10 +19,10 @@ def navbar(app):
                              clearable=False,
                              searchable=False)
             ],
-                     className='container'),
+                     className='navigation-container'),
             html.Div(html.P('SF', className='icon-text'), className='user-icon')
         ],
-                 className='main-content')
+                 className='navbar-main')
     ],
                       className='navbar')
     return navbar

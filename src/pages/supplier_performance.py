@@ -33,7 +33,7 @@ def supplier_performance():
             ],
                      className='chart-container')
         ],
-                 className='main-content')
+                 className='page-main')
     ],
                                     className='page')
     return supplier_performance

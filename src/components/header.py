@@ -31,7 +31,7 @@ def header():
                      className='filter-bar'),
             os_numeric_point_chart()
         ],
-                 className='main-content')
+                 className='header-main')
     ],
                       className='header')
     return header

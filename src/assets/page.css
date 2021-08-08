@@ -1,0 +1,64 @@
+@charset "UTF-8";
+.page {
+  display: block;
+  position: relative;
+  padding: 0 1.2rem 2rem;
+}
+
+.page-main {
+  max-width: 164rem;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.chart-container {
+  width: 100%;
+  margin: 2rem 0 0;
+  padding: 2rem;
+  border-radius: 0.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #32363a;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.chart-title {
+  margin: 0 0 2rem;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #32363a;
+}
+
+.chart-one {
+  margin: 0 0 2rem;
+}
+
+/* large size screen
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 1024px) {
+  .chart-container {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .chart-one {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 50%;
+            flex: 1 1 50%;
+    margin: 0 2rem 0 0;
+  }
+  .chart-two {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 50%;
+            flex: 1 1 50%;
+  }
+}
