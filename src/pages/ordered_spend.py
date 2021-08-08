@@ -1,7 +1,8 @@
 import dash_html_components as html
+import pandas as pd
 
 
-def ordered_spend():
+def ordered_spend(df: pd.DataFrame) -> html.Div:
     ordered_spend = html.Div([
         html.Div([
             html.Div([

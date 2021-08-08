@@ -75,8 +75,3 @@ def __calculate_delivery_details(df: pd.DataFrame) -> None:
     """Calculated Delivery Deviation and classifies the corresponding indicator."""
     df['Delivery Deviation (Days)'] = (df['Delivery Date'] - df['Supplier Delivery Date']).dt.days
     df['Deviation Indicator'] = df.apply(__determine_delivery_indicator, axis=1)
-
-
-df = get_data()
-
-print(df.head())
