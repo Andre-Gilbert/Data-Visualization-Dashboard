@@ -7,7 +7,7 @@ from components.os_numeric_point_chart import os_numeric_point_chart
 def header():
     header = html.Div([
         html.Div([
-            html.H1('Ordered Spend', className='page-title'),
+            html.H1(id='page-header', className='page-title'),
             html.Div([
                 html.Div([
                     html.P('Company Code:', className='filter-bar-label'),

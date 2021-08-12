@@ -1,5 +1,6 @@
 import dash_html_components as html
 
+import utils.callbacks
 from app import app
 from components.header import header
 from components.navbar import navbar

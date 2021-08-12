@@ -7,7 +7,7 @@ def navbar(app):
         html.Div([
             html.Div([
                 html.Img(src=app.get_asset_url("logo.svg"), className='logo'),
-                dcc.Dropdown(id='display-switch',
+                dcc.Dropdown(id='page-switch',
                              options=[{
                                  'label': 'Ordered Spend',
                                  'value': 'OS'
