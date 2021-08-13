@@ -1,8 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
 
-from components.os_numeric_point_chart import os_numeric_point_chart
-
 
 def header():
     header = html.Div([
@@ -29,7 +27,7 @@ def header():
                          className='filter-bar-container')
             ],
                      className='filter-bar'),
-            os_numeric_point_chart()
+            html.Div(id='numeric-point-chart')
         ],
                  className='header-main')
     ],

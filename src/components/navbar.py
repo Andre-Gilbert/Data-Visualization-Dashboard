@@ -1,4 +1,4 @@
-import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
 
 
@@ -6,18 +6,15 @@ def navbar(app):
     navbar = html.Div([
         html.Div([
             html.Div([
-                html.Img(src=app.get_asset_url("logo.svg"), className='logo'),
-                dcc.Dropdown(id='page-switch',
-                             options=[{
-                                 'label': 'Ordered Spend',
-                                 'value': 'OS'
-                             }, {
-                                 'label': 'Supplier Performance',
-                                 'value': 'SP'
-                             }],
-                             value='OS',
-                             clearable=False,
-                             searchable=False)
+                html.Img(src=app.get_asset_url('logo.svg'), className='logo'),
+                dbc.DropdownMenu(
+                    id='dropdown',
+                    label='Ordered Spend',
+                    children=[
+                        dbc.DropdownMenuItem('Ordered Spend', id='OS'),
+                        dbc.DropdownMenuItem('Supplier Performance', id='SP')
+                    ],
+                )
             ],
                      className='navigation-container'),
             html.Div(html.P('SF', className='icon-text'), className='user-icon')

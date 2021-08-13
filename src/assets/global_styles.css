@@ -21,10 +21,8 @@ body {
 }
 
 button {
-  font-size: 1.6rem;
-  font-family: '72', '72full', Arial, Helvetica, sans-serif;
-  background-color: transparent;
-  border: none;
+  font-size: 1.6rem !important;
+  border: none !important;
 }
 
 p {

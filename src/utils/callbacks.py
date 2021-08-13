@@ -1,12 +1,48 @@
-from dash.dependencies import Input, Output
-
+import dash
 from app import app
+from components.os_numeric_point_chart import os_numeric_point_chart
+from components.sp_numeric_point_chart import sp_numeric_point_chart
+from dash.dependencies import Input, Output
+from pages.ordered_spend import ordered_spend
+from pages.supplier_performance import supplier_performance
 
 
-@app.callback(Output(component_id='page-header', component_property='children'),
-              Input(component_id='page-switch', component_property='value'))
-def update_page_header(page_id):
-    if page_id == 'OS':
-        return 'Ordered Spend'
+@app.callback([
+    Output(component_id='dropdown', component_property='label'),
+    Output(component_id='page-header', component_property='children'),
+    Output(component_id='numeric-point-chart', component_property='children'),
+    Output(component_id='page-content', component_property='children')
+], [Input("OS", "n_clicks"), Input("SP", "n_clicks")])
+def update_page_header(*args):
+    id_lookup = {'OS': 'Ordered Spend', 'SP': 'Supplier Performance'}
+    ctx = dash.callback_context
+
+    if not ctx.triggered:
+        button_id = 'OS'
     else:
-        return 'Supplier Performance'
+        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    if button_id == 'OS':
+        page_header = 'Ordered Spend'
+        page_numeric_point_chart = os_numeric_point_chart()
+        page_content = ordered_spend()
+        return id_lookup[button_id], page_header, page_numeric_point_chart, page_content
+
+    else:
+        page_header = 'Supplier Performance'
+        page_content = supplier_performance()
+        page_numeric_point_chart = sp_numeric_point_chart()
+        return id_lookup[button_id], page_header, page_numeric_point_chart, page_content
+
+
+@app.callback([
+    Output(component_id='chard-id-1', component_property='children'),
+    Output(component_id='chard-id-2', component_property='children')
+], [
+    Input(component_id='company-code', component_property='value'),
+    Input(component_id='purchasing-org', component_property='value'),
+    Input(component_id='plant', component_property='value'),
+    Input(component_id='material-group', component_property='value')
+])
+def update_charts(company_code, purchasing_org, plant, material_group):
+    pass

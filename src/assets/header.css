@@ -54,6 +54,10 @@
   position: relative;
 }
 
+.npc-supplier-performance {
+  margin: 0 0 3rem;
+}
+
 .npc-container-current-year {
   margin: 0 0 3rem;
 }
@@ -85,6 +89,9 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+  }
+  .npc-supplier-performance {
+    margin: 0 15rem 0 0;
   }
   .npc-chart-current-year {
     -webkit-box-flex: 1;
@@ -118,5 +125,8 @@
     -webkit-box-flex: 1;
         -ms-flex: 1 1 50%;
             flex: 1 1 50%;
+  }
+  .npc-supplier-performance {
+    margin: 0 30rem 0 0;
   }
 }
