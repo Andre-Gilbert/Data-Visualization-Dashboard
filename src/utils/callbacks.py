@@ -12,7 +12,8 @@ from pages.supplier_performance import supplier_performance
     Output(component_id='page-header', component_property='children'),
     Output(component_id='numeric-point-chart', component_property='children'),
     Output(component_id='page-content', component_property='children')
-], [Input("OS", "n_clicks"), Input("SP", "n_clicks")])
+], [Input(component_id='OS', component_property='n_clicks'),
+    Input(component_id='SP', component_property='n_clicks')])
 def update_page_header(*args):
     id_lookup = {'OS': 'Ordered Spend', 'SP': 'Supplier Performance'}
     ctx = dash.callback_context
@@ -23,16 +24,18 @@ def update_page_header(*args):
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
 
     if button_id == 'OS':
+        dropdown_label = id_lookup[button_id]
         page_header = 'Ordered Spend'
         page_numeric_point_chart = os_numeric_point_chart()
         page_content = ordered_spend()
-        return id_lookup[button_id], page_header, page_numeric_point_chart, page_content
+        return dropdown_label, page_header, page_numeric_point_chart, page_content
 
     else:
+        dropdown_label = id_lookup[button_id]
         page_header = 'Supplier Performance'
         page_content = supplier_performance()
         page_numeric_point_chart = sp_numeric_point_chart()
-        return id_lookup[button_id], page_header, page_numeric_point_chart, page_content
+        return dropdown_label, page_header, page_numeric_point_chart, page_content
 
 
 @app.callback([
