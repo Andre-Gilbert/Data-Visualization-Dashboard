@@ -29,7 +29,6 @@ def update_page(*args: str):
         page_numeric_point_chart = os_numeric_point_chart()
         page_content = ordered_spend()
         return dropdown_label, page_header, page_numeric_point_chart, page_content
-
     else:
         dropdown_label = id_lookup[button_id]
         page_header = 'Supplier Performance'
