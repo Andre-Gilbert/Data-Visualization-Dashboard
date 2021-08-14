@@ -14,7 +14,7 @@ from pages.supplier_performance import supplier_performance
     Output(component_id='page-content', component_property='children')
 ], [Input(component_id='OS', component_property='n_clicks'),
     Input(component_id='SP', component_property='n_clicks')])
-def update_page_header(*args):
+def update_page(*args: str):
     id_lookup = {'OS': 'Ordered Spend', 'SP': 'Supplier Performance'}
     ctx = dash.callback_context
 
@@ -39,8 +39,10 @@ def update_page_header(*args):
 
 
 @app.callback([
-    Output(component_id='chard-id-1', component_property='children'),
-    Output(component_id='chard-id-2', component_property='children')
+    Output(component_id='chart-id-1', component_property='children'),
+    Output(component_id='chart-id-2', component_property='children'),
+    Output(component_id='chart-id-3', component_property='children'),
+    Output(component_id='chart-id-4', component_property='children')
 ], [
     Input(component_id='company-code', component_property='value'),
     Input(component_id='purchasing-org', component_property='value'),
@@ -48,4 +50,8 @@ def update_page_header(*args):
     Input(component_id='material-group', component_property='value')
 ])
 def update_charts(company_code, purchasing_org, plant, material_group):
-    pass
+    chart1 = None
+    chart2 = None
+    chart3 = None
+    chart4 = None
+    return chart1, chart2, chart3, chart4

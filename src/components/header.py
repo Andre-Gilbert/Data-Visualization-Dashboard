@@ -1,28 +1,99 @@
+import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
 
-def header():
+def header() -> html.Div:
     header = html.Div([
         html.Div([
             html.H1(id='page-header', className='page-title'),
             html.Div([
                 html.Div([
                     html.P('Company Code:', className='filter-bar-label'),
-                    dcc.Input(id='input-company-code', type='search')
+                    dbc.Select(
+                        id="company-code",
+                        options=[
+                            {
+                                "label": "Option 1",
+                                "value": "1"
+                            },
+                            {
+                                "label": "Option 2",
+                                "value": "2"
+                            },
+                            {
+                                "label": "Disabled option",
+                                "value": "3",
+                                "disabled": True
+                            },
+                        ],
+                    )
                 ],
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Purchasing Organization:', className='filter-bar-label'),
-                    dcc.Input(id='input-purchasing-org', type='search')
+                    dbc.Select(
+                        id="purchasing-org",
+                        options=[
+                            {
+                                "label": "Option 1",
+                                "value": "1"
+                            },
+                            {
+                                "label": "Option 2",
+                                "value": "2"
+                            },
+                            {
+                                "label": "Disabled option",
+                                "value": "3",
+                                "disabled": True
+                            },
+                        ],
+                    )
                 ],
                          className='filter-bar-container'),
-                html.Div([html.P('Plant:', className='filter-bar-label'),
-                          dcc.Input(id='input-plant', type='search')],
+                html.Div([
+                    html.P('Plant:', className='filter-bar-label'),
+                    dbc.Select(
+                        id="plant",
+                        options=[
+                            {
+                                "label": "Option 1",
+                                "value": "1"
+                            },
+                            {
+                                "label": "Option 2",
+                                "value": "2"
+                            },
+                            {
+                                "label": "Disabled option",
+                                "value": "3",
+                                "disabled": True
+                            },
+                        ],
+                    )
+                ],
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Material Group:', className='filter-bar-label'),
-                    dcc.Input(id='input-material-group', type='search')
+                    dbc.Select(
+                        id="material-group",
+                        options=[
+                            {
+                                "label": "Option 1",
+                                "value": "1"
+                            },
+                            {
+                                "label": "Option 2",
+                                "value": "2"
+                            },
+                            {
+                                "label": "Disabled option",
+                                "value": "3",
+                                "disabled": True
+                            },
+                        ],
+                    )
                 ],
                          className='filter-bar-container')
             ],

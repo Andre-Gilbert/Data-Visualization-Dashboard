@@ -1,7 +1,7 @@
 import dash_html_components as html
 
 
-def os_numeric_point_chart():
+def os_numeric_point_chart() -> html.Div:
     os_numeric_point_chart = html.Div([
         html.Div([
             html.H1('2021', className='npc-title'),
