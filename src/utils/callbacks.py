@@ -50,8 +50,8 @@ def update_page(*args: str):
     Input(component_id='material-group', component_property='value')
 ])
 def update_charts(company_code, purchasing_org, plant, material_group):
-    chart1 = None
-    chart2 = None
-    chart3 = None
-    chart4 = None
+    chart1 = company_code
+    chart2 = purchasing_org
+    chart3 = plant
+    chart4 = material_group
     return chart1, chart2, chart3, chart4
