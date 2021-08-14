@@ -23,14 +23,14 @@ def update_page(*args: str):
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
 
+    dropdown_label = id_lookup[button_id]
+
     if button_id == 'OS':
-        dropdown_label = id_lookup[button_id]
         page_header = 'Ordered Spend'
         page_numeric_point_chart = os_numeric_point_chart()
         page_content = ordered_spend()
         return dropdown_label, page_header, page_numeric_point_chart, page_content
     else:
-        dropdown_label = id_lookup[button_id]
         page_header = 'Supplier Performance'
         page_content = supplier_performance()
         page_numeric_point_chart = sp_numeric_point_chart()
