@@ -1,3 +1,5 @@
+@import 'theme';
+
 *,
 :after,
 :before {
@@ -16,12 +18,15 @@ body {
   margin: 0;
   font-size: 16px;
   font-family: '72', '72full', Arial, Helvetica, sans-serif;
-  background-color: #f7f7f7;
+  background-color: $sap-app-background-color;
 }
 
 button {
   font-size: 1.6rem !important;
   border: none !important;
+}
+a {
+  color: $sap-tab-color;
 }
 
 p {

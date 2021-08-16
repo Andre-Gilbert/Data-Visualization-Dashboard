@@ -25,6 +25,10 @@ button {
   border: none !important;
 }
 
+a {
+  color: #6a6d70;
+}
+
 p {
   margin: 0;
 }

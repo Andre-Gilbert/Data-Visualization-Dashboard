@@ -15,33 +15,22 @@ df_bar_charts = get_data_bar_charts(df)
 
 
 @app.callback([
-    Output(component_id='dropdown', component_property='label'),
     Output(component_id='page-header', component_property='children'),
     Output(component_id='numeric-point-chart', component_property='children'),
     Output(component_id='page-content', component_property='children')
-], [Input(component_id='OS', component_property='n_clicks'),
-    Input(component_id='SP', component_property='n_clicks')])
-def update_page(*args: str):
-    id_lookup = {'OS': 'Ordered Spend', 'SP': 'Supplier Performance'}
-    ctx = dash.callback_context
-
-    if not ctx.triggered:
-        button_id = 'OS'
-    else:
-        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-
-    dropdown_label = id_lookup[button_id]
-
-    if button_id == 'OS':
+], [Input(component_id='tabs', component_property='active_tab')])
+def update_page(active_tab: str):
+    print(active_tab)
+    if active_tab == 'tab-0':
         page_header = 'Ordered Spend'
         page_numeric_point_chart = os_numeric_point_chart()
         page_content = ordered_spend()
-        return dropdown_label, page_header, page_numeric_point_chart, page_content
-    else:
+        return page_header, page_numeric_point_chart, page_content
+    elif active_tab == 'tab-1':
         page_header = 'Supplier Performance'
         page_content = supplier_performance()
         page_numeric_point_chart = sp_numeric_point_chart()
-        return dropdown_label, page_header, page_numeric_point_chart, page_content
+        return page_header, page_numeric_point_chart, page_content
 
 
 @app.callback([

@@ -18,12 +18,17 @@ def navbar() -> html.Div:
                         ],
                     )
                 ],
-                         className='navigation-container'),
+                         className='app-bar-container'),
                 html.Div(html.P('SF', className='icon-text'), className='user-icon')
             ],
-                     className='navbar-main')
+                     className='app-bar-main')
         ],
-                 className='appbar'),
-        html.Div('Hello', className='navbar')
+                 className='app-bar'),
+        html.Div(dbc.Tabs(
+            [dbc.Tab(label='Ordered Spend', id='tab-0'),
+             dbc.Tab(label='Supplier Performance', id='tab-1')],
+            id='tabs',
+            active_tab='tab-0'),
+                 className='navbar')
     ])
     return navbar
