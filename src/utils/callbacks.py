@@ -1,10 +1,17 @@
 import dash
 from app import app
+from components.os_bar_charts import get_data_bar_charts, os_bar_chart
 from components.os_numeric_point_chart import os_numeric_point_chart
 from components.sp_numeric_point_chart import sp_numeric_point_chart
 from dash.dependencies import Input, Output
 from pages.ordered_spend import ordered_spend
 from pages.supplier_performance import supplier_performance
+
+from utils.data_prep import get_data
+
+df = get_data()
+
+df_bar_charts = get_data_bar_charts(df)
 
 
 @app.callback([
@@ -41,7 +48,7 @@ def update_page(*args: str):
     Output(component_id='chart-id-1', component_property='children'),
     Output(component_id='chart-id-2', component_property='children'),
     Output(component_id='chart-id-3', component_property='children'),
-    Output(component_id='chart-id-4', component_property='children')
+    Output(component_id='bar-chart-os', component_property='figure')
 ], [
     Input(component_id='company-code', component_property='value'),
     Input(component_id='purchasing-org', component_property='value'),
@@ -52,5 +59,5 @@ def update_charts(company_code, purchasing_org, plant, material_group):
     chart1 = company_code
     chart2 = purchasing_org
     chart3 = plant
-    chart4 = material_group
+    chart4 = os_bar_chart(df_bar_charts)
     return chart1, chart2, chart3, chart4
