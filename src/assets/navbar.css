@@ -95,8 +95,20 @@
   border-bottom: solid 0.1rem #d9d9d9;
 }
 
+.navbar-container {
+  max-width: 160rem;
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .nav {
-  height: 4.8rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -108,10 +120,20 @@
 }
 
 .nav-item {
-  margin-bottom: 0;
+  margin: 0 3.2rem 0 0;
+}
+
+.nav-link {
+  padding: 1rem 0;
+  border: 0 solid transparent !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0.2rem solid transparent !important;
+  border-bottom: 0.2rem solid transparent !important;
 }
 
 .nav-link.active {
   color: #0854a0 !important;
   background-color: transparent;
+  border-bottom-color: #0854a0 !important;
 }

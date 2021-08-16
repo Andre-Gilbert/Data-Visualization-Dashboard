@@ -15,7 +15,7 @@
 .chart-container {
   width: 100%;
   margin: 2rem 0 0;
-  padding: 2rem;
+  padding: 0.1rem;
   border-radius: 0.4rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -31,7 +31,7 @@
 }
 
 .chart-title {
-  margin: 0 0 2rem;
+  margin: 2rem 2rem 0;
   font-size: 2rem;
   font-weight: 400;
   color: #32363a;

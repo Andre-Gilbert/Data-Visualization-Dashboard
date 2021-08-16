@@ -25,7 +25,12 @@ button {
   font-size: 1.6rem !important;
   border: none !important;
 }
+
 a {
+  color: $sap-tab-color;
+}
+
+a:hover {
   color: $sap-tab-color;
 }
 

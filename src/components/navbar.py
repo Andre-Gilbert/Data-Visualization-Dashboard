@@ -24,11 +24,12 @@ def navbar() -> html.Div:
                      className='app-bar-main')
         ],
                  className='app-bar'),
-        html.Div(dbc.Tabs(
+        html.Div(html.Div(dbc.Tabs(
             [dbc.Tab(label='Ordered Spend', id='tab-0'),
              dbc.Tab(label='Supplier Performance', id='tab-1')],
             id='tabs',
             active_tab='tab-0'),
+                          className='navbar-container'),
                  className='navbar')
     ])
     return navbar
