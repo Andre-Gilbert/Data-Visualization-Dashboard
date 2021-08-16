@@ -7,20 +7,23 @@ def navbar() -> html.Div:
     navbar = html.Div([
         html.Div([
             html.Div([
-                html.Img(src=app.get_asset_url('logo.svg'), className='logo'),
-                dbc.DropdownMenu(
-                    id='dropdown',
-                    label='Ordered Spend',
-                    children=[
-                        dbc.DropdownMenuItem('Ordered Spend', id='OS'),
-                        dbc.DropdownMenuItem('Supplier Performance', id='SP')
-                    ],
-                )
+                html.Div([
+                    html.Img(src=app.get_asset_url('logo.svg'), className='logo'),
+                    dbc.DropdownMenu(
+                        id='dropdown',
+                        label='Ordered Spend',
+                        children=[
+                            dbc.DropdownMenuItem('Ordered Spend', id='OS'),
+                            dbc.DropdownMenuItem('Number of Orders', id='NO')
+                        ],
+                    )
+                ],
+                         className='navigation-container'),
+                html.Div(html.P('SF', className='icon-text'), className='user-icon')
             ],
-                     className='navigation-container'),
-            html.Div(html.P('SF', className='icon-text'), className='user-icon')
+                     className='navbar-main')
         ],
-                 className='navbar-main')
-    ],
-                      className='navbar')
+                 className='appbar'),
+        html.Div('Hello', className='navbar')
+    ])
     return navbar
