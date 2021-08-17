@@ -73,29 +73,29 @@
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 10rem;
   padding: 0;
-  margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: $sap-text-color;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  background-clip: padding-box;
   border: none;
   border-radius: 0.4rem;
-  box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.15), 0 0 0 0.1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
 
   button {
     font-size: 1.4rem !important;
     padding: 0.5rem 5rem 0.5rem 1rem;
+    color: $sap-text-color;
+    border-radius: 0.4rem;
   }
+
+  button:focus {
+    outline: none;
+  }
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+  text-decoration: none;
+  background-color: #fafafa;
+  color: #2f3c48;
 }
 
 .user-icon {
@@ -151,8 +151,8 @@
   border: 0 solid transparent !important;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-top: 0.2rem solid transparent !important;
-  border-bottom: 0.2rem solid transparent !important;
+  border-top: 0.3rem solid transparent !important;
+  border-bottom: 0.3rem solid transparent !important;
 }
 
 .nav-link.active {

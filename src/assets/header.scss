@@ -36,7 +36,13 @@
 .filter-bar-label {
   margin: 0 0 0.4rem;
   font-size: 1.4rem;
-  color: $sap-label-color;
+  color: $sap-label-border-color;
+}
+
+.Select-control {
+  border-radius: 0.2rem;
+  border: 1px solid $sap-label-border-color;
+  color: $sap-text-color;
 }
 
 .numeric-point-chart {

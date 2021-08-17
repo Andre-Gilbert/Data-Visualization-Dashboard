@@ -43,6 +43,12 @@
   color: #89919a;
 }
 
+.Select-control {
+  border-radius: 0.2rem;
+  border: 1px solid #89919a;
+  color: #32363a;
+}
+
 .numeric-point-chart {
   display: -webkit-box;
   display: -ms-flexbox;

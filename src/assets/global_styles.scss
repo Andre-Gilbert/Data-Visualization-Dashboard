@@ -21,6 +21,10 @@ body {
   background-color: $sap-app-background-color;
 }
 
+input {
+  min-width: 12rem;
+}
+
 button {
   font-size: 1.6rem !important;
   border: none !important;

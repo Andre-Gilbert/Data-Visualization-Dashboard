@@ -10,21 +10,16 @@ def header() -> html.Div:
             html.Div([
                 html.Div([
                     html.P('Company Code:', className='filter-bar-label'),
-                    dbc.Select(
+                    dcc.Dropdown(
                         id="company-code",
                         options=[
                             {
                                 "label": "Option 1",
-                                "value": "1"
+                                "value": 1
                             },
                             {
                                 "label": "Option 2",
-                                "value": "2"
-                            },
-                            {
-                                "label": "Disabled option",
-                                "value": "3",
-                                "disabled": True
+                                "value": 2
                             },
                         ],
                     )
@@ -32,21 +27,16 @@ def header() -> html.Div:
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Purchasing Organization:', className='filter-bar-label'),
-                    dbc.Select(
+                    dcc.Dropdown(
                         id="purchasing-org",
                         options=[
                             {
                                 "label": "Option 1",
-                                "value": "1"
+                                "value": 1
                             },
                             {
                                 "label": "Option 2",
-                                "value": "2"
-                            },
-                            {
-                                "label": "Disabled option",
-                                "value": "3",
-                                "disabled": True
+                                "value": 2
                             },
                         ],
                     )
@@ -54,43 +44,31 @@ def header() -> html.Div:
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Plant:', className='filter-bar-label'),
-                    dbc.Select(
-                        id="plant",
-                        options=[
-                            {
-                                "label": "Option 1",
-                                "value": "1"
-                            },
-                            {
-                                "label": "Option 2",
-                                "value": "2"
-                            },
-                            {
-                                "label": "Disabled option",
-                                "value": "3",
-                                "disabled": True
-                            },
-                        ],
-                    )
+                    dcc.Dropdown(id="plant",
+                                 options=[
+                                     {
+                                         "label": "Option 1",
+                                         "value": 1
+                                     },
+                                     {
+                                         "label": "Option 2",
+                                         "value": 2
+                                     },
+                                 ])
                 ],
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Material Group:', className='filter-bar-label'),
-                    dbc.Select(
+                    dcc.Dropdown(
                         id="material-group",
                         options=[
                             {
                                 "label": "Option 1",
-                                "value": "1"
+                                "value": 1
                             },
                             {
                                 "label": "Option 2",
-                                "value": "2"
-                            },
-                            {
-                                "label": "Disabled option",
-                                "value": "3",
-                                "disabled": True
+                                "value": 2
                             },
                         ],
                     )

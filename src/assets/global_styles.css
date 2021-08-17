@@ -20,6 +20,10 @@ body {
   background-color: #f7f7f7;
 }
 
+input {
+  min-width: 12rem;
+}
+
 button {
   font-size: 1.6rem !important;
   border: none !important;
