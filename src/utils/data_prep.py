@@ -27,6 +27,29 @@ def get_data() -> pd.DataFrame:
     return df
 
 
+def copy_and_apply_filter(df: pd.DataFrame, company_code: str, purchasing_org: str, plant: str,
+                          material_group: str) -> pd.DataFrame:
+    """Copies the DataFrame and applies the filters from the GUI if they are set."""
+    filtered_df = df.copy(deep=True)
+
+    if company_code:
+        company_code = int(company_code)
+        filtered_df = filtered_df.loc[filtered_df['Company Code'] == company_code]
+
+    if purchasing_org:
+        purchasing_org = int(purchasing_org)
+        filtered_df = filtered_df.loc[filtered_df['Purchasing Org.'] == purchasing_org]
+
+    if plant:
+        plant = int(plant)
+        filtered_df = filtered_df.loc[filtered_df['Plant'] == plant]
+
+    if material_group:
+        filtered_df = filtered_df.loc[filtered_df['Material Group'] == material_group]
+
+    return filtered_df
+
+
 def __rename_columns(df: pd.DataFrame) -> None:
     """Renames columns of the DataFrame so the names are uniform and can be used in the Dashboard"""
     name_dict = {
