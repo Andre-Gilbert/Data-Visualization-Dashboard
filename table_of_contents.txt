@@ -1,0 +1,18 @@
+Inhaltsverzeichnis
+------------------
+
+1       Einleitung
+1.1     How to use?
+1.2     Requirements & Installation?
+
+2       App
+2.1     Design (Styleguide und other stuff)
+2.2     Aufbau (MVC, Modularisierung und other stuff)
+2.3     Frontend & Backend
+2.4     Funktionalität
+2.4.1   Data Prep
+2.4.2   App Views
+2.4.3   Filter Bar
+
+3       ???
+3.1     ???
