@@ -14,7 +14,7 @@ def navbar() -> html.Div:
                             dbc.DropdownMenuItem('Ordered Spend', id='ordered-spend', n_clicks=0),
                             dbc.DropdownMenuItem('Number of Orders', id='number-of-orders', n_clicks=0)
                         ],
-                        id='dropdown',
+                        id='dropdown-menu',
                         label='Ordered Spend',
                     )
                 ],

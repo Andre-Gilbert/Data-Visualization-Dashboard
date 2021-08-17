@@ -11,7 +11,7 @@ def header() -> html.Div:
                 html.Div([
                     html.P('Company Code:', className='filter-bar-label'),
                     dcc.Dropdown(
-                        id="company-code",
+                        id='company-code',
                         options=[
                             {
                                 "label": "Option 1",
@@ -28,7 +28,7 @@ def header() -> html.Div:
                 html.Div([
                     html.P('Purchasing Organization:', className='filter-bar-label'),
                     dcc.Dropdown(
-                        id="purchasing-org",
+                        id='purchasing-org',
                         options=[
                             {
                                 "label": "Option 1",
@@ -44,7 +44,7 @@ def header() -> html.Div:
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Plant:', className='filter-bar-label'),
-                    dcc.Dropdown(id="plant",
+                    dcc.Dropdown(id='plant',
                                  options=[
                                      {
                                          "label": "Option 1",
@@ -52,7 +52,7 @@ def header() -> html.Div:
                                      },
                                      {
                                          "label": "Option 2",
-                                         "value": 2
+                                         'value': 2
                                      },
                                  ])
                 ],
@@ -60,15 +60,15 @@ def header() -> html.Div:
                 html.Div([
                     html.P('Material Group:', className='filter-bar-label'),
                     dcc.Dropdown(
-                        id="material-group",
+                        id='material-group',
                         options=[
                             {
                                 "label": "Option 1",
                                 "value": 1
                             },
                             {
-                                "label": "Option 2",
-                                "value": 2
+                                'label': "Option 2",
+                                'value': 2
                             },
                         ],
                     )

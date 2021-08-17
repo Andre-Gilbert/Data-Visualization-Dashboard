@@ -34,7 +34,7 @@ def update_page(active_tab: str):
 
 
 @app.callback([
-    Output(component_id='dropdown', component_property='label'),
+    Output(component_id='dropdown-menu', component_property='label'),
     Output(component_id='bar-chart-os', component_property='figure')
 ], [
     Input(component_id='ordered-spend', component_property='n_clicks'),
@@ -55,4 +55,6 @@ def update_charts(ordered_spend: int, number_of_orders: int, company_code: str, 
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
         dropdown_label = id_lookup[button_id]
 
-    return dropdown_label, os_bar_chart(df_bar_charts)
+    bar_chart_os = os_bar_chart(df_bar_charts)
+
+    return dropdown_label, bar_chart_os
