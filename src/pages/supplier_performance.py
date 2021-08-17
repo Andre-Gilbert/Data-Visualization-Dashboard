@@ -12,19 +12,17 @@ def supplier_performance() -> html.Div:
                      className='chart-container'),
             html.Div([
                 html.Div([html.H1('Title', className='chart-title'),
+                          dcc.Graph(id='chart-id-2')], className='chart-one'),
+            ],
+                     className='chart-container'),
+            html.Div([
+                html.Div([html.H1('Title', className='chart-title'),
                           dcc.Graph(id='chart-id-3')], className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
                 html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='bar-chart-os')],
-                         className='chart-one'),
-            ],
-                     className='chart-container'),
-            html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='bar-chart-os')],
-                         className='chart-one'),
+                          dcc.Graph(id='chart-id-4')], className='chart-one'),
             ],
                      className='chart-container')
         ],

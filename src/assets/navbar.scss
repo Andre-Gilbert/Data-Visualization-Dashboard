@@ -58,6 +58,46 @@
   background-color: $sap-hover-color;
 }
 
+.btn-secondary:not(:disabled):not(.disabled).active:focus,
+.btn-secondary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-secondary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: $sap-hover-color;
+  border-color: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: $sap-text-color;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.15), 0 0 0 0.1rem rgba(0, 0, 0, 0.15);
+
+  button {
+    font-size: 1.4rem !important;
+    padding: 0.5rem 5rem 0.5rem 1rem;
+  }
+}
+
 .user-icon {
   width: 3.6rem;
   height: 3.6rem;
