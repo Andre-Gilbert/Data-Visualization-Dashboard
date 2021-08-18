@@ -138,7 +138,13 @@ def update_ordered_spend_charts(active_tab: str, dropdown_label: str, company_co
         return npc_current_year, npc_prior_year, bar_chart, line_chart, pie_chart
 
 
-@app.callback(Output(component_id='bar-chart-sp', component_property='figure'), [
+@app.callback([
+    Output(component_id='supplier-performance-npc-current-year', component_property='figure'),
+    Output(component_id='supplier-performance-npc-prior-year', component_property='figure'),
+    Output(component_id='supplier-performance-bar-chart', component_property='figure'),
+    Output(component_id='supplier-performance-line-chart', component_property='figure'),
+    Output(component_id='supplier-performance-pie-chart', component_property='figure')
+], [
     Input(component_id='tabs', component_property='active_tab'),
     Input(component_id='dropdown-menu', component_property='label'),
     Input(component_id='company-code', component_property='value'),
@@ -161,4 +167,5 @@ def update_supplier_performance_charts(active_tab: str, dropdown_label: str, com
     Returns:
         The updated charts.
     """
-    return os_bar_chart(df_bar_charts)
+    chart1 = chart2 = chart3 = chart4 = chart5 = None
+    return chart1, chart2, chart3, chart4, chart5

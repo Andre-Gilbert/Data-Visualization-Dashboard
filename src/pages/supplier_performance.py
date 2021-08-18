@@ -14,20 +14,26 @@ def supplier_performance() -> html.Div:
     supplier_performance = html.Div([
         html.Div([
             html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='chart-id-1', figure={})],
+                html.Div([
+                    html.H1('Title', className='chart-title'),
+                    dcc.Graph(id='supplier-performance-line-chart', figure={})
+                ],
                          className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='chart-id-2', figure={})],
+                html.Div([
+                    html.H1('Title', className='chart-title'),
+                    dcc.Graph(id='supplier-performance-bar-chart', figure={})
+                ],
                          className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='chart-id-3', figure={})],
+                html.Div([
+                    html.H1('Title', className='chart-title'),
+                    dcc.Graph(id='supplier-performance-pie-chart', figure={})
+                ],
                          className='chart-one'),
             ],
                      className='chart-container'),
