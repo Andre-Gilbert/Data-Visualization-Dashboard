@@ -43,6 +43,17 @@
   border-radius: 0.2rem;
   border: 1px solid $sap-label-border-color;
   color: $sap-text-color;
+  cursor: text;
+}
+
+.Select-control:hover {
+  box-shadow: none;
+  border-color: $sap-selected-color;
+}
+
+.Select--single > .Select-control .Select-value,
+.Select-placeholder {
+  color: $sap-label-border-color;
 }
 
 .numeric-point-chart {
