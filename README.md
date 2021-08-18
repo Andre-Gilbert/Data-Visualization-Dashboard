@@ -1,19 +1,22 @@
 # Dashboard
+Project Summary
 
-
-## how to start
-1. install requirements
+## Installation
+To install the requirements:
 ```
 pip install -r requirements.txt
 ```
-2. start index.py
+To start the application:
 ```
 cd src
-python index.pys
+python index.py
 ```
 
-## requirements
+## Requirements
 View [requirements](requirements.txt).
+
+## Usage
+How to use
 
 ## License
 
