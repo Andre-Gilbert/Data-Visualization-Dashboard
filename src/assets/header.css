@@ -61,6 +61,33 @@
   color: #89919a;
 }
 
+.Select-menu-outer {
+  margin: 0;
+  border: none;
+  border-radius: 0.4rem;
+  -webkit-box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+  font-size: 1.4rem;
+}
+
+.VirtualizedSelectOption {
+  color: #32363a;
+  padding: 0.5rem 5rem 0.5rem 1rem;
+  border: none;
+  border-radius: 0.4rem;
+}
+
+.VirtualizedSelectFocusedOption {
+  text-decoration: none;
+  background-color: #fafafa;
+  color: #2f3c48 #2f3c48;
+}
+
+.has-value.Select--single > .Select-control .Select-value .Select-value-label,
+.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+  color: #32363a;
+}
+
 .numeric-point-chart {
   display: -webkit-box;
   display: -ms-flexbox;

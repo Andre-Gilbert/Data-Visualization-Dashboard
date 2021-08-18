@@ -56,6 +56,32 @@
   color: $sap-label-border-color;
 }
 
+.Select-menu-outer {
+  margin: 0;
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+  font-size: 1.4rem;
+}
+
+.VirtualizedSelectOption {
+  color: $sap-text-color;
+  padding: 0.5rem 5rem 0.5rem 1rem;
+  border: none;
+  border-radius: 0.4rem;
+}
+
+.VirtualizedSelectFocusedOption {
+  text-decoration: none;
+  background-color: $sap-focus-background-color;
+  color: $sap-focus-text-color #2f3c48;
+}
+
+.has-value.Select--single > .Select-control .Select-value .Select-value-label,
+.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+  color: $sap-text-color;
+}
+
 .numeric-point-chart {
   display: flex;
   flex-direction: column;

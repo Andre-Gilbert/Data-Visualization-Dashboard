@@ -94,8 +94,8 @@
 .dropdown-item:focus,
 .dropdown-item:hover {
   text-decoration: none;
-  background-color: #fafafa;
-  color: #2f3c48;
+  background-color: $sap-focus-background-color;
+  color: $sap-focus-text-color;
 }
 
 .user-icon {
