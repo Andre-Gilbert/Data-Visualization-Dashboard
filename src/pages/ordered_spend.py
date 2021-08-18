@@ -14,21 +14,24 @@ def ordered_spend() -> html.Div:
     ordered_spend = html.Div([
         html.Div([
             html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='chart-id-1', figure={})],
-                         className='chart-one'),
+                html.Div(
+                    [html.H1('Title', className='chart-title'),
+                     dcc.Graph(id='ordered-spend-pie-chart', figure={})],
+                    className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='chart-id-3', figure={})],
-                         className='chart-one'),
+                html.Div(
+                    [html.H1('Title', className='chart-title'),
+                     dcc.Graph(id='ordered-spend-line-chart', figure={})],
+                    className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='bar-chart-os', figure={})],
-                         className='chart-one'),
+                html.Div(
+                    [html.H1('Title', className='chart-title'),
+                     dcc.Graph(id='ordered-spend-bar-chart', figure={})],
+                    className='chart-one'),
             ],
                      className='chart-container')
         ],

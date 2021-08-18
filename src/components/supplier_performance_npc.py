@@ -2,7 +2,7 @@
 import dash_html_components as html
 
 
-def sp_numeric_point_chart() -> html.Div:
+def supplier_performance_npc() -> html.Div:
     """Generate the numeric point charts for supplier performance.
 
     Summary
@@ -10,7 +10,7 @@ def sp_numeric_point_chart() -> html.Div:
     Returns:
         The html containing the charts.
     """
-    sp_numeric_point_chart = html.Div([
+    supplier_performance_npc = html.Div([
         html.Div([
             html.H1('Delivery Deviation', className='npc-title'),
             html.Div([
@@ -22,4 +22,4 @@ def sp_numeric_point_chart() -> html.Div:
         ],
                  className='npc-container-one')
     ])
-    return sp_numeric_point_chart
+    return supplier_performance_npc

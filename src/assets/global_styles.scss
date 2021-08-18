@@ -19,6 +19,7 @@ body {
   font-size: 16px;
   font-family: '72', '72full', Arial, Helvetica, sans-serif;
   background-color: $sap-app-background-color;
+  overflow-x: hidden;
 }
 
 input {

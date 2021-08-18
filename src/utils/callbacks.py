@@ -1,8 +1,10 @@
 import dash
 from app import app
-from components.os_bar_charts import get_data_bar_charts, os_bar_chart
-from components.os_numeric_point_chart import os_numeric_point_chart
-from components.sp_numeric_point_chart import sp_numeric_point_chart
+from charts.ordered_spend_charts import (get_data_bar_charts, get_data_os_line_charts, get_data_os_numeric_point_charts,
+                                         get_data_os_pie_charts, os_bar_chart, os_line_chart, os_numeric_point_chart,
+                                         os_pie_chart)
+from components.ordered_spend_npc import ordered_spend_npc
+from components.supplier_performance_npc import supplier_performance_npc
 from dash.dependencies import Input, Output
 from pages.ordered_spend import ordered_spend
 from pages.supplier_performance import supplier_performance
@@ -10,8 +12,10 @@ from pages.supplier_performance import supplier_performance
 from utils.data_prep import get_data
 
 df = get_data()
-
+df_numeric_point_charts = get_data_os_numeric_point_charts(df)
 df_bar_charts = get_data_bar_charts(df)
+df_line_charts = get_data_os_line_charts(df)
+df_pie_charts = get_data_os_pie_charts(df)
 
 
 @app.callback(Output(component_id='dropdown-menu', component_property='label'), [
@@ -52,22 +56,28 @@ def update_page(active_tab: str):
         active_tab: The active_tab of the page.
 
     Returns:
-        The page header, numeric point charts and the page content
+        The page header, numeric point charts and the page content.
     """
     if active_tab == 'tab-ordered-spend':
         page_header = 'Ordered Spend'
-        page_numeric_point_chart = os_numeric_point_chart()
+        page_numeric_point_chart = ordered_spend_npc()
         page_content = ordered_spend()
-        return page_header, page_numeric_point_chart, page_content
 
     elif active_tab == 'tab-supplier-performance':
         page_header = 'Supplier Performance'
+        page_numeric_point_chart = supplier_performance_npc()
         page_content = supplier_performance()
-        page_numeric_point_chart = sp_numeric_point_chart()
-        return page_header, page_numeric_point_chart, page_content
+
+    return page_header, page_numeric_point_chart, page_content
 
 
-@app.callback(Output(component_id='bar-chart-os', component_property='figure'), [
+@app.callback([
+    Output(component_id='ordered-spend-npc-current-year', component_property='figure'),
+    Output(component_id='ordered-spend-npc-prior-year', component_property='figure'),
+    Output(component_id='ordered-spend-bar-chart', component_property='figure'),
+    Output(component_id='ordered-spend-line-chart', component_property='figure'),
+    Output(component_id='ordered-spend-pie-chart', component_property='figure')
+], [
     Input(component_id='tabs', component_property='active_tab'),
     Input(component_id='dropdown-menu', component_property='label'),
     Input(component_id='company-code', component_property='value'),
@@ -90,7 +100,42 @@ def update_ordered_spend_charts(active_tab: str, dropdown_label: str, company_co
     Returns:
         The updated charts.
     """
-    return os_bar_chart(df_bar_charts)
+    if active_tab == 'tab-ordered-spend':
+        npc_current_year = os_numeric_point_chart(df_numeric_point_charts, company_code, purchasing_org, plant,
+                                                  material_group)
+        npc_prior_year = os_numeric_point_chart(df_numeric_point_charts,
+                                                company_code,
+                                                purchasing_org,
+                                                plant,
+                                                material_group,
+                                                last_year=True)
+
+        if dropdown_label == 'Ordered Spend':
+            bar_chart = os_bar_chart(df_bar_charts, company_code, purchasing_org, plant, material_group)
+            line_chart = os_line_chart(df_line_charts, company_code, purchasing_org, plant, material_group)
+            pie_chart = os_pie_chart(df_pie_charts, company_code, purchasing_org, plant, material_group)
+
+        elif dropdown_label == 'Number of Orders':
+            bar_chart = os_bar_chart(df_bar_charts,
+                                     company_code,
+                                     purchasing_org,
+                                     plant,
+                                     material_group,
+                                     number_of_orders=True)
+            line_chart = os_line_chart(df_line_charts,
+                                       company_code,
+                                       purchasing_org,
+                                       plant,
+                                       material_group,
+                                       number_of_orders=True)
+            pie_chart = os_pie_chart(df_pie_charts,
+                                     company_code,
+                                     purchasing_org,
+                                     plant,
+                                     material_group,
+                                     number_of_orders=True)
+
+        return npc_current_year, npc_prior_year, bar_chart, line_chart, pie_chart
 
 
 @app.callback(Output(component_id='bar-chart-sp', component_property='figure'), [
