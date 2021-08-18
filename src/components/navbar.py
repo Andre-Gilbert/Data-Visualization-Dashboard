@@ -1,9 +1,19 @@
+"""Dashboard Navbar."""
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 from app import app
 
 
 def navbar() -> html.Div:
+    """Generate the navbar for the dashboard.
+
+    The navbar allows one to switch between two views:
+        - Ordered Spend
+        - Number of Orders
+
+    Returns:
+        The html containing the logo and the dropdown menu.
+    """
     navbar = html.Div([
         html.Div([
             html.Div([

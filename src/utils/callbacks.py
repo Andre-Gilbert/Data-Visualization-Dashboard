@@ -19,6 +19,15 @@ df_bar_charts = get_data_bar_charts(df)
     Input(component_id='number-of-orders', component_property='n_clicks')
 ])
 def update_dropdown_label(ordered_spend: int, number_of_orders: int) -> str:
+    """Callback that updates the dropdown label.
+
+    Args:
+        ordered_spend: The number of button clicks.
+        number_of_orders: The number of button clicks.
+
+    Returns:
+        The updated dropdown label.
+    """
     id_lookup = {'ordered-spend': 'Ordered Spend', 'number-of-orders': 'Number of Orders'}
     ctx = dash.callback_context
 
@@ -37,6 +46,14 @@ def update_dropdown_label(ordered_spend: int, number_of_orders: int) -> str:
     Output(component_id='page-content', component_property='children')
 ], [Input(component_id='tabs', component_property='active_tab')])
 def update_page(active_tab: str):
+    """Callback that updates the page.
+
+    Args:
+        active_tab: The active_tab of the page.
+
+    Returns:
+        The page header, numeric point charts and the page content
+    """
     if active_tab == 'tab-ordered-spend':
         page_header = 'Ordered Spend'
         page_numeric_point_chart = os_numeric_point_chart()
@@ -60,6 +77,19 @@ def update_page(active_tab: str):
 ])
 def update_ordered_spend_charts(active_tab: str, dropdown_label: str, company_code: str, purchasing_org: str,
                                 plant: str, material_group: str):
+    """Callback that updates the ordered spend charts.
+
+    Args:
+        active_tab: The active_tab of the page.
+        dropdown_label: The current dropdown label.
+        company_code:
+        purchasing_org:
+        plant:
+        material_group:
+
+    Returns:
+        The updated charts.
+    """
     return os_bar_chart(df_bar_charts)
 
 
@@ -73,4 +103,17 @@ def update_ordered_spend_charts(active_tab: str, dropdown_label: str, company_co
 ])
 def update_supplier_performance_charts(active_tab: str, dropdown_label: str, company_code: str, purchasing_org: str,
                                        plant: str, material_group: str):
+    """Callback that updates the supplier performance charts.
+
+    Args:
+        active_tab: The active_tab of the page.
+        dropdown_label: The current dropdown label.
+        company_code:
+        purchasing_org:
+        plant:
+        material_group:
+
+    Returns:
+        The updated charts.
+    """
     return os_bar_chart(df_bar_charts)

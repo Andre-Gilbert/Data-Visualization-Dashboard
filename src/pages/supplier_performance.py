@@ -1,8 +1,16 @@
+"""Dashboard Supplier Performance Page."""
 import dash_core_components as dcc
 import dash_html_components as html
 
 
 def supplier_performance() -> html.Div:
+    """Generate the supplier performance page.
+
+    Summary
+
+    Returns:
+        The html of the chart containers and the charts.
+    """
     supplier_performance = html.Div([
         html.Div([
             html.Div([

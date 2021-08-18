@@ -1,7 +1,15 @@
+"""Ordered Spend Numeric Point Charts."""
 import dash_html_components as html
 
 
 def os_numeric_point_chart() -> html.Div:
+    """Generate the numeric point charts for ordered spend.
+
+    Summary
+
+    Returns:
+        The html containing the charts.
+    """
     os_numeric_point_chart = html.Div([
         html.Div([
             html.H1('2020', className='npc-title'),

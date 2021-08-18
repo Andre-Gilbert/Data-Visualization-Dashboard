@@ -1,9 +1,17 @@
-import dash_bootstrap_components as dbc
+"""Dashboard Header."""
 import dash_core_components as dcc
 import dash_html_components as html
 
 
 def header() -> html.Div:
+    """Generate the header for the dashboard.
+
+    The page header and the numeric point charts will be re-rendered
+    when the page changes, but the filters will be applied globally.
+
+    Returns:
+        The html containing the page header, filter bar and the numeric point charts.
+    """
     header = html.Div([
         html.Div([
             html.H1(id='page-header', className='page-title'),
