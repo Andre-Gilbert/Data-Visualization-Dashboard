@@ -10,6 +10,20 @@ sapUiChartPaletteQualitativeHue9 = '#6C8893'
 sapUiChartPaletteQualitativeHue10 = '#EE6868'
 sapUiChartPaletteQualitativeHue11 = '#2F6497'
 
+sapUiChartPaletteQualitativeHues = [
+    sapUiChartPaletteQualitativeHue1,
+    sapUiChartPaletteQualitativeHue2,
+    sapUiChartPaletteQualitativeHue3,
+    sapUiChartPaletteQualitativeHue4,
+    sapUiChartPaletteQualitativeHue5,
+    sapUiChartPaletteQualitativeHue6,
+    sapUiChartPaletteQualitativeHue7,
+    sapUiChartPaletteQualitativeHue8,
+    sapUiChartPaletteQualitativeHue9,
+    sapUiChartPaletteQualitativeHue10,
+    sapUiChartPaletteQualitativeHue11,
+]
+
 sapUiChartPaletteSemanticBadLight3 = '#f99494'
 sapUiChartPaletteSemanticBadLight2 = '#f66364'
 sapUiChartPaletteSemanticBadLight1 = '#f33334'
@@ -35,6 +49,28 @@ sapUiChartPaletteSemanticNeutral = '#848f94'
 sapUiChartPaletteSemanticNeutralDark1 = '#69767c'
 sapUiChartPaletteSemanticNeutralDark2 = '#596468'
 
+sapUiChartPaletteSemanticBads = [
+    sapUiChartPaletteSemanticBadLight3, sapUiChartPaletteSemanticBadLight2, sapUiChartPaletteSemanticBadLight1,
+    sapUiChartPaletteSemanticBad, sapUiChartPaletteSemanticBadDark1, sapUiChartPaletteSemanticBadDark2
+]
+
+sapUiChartPaletteSemanticCriticals = [
+    sapUiChartPaletteSemanticCriticalLight3, sapUiChartPaletteSemanticCriticalLight2,
+    sapUiChartPaletteSemanticCriticalLight1, sapUiChartPaletteSemanticCritical, sapUiChartPaletteSemanticCriticalDark1,
+    sapUiChartPaletteSemanticCriticalDark2
+]
+
+sapUiChartPaletteSemanticGoods = [
+    sapUiChartPaletteSemanticGoodLight3, sapUiChartPaletteSemanticGoodLight2, sapUiChartPaletteSemanticGoodLight1,
+    sapUiChartPaletteSemanticGood, sapUiChartPaletteSemanticGoodDark1, sapUiChartPaletteSemanticGoodDark2
+]
+
+sapUiChartPaletteSemanticNeutrals = [
+    sapUiChartPaletteSemanticNeutralLight3, sapUiChartPaletteSemanticNeutralLight2,
+    sapUiChartPaletteSemanticNeutralLight1, sapUiChartPaletteSemanticNeutral, sapUiChartPaletteSemanticNeutralDark1,
+    sapUiChartPaletteSemanticNeutralDark2
+]
+
 sapUiChartPaletteSequentialHue1Light3 = '#b2d4f5'
 sapUiChartPaletteSequentialHue1Light2 = '#93bfeb'
 sapUiChartPaletteSequentialHue1Light1 = '#74abe2'
@@ -59,3 +95,24 @@ sapUiChartPaletteSequentialNeutralLight1 = '#9ea8ad'
 sapUiChartPaletteSequentialNeutral = '#848f94'
 sapUiChartPaletteSequentialNeutralDark1 = '#69767c'
 sapUiChartPaletteSequentialNeutralDark2 = '#596468'
+
+sapUiChartPaletteSequentialHues1 = [
+    sapUiChartPaletteSequentialHue1Light3, sapUiChartPaletteSequentialHue1Light2, sapUiChartPaletteSequentialHue1Light1,
+    sapUiChartPaletteSequentialHue1, sapUiChartPaletteSequentialHue1Dark1, sapUiChartPaletteSequentialHue1Dark2
+]
+
+sapUiChartPaletteSequentialHues2 = [
+    sapUiChartPaletteSequentialHue2Light3, sapUiChartPaletteSequentialHue2Light2, sapUiChartPaletteSequentialHue2Light1,
+    sapUiChartPaletteSequentialHue2, sapUiChartPaletteSequentialHue2Dark1, sapUiChartPaletteSequentialHue2Dark2
+]
+
+sapUiChartPaletteSequentialHues3 = [
+    sapUiChartPaletteSequentialHue3Light3, sapUiChartPaletteSequentialHue3Light2, sapUiChartPaletteSequentialHue3Light1,
+    sapUiChartPaletteSequentialHue3, sapUiChartPaletteSequentialHue3Dark1, sapUiChartPaletteSequentialHue3Dark2
+]
+
+sapUiChartPaletteSequentialNeutrals = [
+    sapUiChartPaletteSequentialNeutralLight3, sapUiChartPaletteSequentialNeutralLight2,
+    sapUiChartPaletteSequentialNeutralLight1, sapUiChartPaletteSequentialNeutral,
+    sapUiChartPaletteSequentialNeutralDark1, sapUiChartPaletteSequentialNeutralDark2
+]
