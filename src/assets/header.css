@@ -43,6 +43,27 @@
   color: #89919a;
 }
 
+.Select-clear-zone {
+  color: #0854a0;
+}
+
+.is-focused:not(.is-open) > .Select-control {
+  border-color: #0854a0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.is-open > .Select-control {
+  border-radius: 0.2rem;
+  border-color: #0854a0;
+}
+
+.is-open > .Select-control .Select-arrow {
+  top: 0;
+  border-color: #0854a0;
+  border-width: 0 0.15rem 0.15rem 0;
+}
+
 .Select-control {
   border-radius: 0.2rem;
   border: 1px solid #89919a;
@@ -59,6 +80,24 @@
 .Select--single > .Select-control .Select-value,
 .Select-placeholder {
   color: #89919a;
+}
+
+.Select-arrow-zone {
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  width: 25px;
+  padding-right: 5px;
+}
+
+.Select-arrow {
+  border: solid #0854a0;
+  border-width: 0 0.15rem 0.15rem 0;
+  display: inline-block;
+  padding: 0.3rem;
+  margin: 0 0 0.4rem;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
 }
 
 .Select-menu-outer {

@@ -39,6 +39,26 @@
   color: $sap-label-border-color;
 }
 
+.Select-clear-zone {
+  color: $sap-selected-color;
+}
+
+.is-focused:not(.is-open) > .Select-control {
+  border-color: $sap-selected-color;
+  box-shadow: none;
+}
+
+.is-open > .Select-control {
+  border-radius: 0.2rem;
+  border-color: $sap-selected-color;
+}
+
+.is-open > .Select-control .Select-arrow {
+  top: 0;
+  border-color: $sap-selected-color;
+  border-width: 0 0.15rem 0.15rem 0;
+}
+
 .Select-control {
   border-radius: 0.2rem;
   border: 1px solid $sap-label-border-color;
@@ -54,6 +74,23 @@
 .Select--single > .Select-control .Select-value,
 .Select-placeholder {
   color: $sap-label-border-color;
+}
+
+.Select-arrow-zone {
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  width: 25px;
+  padding-right: 5px;
+}
+
+.Select-arrow {
+  border: solid $sap-selected-color;
+  border-width: 0 0.15rem 0.15rem 0;
+  display: inline-block;
+  padding: 0.3rem;
+  margin: 0 0 0.4rem;
+  transform: rotate(45deg);
 }
 
 .Select-menu-outer {
