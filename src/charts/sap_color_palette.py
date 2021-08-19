@@ -116,3 +116,7 @@ sapUiChartPaletteSequentialNeutrals = [
     sapUiChartPaletteSequentialNeutralLight1, sapUiChartPaletteSequentialNeutral,
     sapUiChartPaletteSequentialNeutralDark1, sapUiChartPaletteSequentialNeutralDark2
 ]
+
+sapUiPointChartCurrency = '#89919A'
+sapUiPointChartNumber = '#0854A0'
+sapUiPointChartLabel = '#6A6D70'
