@@ -1,6 +1,9 @@
 """Dashboard Header."""
 import dash_core_components as dcc
 import dash_html_components as html
+from utils.data_prep import get_data
+
+df = get_data()
 
 
 def header() -> html.Div:
@@ -20,16 +23,10 @@ def header() -> html.Div:
                     html.P('Company Code:', className='filter-bar-label'),
                     dcc.Dropdown(
                         id='company-code',
-                        options=[
-                            {
-                                "label": "Option 1",
-                                "value": 1
-                            },
-                            {
-                                "label": "Option 2",
-                                "value": 2
-                            },
-                        ],
+                        options=[{
+                            'label': label,
+                            'value': label
+                        } for label in df['Company Code'].unique()],
                     )
                 ],
                          className='filter-bar-container'),
@@ -37,49 +34,31 @@ def header() -> html.Div:
                     html.P('Purchasing Organization:', className='filter-bar-label'),
                     dcc.Dropdown(
                         id='purchasing-org',
-                        options=[
-                            {
-                                "label": "Option 1",
-                                "value": 1
-                            },
-                            {
-                                "label": "Option 2",
-                                "value": 2
-                            },
-                        ],
+                        options=[{
+                            'label': label,
+                            'value': label
+                        } for label in df['Purchasing Org.'].unique()],
                     )
                 ],
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Plant:', className='filter-bar-label'),
-                    dcc.Dropdown(id='plant',
-                                 options=[
-                                     {
-                                         "label": "Option 1",
-                                         "value": 1
-                                     },
-                                     {
-                                         "label": "Option 2",
-                                         'value': 2
-                                     },
-                                 ])
+                    dcc.Dropdown(
+                        id='plant',
+                        options=[{
+                            'label': label,
+                            'value': label
+                        } for label in df['Plant'].unique()],
+                    )
                 ],
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Material Group:', className='filter-bar-label'),
-                    dcc.Dropdown(
-                        id='material-group',
-                        options=[
-                            {
-                                "label": "Option 1",
-                                "value": 1
-                            },
-                            {
-                                'label': "Option 2",
-                                'value': 2
-                            },
-                        ],
-                    )
+                    dcc.Dropdown(id='material-group',
+                                 options=[{
+                                     'label': label,
+                                     'value': label
+                                 } for label in df['Material Group'].unique()])
                 ],
                          className='filter-bar-container')
             ],
