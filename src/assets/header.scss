@@ -99,6 +99,28 @@
   border-radius: 0.4rem;
   box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
   font-size: 1.4rem;
+  overflow-y: hidden;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 0.6rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $sap-base-color;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $sap-scrollbar-color;
+    border-radius: 0.4rem;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $sap-scrollbar-hover-color;
+  }
 }
 
 .VirtualizedSelectOption {
