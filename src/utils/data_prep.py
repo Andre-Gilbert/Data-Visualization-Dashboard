@@ -8,27 +8,27 @@ def get_data() -> pd.DataFrame:
     """Reads the data from an Excel-File, applies the preparation required for the Dashboard and returns the data frame.
     Should be the only function called from outside.
 
-    Args:
-        None
     Returns:
-        df: Prepared DataFrame, usable for the Dashboard"""
-
+        df: Prepared DataFrame, usable for the Dashboard
+    """
     data_path = os.path.join(os.path.dirname(__file__), '../../data/Daten I.xlsx')
     df = pd.read_excel(data_path)
 
     __rename_columns(df)
-
     __drop_unnecessary_columns(df)
-
     __calculate_month_and_year(df)
-
     __calculate_delivery_details(df)
 
     return df
 
 
-def copy_and_apply_filter(df: pd.DataFrame, company_code: str, purchasing_org: str, plant: str,
-                          material_group: str) -> pd.DataFrame:
+def copy_and_apply_filter(
+    df: pd.DataFrame,
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> pd.DataFrame:
     """Copies the DataFrame and applies the filters from the GUI if they are set."""
     filtered_df = df.copy(deep=True)
 

@@ -1,4 +1,6 @@
 import dash
+import dash_html_components as html
+import plotly.graph_objects as go
 from app import app
 from charts.ordered_spend_charts import (get_data_bar_charts, get_data_os_line_charts, get_data_os_numeric_point_charts,
                                          get_data_os_pie_charts, os_bar_chart, os_line_chart, os_numeric_point_chart,
@@ -49,7 +51,7 @@ def update_dropdown_label(ordered_spend: int, number_of_orders: int) -> str:
     Output(component_id='numeric-point-chart', component_property='children'),
     Output(component_id='page-content', component_property='children')
 ], [Input(component_id='tabs', component_property='active_tab')])
-def update_page(active_tab: str):
+def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     """Callback that updates the page.
 
     Args:
@@ -85,8 +87,14 @@ def update_page(active_tab: str):
     Input(component_id='plant', component_property='value'),
     Input(component_id='material-group', component_property='value')
 ])
-def update_ordered_spend_charts(active_tab: str, dropdown_label: str, company_code: str, purchasing_org: str,
-                                plant: str, material_group: str):
+def update_ordered_spend_charts(
+    active_tab: str,
+    dropdown_label: str,
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> tuple[go.Figure]:
     """Callback that updates the ordered spend charts.
 
     Args:
@@ -152,8 +160,14 @@ def update_ordered_spend_charts(active_tab: str, dropdown_label: str, company_co
     Input(component_id='plant', component_property='value'),
     Input(component_id='material-group', component_property='value')
 ])
-def update_supplier_performance_charts(active_tab: str, dropdown_label: str, company_code: str, purchasing_org: str,
-                                       plant: str, material_group: str):
+def update_supplier_performance_charts(
+    active_tab: str,
+    dropdown_label: str,
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> tuple[go.Figure]:
     """Callback that updates the supplier performance charts.
 
     Args:
@@ -167,5 +181,39 @@ def update_supplier_performance_charts(active_tab: str, dropdown_label: str, com
     Returns:
         The updated charts.
     """
-    chart1 = chart2 = chart3 = chart4 = chart5 = None
-    return chart1, chart2, chart3, chart4, chart5
+    if active_tab == 'tab-supplier-performance':
+        npc_current_year = os_numeric_point_chart(df_numeric_point_charts, company_code, purchasing_org, plant,
+                                                  material_group)
+        npc_prior_year = os_numeric_point_chart(df_numeric_point_charts,
+                                                company_code,
+                                                purchasing_org,
+                                                plant,
+                                                material_group,
+                                                last_year=True)
+
+        if dropdown_label == 'Ordered Spend':
+            bar_chart = os_bar_chart(df_bar_charts, company_code, purchasing_org, plant, material_group)
+            line_chart = os_line_chart(df_line_charts, company_code, purchasing_org, plant, material_group)
+            pie_chart = os_pie_chart(df_pie_charts, company_code, purchasing_org, plant, material_group)
+
+        elif dropdown_label == 'Number of Orders':
+            bar_chart = os_bar_chart(df_bar_charts,
+                                     company_code,
+                                     purchasing_org,
+                                     plant,
+                                     material_group,
+                                     number_of_orders=True)
+            line_chart = os_line_chart(df_line_charts,
+                                       company_code,
+                                       purchasing_org,
+                                       plant,
+                                       material_group,
+                                       number_of_orders=True)
+            pie_chart = os_pie_chart(df_pie_charts,
+                                     company_code,
+                                     purchasing_org,
+                                     plant,
+                                     material_group,
+                                     number_of_orders=True)
+
+        return npc_current_year, npc_prior_year, bar_chart, line_chart, pie_chart
