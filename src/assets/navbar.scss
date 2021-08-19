@@ -160,3 +160,15 @@
   background-color: transparent;
   border-bottom-color: $sap-selected-color !important;
 }
+
+/* large size screen
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 1024px) {
+  .app-bar {
+    padding: 0 3.2rem;
+  }
+
+  .navbar {
+    padding: 0 3.2rem;
+  }
+}

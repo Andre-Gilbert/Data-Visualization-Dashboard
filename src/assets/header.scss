@@ -215,3 +215,11 @@
     margin: 0 30rem 0 0;
   }
 }
+
+/* large size screen
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: 4rem 3.2rem;
+  }
+}
