@@ -2,9 +2,9 @@ import dash
 import dash_html_components as html
 import plotly.graph_objects as go
 from app import app
-from charts.ordered_spend_charts import (get_data_bar_charts, get_data_os_line_charts, get_data_os_numeric_point_charts,
-                                         get_data_os_pie_charts, os_bar_chart, os_line_chart, os_numeric_point_chart,
-                                         os_pie_chart)
+from charts.ordered_spend_charts import (get_data_os_bar_charts, get_data_os_line_charts,
+                                         get_data_os_numeric_point_charts, get_data_os_pie_charts, os_bar_chart,
+                                         os_line_chart, os_numeric_point_chart, os_pie_chart)
 from components.ordered_spend_npc import ordered_spend_npc
 from components.supplier_performance_npc import supplier_performance_npc
 from dash.dependencies import Input, Output
@@ -15,7 +15,7 @@ from utils.data_prep import get_data
 
 df = get_data()
 df_numeric_point_charts = get_data_os_numeric_point_charts(df)
-df_bar_charts = get_data_bar_charts(df)
+df_bar_charts = get_data_os_bar_charts(df)
 df_line_charts = get_data_os_line_charts(df)
 df_pie_charts = get_data_os_pie_charts(df)
 
