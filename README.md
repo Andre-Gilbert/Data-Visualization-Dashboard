@@ -2,6 +2,8 @@
 Project Summary
 
 ## Installation
+Before running the application make sure you have **Python 3.9** installed.
+
 To install the requirements:
 ```
 pip install -r requirements.txt
