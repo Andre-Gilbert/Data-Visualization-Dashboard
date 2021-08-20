@@ -29,24 +29,24 @@ df_sp_supplier_bar_charts = get_data_sp_supplier_bar_charts(df)
 
 
 @app.callback(Output(component_id='dropdown-menu', component_property='label'), [
-    Input(component_id='ordered-spend', component_property='n_clicks'),
+    Input(component_id='ordered-spend-amount', component_property='n_clicks'),
     Input(component_id='number-of-orders', component_property='n_clicks')
 ])
-def update_dropdown_label(ordered_spend: int, number_of_orders: int) -> str:
+def update_dropdown_label(ordered_spend_amount: int, number_of_orders: int) -> str:
     """Callback that updates the dropdown label.
 
     Args:
-        ordered_spend: The number of button clicks.
+        ordered_spend_amount: The number of button clicks.
         number_of_orders: The number of button clicks.
 
     Returns:
         The updated dropdown label.
     """
-    id_lookup = {'ordered-spend': 'Ordered Spend', 'number-of-orders': 'Number of Orders'}
+    id_lookup = {'ordered-spend-amount': 'Ordered Spend Amount', 'number-of-orders': 'Number of Orders'}
     ctx = dash.callback_context
 
     if not ordered_spend and not number_of_orders or not ctx.triggered:
-        dropdown_label = 'Ordered Spend'
+        dropdown_label = 'Ordered Spend Amount'
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
         dropdown_label = id_lookup[button_id]
@@ -129,7 +129,7 @@ def update_ordered_spend_charts(
                                                 plant=plant,
                                                 material_group=material_group)
 
-        if dropdown_label == 'Ordered Spend':
+        if dropdown_label == 'Ordered Spend Amount':
             bar_chart = os_bar_chart(df=df_os_bar_charts,
                                      company_code=company_code,
                                      purchasing_org=purchasing_org,
@@ -220,7 +220,7 @@ def update_supplier_performance_charts(
                                                 plant=plant,
                                                 material_group=material_group)
 
-        if dropdown_label == 'Ordered Spend':
+        if dropdown_label == 'Ordered Spend Amount':
             deviation_bar_chart = sp_deviation_bar_chart(df=df_sp_deviation_bar_charts,
                                                          company_code=company_code,
                                                          purchasing_org=purchasing_org,
