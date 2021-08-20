@@ -54,11 +54,13 @@ def header() -> html.Div:
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Material Group:', className='filter-bar-label'),
-                    dcc.Dropdown(id='material-group',
-                                 options=[{
-                                     'label': label,
-                                     'value': label
-                                 } for label in df['Material Group'].unique()])
+                    dcc.Dropdown(
+                        id='material-group',
+                        options=[{
+                            'label': label,
+                            'value': label
+                        } for label in sorted(df['Material Group'].unique().astype(str))],
+                    )
                 ],
                          className='filter-bar-container')
             ],
