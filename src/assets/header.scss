@@ -105,22 +105,6 @@
   ::-webkit-scrollbar {
     width: 0.6rem;
   }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: $sap-base-color;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: $sap-scrollbar-color;
-    border-radius: 0.4rem;
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: $sap-scrollbar-hover-color;
-  }
 }
 
 .VirtualizedSelectOption {
@@ -198,6 +182,10 @@
 /* large size screen
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
+  .header {
+    padding: 4rem 3.2rem;
+  }
+
   .numeric-point-chart {
     flex-direction: row;
   }
@@ -213,13 +201,5 @@
 
   .npc-supplier-performance {
     margin: 0 30rem 0 0;
-  }
-}
-
-/* large size screen
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (min-width: 1024px) {
-  .header {
-    padding: 4rem 3.2rem;
   }
 }

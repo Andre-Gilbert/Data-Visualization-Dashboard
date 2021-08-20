@@ -109,26 +109,10 @@
   font-size: 1.4rem;
   overflow-y: hidden;
   /* width */
-  /* Track */
-  /* Handle */
-  /* Handle on hover */
 }
 
 .Select-menu-outer ::-webkit-scrollbar {
   width: 0.6rem;
-}
-
-.Select-menu-outer ::-webkit-scrollbar-track {
-  background: #ffffff;
-}
-
-.Select-menu-outer ::-webkit-scrollbar-thumb {
-  background: #949494;
-  border-radius: 0.4rem;
-}
-
-.Select-menu-outer ::-webkit-scrollbar-thumb:hover {
-  background: #747474;
 }
 
 .VirtualizedSelectOption {
@@ -215,6 +199,9 @@
 /* large size screen
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
+  .header {
+    padding: 4rem 3.2rem;
+  }
   .numeric-point-chart {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -234,13 +221,5 @@
   }
   .npc-supplier-performance {
     margin: 0 30rem 0 0;
-  }
-}
-
-/* large size screen
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (min-width: 1024px) {
-  .header {
-    padding: 4rem 3.2rem;
   }
 }

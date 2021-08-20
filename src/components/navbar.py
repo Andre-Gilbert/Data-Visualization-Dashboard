@@ -18,7 +18,7 @@ def navbar() -> html.Div:
         html.Div([
             html.Div([
                 html.Div([
-                    html.Img(src=app.get_asset_url('logo.svg'), className='logo'),
+                    html.A([html.Img(src=app.get_asset_url('logo.svg'), className='logo')], href='/'),
                     dbc.DropdownMenu(
                         children=[
                             dbc.DropdownMenuItem('Ordered Spend', id='ordered-spend', n_clicks=0),
