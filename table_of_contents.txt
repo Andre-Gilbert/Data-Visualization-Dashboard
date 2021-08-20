@@ -1,18 +1,25 @@
 Inhaltsverzeichnis
 ------------------
 
+1 - 1 1/2 Seiten
 1       Einleitung
 1.1     How to use?
 1.2     Requirements & Installation?
 
-2       App
-2.1     Design (Styleguide und other stuff)
-2.2     Aufbau (MVC, Modularisierung und other stuff)
-2.3     Frontend & Backend
-2.4     Funktionalität
-2.4.1   Data Prep
-2.4.2   App Views
-2.4.3   Filter Bar
+3 Seiten
+2       Theorie
+2.1     MVC
+2.2     Frontend & Backend
+2.2.3   Callbacks
 
-3       ???
-3.1     ???
+5 1/2 - 6 Seiten
+3       App
+3.1     Design (Styleguide und other stuff)
+3.2     Funktionalität
+3.2.1   Data Prep
+3.2.2   App Views
+3.2.3   Filter Bar
+
+2 Seiten
+4       Fazit
+4.1     Ergebnisse und Ausblick (Deployment, Real time data, etc.)
