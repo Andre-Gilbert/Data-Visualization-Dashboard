@@ -26,7 +26,7 @@ def header() -> html.Div:
                         options=[{
                             'label': label,
                             'value': label
-                        } for label in sorted(df['Company Code'].unique().astype(int))],
+                        } for label in sorted(df['Company Code'].unique())],
                     )
                 ],
                          className='filter-bar-container'),
@@ -37,7 +37,7 @@ def header() -> html.Div:
                         options=[{
                             'label': label,
                             'value': label
-                        } for label in sorted(df['Purchasing Org.'].unique().astype(int))],
+                        } for label in sorted(df['Purchasing Org.'].unique())],
                     )
                 ],
                          className='filter-bar-container'),
@@ -48,7 +48,7 @@ def header() -> html.Div:
                         options=[{
                             'label': label,
                             'value': label
-                        } for label in sorted(df['Plant'].unique().astype(int))],
+                        } for label in sorted(df['Plant'].unique())],
                     )
                 ],
                          className='filter-bar-container'),
