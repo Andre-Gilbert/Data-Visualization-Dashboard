@@ -109,39 +109,54 @@ def update_ordered_spend_charts(
         The updated charts.
     """
     if active_tab == 'tab-ordered-spend':
-        npc_current_year = os_numeric_point_chart(df_numeric_point_charts, company_code, purchasing_org, plant,
-                                                  material_group)
-        npc_prior_year = os_numeric_point_chart(df_numeric_point_charts,
-                                                company_code,
-                                                purchasing_org,
-                                                plant,
-                                                material_group,
-                                                last_year=True)
+        npc_current_year = os_numeric_point_chart(df=df_numeric_point_charts,
+                                                  company_code=company_code,
+                                                  purchasing_org=purchasing_org,
+                                                  plant=plant,
+                                                  material_group=material_group)
+        npc_prior_year = os_numeric_point_chart(df=df_numeric_point_charts,
+                                                last_year=True,
+                                                company_code=company_code,
+                                                purchasing_org=purchasing_org,
+                                                plant=plant,
+                                                material_group=material_group)
 
         if dropdown_label == 'Ordered Spend':
-            bar_chart = os_bar_chart(df_bar_charts, company_code, purchasing_org, plant, material_group)
-            line_chart = os_line_chart(df_line_charts, company_code, purchasing_org, plant, material_group)
-            pie_chart = os_pie_chart(df_pie_charts, company_code, purchasing_org, plant, material_group)
+            bar_chart = os_bar_chart(df=df_bar_charts,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
+            line_chart = os_line_chart(df=df_line_charts,
+                                       company_code=company_code,
+                                       purchasing_org=purchasing_org,
+                                       plant=plant,
+                                       material_group=material_group)
+            pie_chart = os_pie_chart(df=df_pie_charts,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
 
         elif dropdown_label == 'Number of Orders':
-            bar_chart = os_bar_chart(df_bar_charts,
-                                     company_code,
-                                     purchasing_org,
-                                     plant,
-                                     material_group,
-                                     number_of_orders=True)
-            line_chart = os_line_chart(df_line_charts,
-                                       company_code,
-                                       purchasing_org,
-                                       plant,
-                                       material_group,
-                                       number_of_orders=True)
-            pie_chart = os_pie_chart(df_pie_charts,
-                                     company_code,
-                                     purchasing_org,
-                                     plant,
-                                     material_group,
-                                     number_of_orders=True)
+            bar_chart = os_bar_chart(df=df_bar_charts,
+                                     number_of_orders=True,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
+            line_chart = os_line_chart(df=df_line_charts,
+                                       number_of_orders=True,
+                                       company_code=company_code,
+                                       purchasing_org=purchasing_org,
+                                       plant=plant,
+                                       material_group=material_group)
+            pie_chart = os_pie_chart(df=df_pie_charts,
+                                     number_of_orders=True,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
 
         return npc_current_year, npc_prior_year, bar_chart, line_chart, pie_chart
 
@@ -182,38 +197,53 @@ def update_supplier_performance_charts(
         The updated charts.
     """
     if active_tab == 'tab-supplier-performance':
-        npc_current_year = os_numeric_point_chart(df_numeric_point_charts, company_code, purchasing_org, plant,
-                                                  material_group)
-        npc_prior_year = os_numeric_point_chart(df_numeric_point_charts,
-                                                company_code,
-                                                purchasing_org,
-                                                plant,
-                                                material_group,
-                                                last_year=True)
+        npc_current_year = os_numeric_point_chart(df=df_numeric_point_charts,
+                                                  company_code=company_code,
+                                                  purchasing_org=purchasing_org,
+                                                  plant=plant,
+                                                  material_group=material_group)
+        npc_prior_year = os_numeric_point_chart(df=df_numeric_point_charts,
+                                                last_year=True,
+                                                company_code=company_code,
+                                                purchasing_org=purchasing_org,
+                                                plant=plant,
+                                                material_group=material_group)
 
         if dropdown_label == 'Ordered Spend':
-            bar_chart = os_bar_chart(df_bar_charts, company_code, purchasing_org, plant, material_group)
-            line_chart = os_line_chart(df_line_charts, company_code, purchasing_org, plant, material_group)
-            pie_chart = os_pie_chart(df_pie_charts, company_code, purchasing_org, plant, material_group)
+            bar_chart = os_bar_chart(df=df_bar_charts,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
+            line_chart = os_line_chart(df=df_line_charts,
+                                       company_code=company_code,
+                                       purchasing_org=purchasing_org,
+                                       plant=plant,
+                                       material_group=material_group)
+            pie_chart = os_pie_chart(df=df_pie_charts,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
 
         elif dropdown_label == 'Number of Orders':
-            bar_chart = os_bar_chart(df_bar_charts,
-                                     company_code,
-                                     purchasing_org,
-                                     plant,
-                                     material_group,
-                                     number_of_orders=True)
-            line_chart = os_line_chart(df_line_charts,
-                                       company_code,
-                                       purchasing_org,
-                                       plant,
-                                       material_group,
-                                       number_of_orders=True)
-            pie_chart = os_pie_chart(df_pie_charts,
-                                     company_code,
-                                     purchasing_org,
-                                     plant,
-                                     material_group,
-                                     number_of_orders=True)
+            bar_chart = os_bar_chart(df=df_bar_charts,
+                                     number_of_orders=True,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
+            line_chart = os_line_chart(df=df_line_charts,
+                                       number_of_orders=True,
+                                       company_code=company_code,
+                                       purchasing_org=purchasing_org,
+                                       plant=plant,
+                                       material_group=material_group)
+            pie_chart = os_pie_chart(df=df_pie_charts,
+                                     number_of_orders=True,
+                                     company_code=company_code,
+                                     purchasing_org=purchasing_org,
+                                     plant=plant,
+                                     material_group=material_group)
 
         return npc_current_year, npc_prior_year, bar_chart, line_chart, pie_chart
