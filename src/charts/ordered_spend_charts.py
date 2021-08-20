@@ -19,7 +19,7 @@ def get_data_os_numeric_point_charts(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def os_numeric_point_chart(df: pd.DataFrame,
-                           last_year: bool = False,
+                           number_of_orders: bool = False,
                            company_code: str = None,
                            purchasing_org: str = None,
                            plant: str = None,
@@ -35,50 +35,36 @@ def os_numeric_point_chart(df: pd.DataFrame,
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby('Year').agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
-    if last_year:
-        year = 2019
-        mode = 'number'
-        delta_os = None
-        delta_no = None
+    df_this_year = df.loc[df['Year'] == 2020]
+    df_last_year = df.loc[df['Year'] == 2019]
+
+    if number_of_orders:
+        displayed = 'Number of Orders'
     else:
-        year = 2020
-        mode = 'number+delta'
-        delta_os = df.loc[df['Year'] == 2019, 'Ordered Spend'].iloc[0]
-        delta_no = df.loc[df['Year'] == 2019, 'Number of Orders'].iloc[0]
+        displayed = 'Ordered Spend'
 
-    df = df.loc[df['Year'] == year]
-
-    ordered_spend = df['Ordered Spend'].iloc[0]
-    number_of_orders = df['Number of Orders'].iloc[0]
+    value_this_year = df_this_year[displayed].iloc[0]
+    value_last_year = df_last_year[displayed].iloc[0]
 
     fig = go.Figure()
 
     fig.add_trace(
-        go.Indicator(mode=mode,
-                     value=ordered_spend,
+        go.Indicator(mode='number+delta',
+                     value=value_this_year,
                      domain={
                          'x': [0, 0.45],
                          'y': [0, 1]
                      },
                      delta={
-                         'reference': delta_os,
+                         'reference': value_last_year,
                          'relative': True
                      },
-                     title='Ordered Spend'))
-    fig.add_trace(
-        go.Indicator(mode=mode,
-                     value=number_of_orders,
-                     domain={
-                         'x': [0.55, 1],
-                         'y': [0, 1]
-                     },
-                     delta={
-                         'reference': delta_no,
-                         'relative': True
-                     },
-                     title='Number of Orders'))
+                     title='2019'))
+    fig.add_trace(go.Indicator(mode='number', value=value_last_year, domain={
+        'x': [0.55, 1],
+        'y': [0, 1]
+    }, title='2020'))
 
-    fig.update_layout(title_text=year)
     return fig
 
 
