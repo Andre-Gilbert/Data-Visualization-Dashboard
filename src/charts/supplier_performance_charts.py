@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
 
-def get_data_sp_point_and_pie_charts(df: pd.DataFrame) -> pd.DataFrame:
+def get_data_sp_point_and_pie_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Creates the DataFrames to be used for the Supplier Performance Numeric Point and Pie Charts.
 
     Returns:
@@ -157,6 +157,7 @@ def get_data_sp_line_charts(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def sp_line_chart(df: pd.DataFrame,
+                  number_of_orders: bool = False,
                   company_code: str = None,
                   purchasing_org: str = None,
                   plant: str = None,
@@ -166,6 +167,7 @@ def sp_line_chart(df: pd.DataFrame,
 
     Args:
         df: DataFrame produced by function get_data_sp_line_charts.
+        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
@@ -189,11 +191,20 @@ def sp_line_chart(df: pd.DataFrame,
         },
         inplace=True)
 
-    fig = make_subplots(rows=1, cols=2, subplot_titles=('Ordered Spend', 'Number of Orders'))
+    if number_of_orders:
+        displayed = 'Number of Orders'
+    else:
+        displayed = 'Ordered Spend'
 
-    fig.add_trace(go.Scatter(x=df['Month'], y=df['Ordered Spend'], mode='lines+markers', name='Ordered Spend'), 1, 1)
-    fig.add_trace(go.Scatter(x=df['Month'], y=df['Number of Orders'], mode='lines+markers', name='Number of Orders'), 1,
-                  2)
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(x=df['Month'],
+                   y=df[displayed],
+                   mode='lines+markers',
+                   name=displayed,
+                   title_text=displayed,
+                   title_position='bottom center'))
 
     fig.update_layout(title_text='Deviated Deliveries by Month', showlegend=False)
 
@@ -201,6 +212,7 @@ def sp_line_chart(df: pd.DataFrame,
 
 
 def sp_pie_chart(df: pd.DataFrame,
+                 number_of_orders: bool = False,
                  company_code: str = None,
                  purchasing_org: str = None,
                  plant: str = None,
@@ -210,29 +222,28 @@ def sp_pie_chart(df: pd.DataFrame,
 
     Args:
         df: First DataFrame produced by function get_data_sp_point_and_pie_charts.
+        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby(['Purchasing Org.']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
-    fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'domain'}, {'type': 'domain'}]])
+    if number_of_orders:
+        displayed = 'Number of Orders'
+    else:
+        displayed = 'Ordered Spend'
+
+    fig = go.Figure()
 
     fig.add_trace(
         go.Pie(labels=df['Purchasing Org.'],
-               values=df['Ordered Spend'],
-               name='Ordered Spend',
-               title_text='Ordered Spend',
+               values=df[displayed],
+               name=displayed,
+               title_text=displayed,
                title_position='bottom center',
                textinfo='label+percent',
                direction='clockwise'), 1, 1)
-    fig.add_trace(
-        go.Pie(labels=df['Purchasing Org.'],
-               values=df['Number of Orders'],
-               name='Number of Orders',
-               title_text='Number of Orders',
-               title_position='bottom center',
-               textinfo='label+percent',
-               direction='clockwise'), 1, 2)
+
     fig.update_layout(title='Deviated Deliveries by Purchasing Organisation')
     return fig
 
@@ -253,6 +264,7 @@ def get_data_sp_supplier_bar_charts(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def sp_supplier_bar_chart(df: pd.DataFrame,
+                          number_of_orders: bool = False,
                           company_code: str = None,
                           purchasing_org: str = None,
                           plant: str = None,
@@ -262,6 +274,7 @@ def sp_supplier_bar_chart(df: pd.DataFrame,
 
     Args:
         df: DataFrame produced by function get_data_sp_supplier_bar_charts.
+        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
@@ -272,17 +285,21 @@ def sp_supplier_bar_chart(df: pd.DataFrame,
 
     df.sort_values('Ordered Spend', ascending=False, inplace=True)
 
-    fig = make_subplots(rows=1, cols=2, subplot_titles=('Ordered Spend', 'Number of Orders'))
-    fig.add_trace(go.Bar(
-        x=df['Supplier Name'],
-        y=df['Ordered Spend'],
-        name='Ordered Spend',
-    ), 1, 1)
-    fig.add_trace(go.Bar(
-        x=df['Supplier Name'],
-        y=df['Number of Orders'],
-        name='Number of Orders',
-    ), 1, 2)
+    if number_of_orders:
+        displayed = 'Number of Orders'
+    else:
+        displayed = 'Ordered Spend'
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Bar(
+            x=df['Supplier Name'],
+            y=df[displayed],
+            name=displayed,
+            title_text=displayed,
+            title_position='bottom center',
+        ))
 
     fig.update_layout(title='Deviated Deliveries by Top 10 Suppliers',
                       barmode='group',
