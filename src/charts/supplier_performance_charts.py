@@ -200,15 +200,7 @@ def sp_by_month_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure()
-
-    fig.add_trace(
-        go.Scatter(x=df['Month'],
-                   y=df[displayed],
-                   mode='lines+markers',
-                   name=displayed,
-                   title_text=displayed,
-                   title_position='bottom center'))
+    fig = go.Figure(go.Scatter(x=df['Month'], y=df[displayed], mode='lines+markers', name=displayed))
 
     fig.update_layout(showlegend=False)
 
@@ -237,11 +229,11 @@ def sp_by_org_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure()
-
-    fig.add_trace(go.Bar(x=df['Purchasing Org.'], y=df[displayed], name=displayed))
+    fig = go.Figure(go.Bar(x=df['Purchasing Org.'], y=df[displayed], name=displayed))
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+
+    fig.update_xaxes(type='category')
 
     return fig
 
@@ -289,16 +281,7 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure()
-
-    fig.add_trace(
-        go.Bar(
-            x=df['Supplier Name'],
-            y=df[displayed],
-            name=displayed,
-            title_text=displayed,
-            title_position='bottom center',
-        ))
+    fig = go.Figure(go.Bar(x=df['Supplier Name'], y=df[displayed], name=displayed))
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
 

@@ -14,24 +14,27 @@ def ordered_spend() -> html.Div:
     ordered_spend = html.Div([
         html.Div([
             html.Div([
-                html.Div(
-                    [html.H1('Title', className='chart-title'),
-                     dcc.Graph(id='ordered-spend-pie-chart', figure={})],
-                    className='chart-one'),
+                html.Div([
+                    html.H1('Orders by Month', className='chart-title'),
+                    dcc.Graph(id='ordered-spend-by-month-chart', figure={})
+                ],
+                         className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
-                html.Div(
-                    [html.H1('Title', className='chart-title'),
-                     dcc.Graph(id='ordered-spend-line-chart', figure={})],
-                    className='chart-one'),
+                html.Div([
+                    html.H1('Orders by Purchsing Organisation', className='chart-title'),
+                    dcc.Graph(id='ordered-spend-by-org-chart', figure={})
+                ],
+                         className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
-                html.Div(
-                    [html.H1('Title', className='chart-title'),
-                     dcc.Graph(id='ordered-spend-bar-chart', figure={})],
-                    className='chart-one'),
+                html.Div([
+                    html.H1('Orders by Top Ten Suppliers', className='chart-title'),
+                    dcc.Graph(id='ordered-spend-top-10-suppliers-chart', figure={})
+                ],
+                         className='chart-one'),
             ],
                      className='chart-container')
         ],

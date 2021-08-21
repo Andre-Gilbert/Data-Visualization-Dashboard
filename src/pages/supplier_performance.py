@@ -15,31 +15,33 @@ def supplier_performance() -> html.Div:
         html.Div([
             html.Div([
                 html.Div([
-                    html.H1('Title', className='chart-title'),
-                    dcc.Graph(id='supplier-performance-line-chart', figure={})
+                    html.H1('Deviated Orders by Deviation Cause and Indicator', className='chart-title'),
+                    dcc.Graph(id='supplier-performance-deviation-cause-and-indicator-chart', figure={})
                 ],
                          className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
                 html.Div([
-                    html.H1('Title', className='chart-title'),
-                    dcc.Graph(id='supplier-performance-bar-chart', figure={})
+                    html.H1('Deviated Orders by Month', className='chart-title'),
+                    dcc.Graph(id='supplier-performance-by-month-chart', figure={})
                 ],
                          className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
                 html.Div([
-                    html.H1('Title', className='chart-title'),
-                    dcc.Graph(id='supplier-performance-pie-chart', figure={})
+                    html.H1('Deviated Orders by Purchasing Organisation', className='chart-title'),
+                    dcc.Graph(id='supplier-performance-by-org-chart', figure={})
                 ],
                          className='chart-one'),
             ],
                      className='chart-container'),
             html.Div([
-                html.Div([html.H1('Title', className='chart-title'),
-                          dcc.Graph(id='bar-chart-sp', figure={})],
+                html.Div([
+                    html.H1('Deviated Orders of Top Ten Suppliers', className='chart-title'),
+                    dcc.Graph(id='supplier-performance-top-10-suppliers-chart', figure={})
+                ],
                          className='chart-one'),
             ],
                      className='chart-container')

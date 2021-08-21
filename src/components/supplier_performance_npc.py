@@ -15,12 +15,11 @@ def supplier_performance_npc() -> html.Div:
         html.Div([
             html.H1('Delivery Deviation', className='npc-title'),
             html.Div([
-                dcc.Graph(id='supplier-performance-npc-current-year', className='npc-supplier-performance'),
-                dcc.Graph(id='supplier-performance-npc-current-year', className='npc-supplier-performance'),
-                dcc.Graph(id='supplier-performance-npc-current-year')
+                dcc.Graph(id='supplier-performance-total-deviation-and-percentage-chart',
+                          className='npc-chart-current-year')
             ],
                      className='npc-chart-container')
         ],
-                 className='npc-container-one')
+                 className='npc-container-current-year')
     ])
     return supplier_performance_npc

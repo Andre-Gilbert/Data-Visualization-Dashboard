@@ -166,8 +166,13 @@ def update_ordered_spend_charts(
                                                                purchasing_org=purchasing_org,
                                                                plant=plant,
                                                                material_group=material_group)
+    else:
+        total_by_year_chart = None
+        by_month_chart = None
+        by_org_chart = None
+        top_10_suppliers_chart = None
 
-        return (total_by_year_chart, by_month_chart, by_org_chart, top_10_suppliers_chart)
+    return total_by_year_chart, by_month_chart, by_org_chart, top_10_suppliers_chart
 
 
 @app.callback([
@@ -246,19 +251,19 @@ def update_supplier_performance_charts(
                 plant=plant,
                 material_group=material_group)
             deviation_cause_and_indicator_chart = sp_deviation_cause_and_indicator_chart(
-                df=df_os_top_10_suppliers_charts,
+                df=df_sp_deviation_cause_and_indicator_charts,
                 number_of_orders=True,
                 company_code=company_code,
                 purchasing_org=purchasing_org,
                 plant=plant,
                 material_group=material_group)
-            by_month_chart = sp_by_month_chart(df=df_os_by_month_charts,
+            by_month_chart = sp_by_month_chart(df=df_sp_by_month_charts,
                                                number_of_orders=True,
                                                company_code=company_code,
                                                purchasing_org=purchasing_org,
                                                plant=plant,
                                                material_group=material_group)
-            by_org_chart = sp_by_org_chart(df=df_os_total_by_year_charts,
+            by_org_chart = sp_by_org_chart(df=df_sp_total_deviation_charts,
                                            number_of_orders=True,
                                            company_code=company_code,
                                            purchasing_org=purchasing_org,
@@ -270,6 +275,11 @@ def update_supplier_performance_charts(
                                                                purchasing_org=purchasing_org,
                                                                plant=plant,
                                                                material_group=material_group)
+    else:
+        total_deviation_and_percentage_chart = None
+        deviation_cause_and_indicator_chart = None
+        by_month_chart = None
+        by_org_chart = None
+        top_10_suppliers_chart = None
 
-        return (total_deviation_and_percentage_chart, deviation_cause_and_indicator_chart, by_month_chart, by_org_chart,
-                top_10_suppliers_chart)
+    return total_deviation_and_percentage_chart, deviation_cause_and_indicator_chart, by_month_chart, by_org_chart, top_10_suppliers_chart  # noqa: E501

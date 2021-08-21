@@ -59,11 +59,11 @@ def os_total_by_year_chart(df: pd.DataFrame,
                          'reference': value_last_year,
                          'relative': True
                      },
-                     title='2019'))
+                     title='2020'))
     fig.add_trace(go.Indicator(mode='number', value=value_last_year, domain={
         'x': [0.55, 1],
         'y': [0, 1]
-    }, title='2020'))
+    }, title='2019'))
 
     return fig
 
@@ -171,6 +171,8 @@ def os_by_org_chart(df: pd.DataFrame,
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45)
 
+    fig.update_xaxes(type='category')
+
     return fig
 
 
@@ -231,4 +233,5 @@ def os_top_10_suppliers_chart(df: pd.DataFrame,
     ))
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45)
+
     return fig

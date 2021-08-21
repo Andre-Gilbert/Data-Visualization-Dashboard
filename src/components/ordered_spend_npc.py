@@ -15,19 +15,11 @@ def ordered_spend_npc() -> html.Div:
         html.Div([
             html.H1('2020', className='npc-title'),
             html.Div([
-                dcc.Graph(id='ordered-spend-npc-current-year', className='npc-chart-current-year'),
+                dcc.Graph(id='ordered-spend-total-by-year-chart', className='npc-chart-current-year'),
             ],
                      className='npc-chart-container')
         ],
-                 className='npc-container-current-year'),
-        html.Div([
-            html.H1('2019', className='npc-title'),
-            html.Div([
-                dcc.Graph(id='ordered-spend-npc-prior-year', className='npc-chart-prior-year'),
-            ],
-                     className='npc-chart-container')
-        ],
-                 className='npc-container-prior-year')
+                 className='npc-container-current-year')
     ],
                                  className='numeric-point-chart')
     return ordered_spend_npc
