@@ -25,7 +25,7 @@ df_os_total_by_year_charts = get_data_os_total_by_year_charts(df)
 df_os_by_month_charts = get_data_os_by_month_charts(df)
 df_os_top_10_suppliers_charts = get_data_os_top_10_suppliers_charts(df)
 
-df_sp_total_deviation_charts, df_reference = get_data_sp_total_deviation_and_percentage_charts(df)
+df_sp_total_deviation_charts, df_sp_reference = get_data_sp_total_deviation_and_percentage_charts(df)
 df_sp_deviation_cause_and_indicator_charts = get_data_sp_deviation_cause_and_indicator_charts(df)
 df_sp_by_month_charts = get_data_sp_by_month_charts(df)
 df_sp_top_10_suppliers_charts = get_data_sp_top_10_suppliers_charts(df)
@@ -210,13 +210,13 @@ def update_supplier_performance_charts(
     """
     if active_tab == 'tab-supplier-performance':
         npc_current_year = sp_total_deviation_and_percentage_chart(df_deviated=df_sp_total_deviation_charts,
-                                                                   df_all=df_reference,
+                                                                   df_all=df_sp_reference,
                                                                    company_code=company_code,
                                                                    purchasing_org=purchasing_org,
                                                                    plant=plant,
                                                                    material_group=material_group)
         npc_prior_year = sp_total_deviation_and_percentage_chart(df_deviated=df_sp_total_deviation_charts,
-                                                                 df_all=df_reference,
+                                                                 df_all=df_sp_reference,
                                                                  number_of_orders=True,
                                                                  company_code=company_code,
                                                                  purchasing_org=purchasing_org,

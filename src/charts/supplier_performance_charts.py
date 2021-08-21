@@ -6,25 +6,28 @@ from utils.data_prep import copy_and_apply_filter
 
 
 def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
-    """Creates the DataFrames to be used for the Supplier Performance Numeric Point and Pie Charts.
+    """Creates the DataFrames to be used for the Supplier Performance Total Deviation and Percentage and
+    by Purchasing Organisation Charts.
 
     Returns:
-        df_deviated: DataFrame containing sum and count of only Orders with Deviation Cause != 0 and
-            year == 2020, intended for Numeric Point and Pie Charts.
-        df_all: DataFrame containing sum and count of all Orders of year == 2020, intended only for
-            Numeric Point Charts."""
+        df_total_deviation_and_percentage_charts: DataFrame containing sum and count of only Orders with Deviation Cause
+            != 0 and year == 2020, intended for functions sp_total_deviation_and_percentage_chart and sp_by_org_chart.
+        df_reference: DataFrame containing sum and count of all Orders of year == 2020, intended only for
+            function sp_total_deviation_and_percentage_chart."""
 
     group_columns = ['Company Code', 'Purchasing Org.', 'Plant', 'Material Group']
     aggregate_functions = {'Document Date': 'count', 'Net Value': 'sum'}
     rename_columns = {'Net Value': 'Ordered Spend', 'Document Date': 'Number of Orders'}
 
-    df_all = df.loc[df['Year'] == 2020]
-    df_all = df_all.groupby(group_columns).agg(aggregate_functions).reset_index().rename(columns=rename_columns)
+    df_total_deviation_and_percentage_charts = df.loc[df['Year'] == 2020]
+    df_total_deviation_and_percentage_charts = df_total_deviation_and_percentage_charts.groupby(group_columns).agg(
+        aggregate_functions).reset_index().rename(columns=rename_columns)
 
-    df_deviated = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
-    df_deviated = df_deviated.groupby(group_columns).agg(aggregate_functions).reset_index().rename(
+    df_reference = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
+    df_reference = df_reference.groupby(group_columns).agg(aggregate_functions).reset_index().rename(
         columns=rename_columns)
-    return df_deviated, df_all
+
+    return df_reference, df_total_deviation_and_percentage_charts
 
 
 def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
@@ -34,13 +37,13 @@ def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
                                             purchasing_org: str = None,
                                             plant: str = None,
                                             material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Numeric Point Charts for total and percentage of
-    either Ordered Spend or Number of Orders of deviated Orders this year.
+    """Creates a Figure containing two Numeric Point Chart Traces for total and percentage of
+    either Ordered Spend or Number of Deviated Orders this year.
 
     Args:
         df_deviated: First DataFrame produced by function get_data_sp_total_deviation_and_percentage_charts.
         df_all: Second DataFrame produced by function get_data_sp_total_deviation_and_percentage_charts.
-        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
+        number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df_deviated = copy_and_apply_filter(df_deviated, company_code, purchasing_org, plant, material_group)
@@ -79,12 +82,11 @@ def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
                      },
                      title='Percentage of all Orders'))
 
-    fig.update_layout(title_text=displayed)
     return fig
 
 
 def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Supplier Performance Deviation Bar Charts."""
+    """Creates the DataFrame to be used for the Supplier Performance Deviation Cause and Indicator Charts."""
 
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
     df_bar_charts = df_bar_charts.groupby(
@@ -96,6 +98,7 @@ def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.Dat
              'Net Value': 'Ordered Spend',
              'Document Date': 'Number of Orders'
          })
+
     return df_bar_charts
 
 
@@ -105,12 +108,12 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
                                            purchasing_org: str = None,
                                            plant: str = None,
                                            material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Bar Charts comparing either Ordered Spend or Number
-    of Orders of deviated Orders by Deviation Cause and Deviation Indicator.
+    """Creates a Figure containing two Bar Chart Subplots showing either Ordered Spend or Number
+    of Deviated Orders by Deviation Cause and Deviation Indicator.
 
     Args:
         df: DataFrame produced by function get_data_sp_deviation_cause_and_indicator_charts.
-        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
+        number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
@@ -137,12 +140,13 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
         go.Bar(x=df_dev_indicator['Deviation Indicator'], y=df_dev_indicator[displayed], name='Deviation Indicator'), 1,
         2)
 
-    fig.update_layout(title=displayed, barmode='group', xaxis_tickangle=-45, showlegend=False)
+    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+
     return fig
 
 
 def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Supplier Performance Line Charts."""
+    """Creates the DataFrame to be used for the Supplier Performance by Month Charts."""
 
     df_line_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
     df_line_charts = df_line_charts.groupby(['Month', 'Company Code', 'Purchasing Org.', 'Plant',
@@ -153,6 +157,7 @@ def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
                                                  'Net Value': 'Ordered Spend',
                                                  'Document Date': 'Number of Orders'
                                              })
+
     return df_line_charts
 
 
@@ -162,12 +167,11 @@ def sp_by_month_chart(df: pd.DataFrame,
                       purchasing_org: str = None,
                       plant: str = None,
                       material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Line Charts comparing Ordered Spend and Number
-    of Orders of deviated Orders by Month.
+    """Creates a Line Chart showing either Ordered Spend or Number of Deviated Orders by Month.
 
     Args:
         df: DataFrame produced by function get_data_sp_by_month_charts.
-        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
+        number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
@@ -206,7 +210,7 @@ def sp_by_month_chart(df: pd.DataFrame,
                    title_text=displayed,
                    title_position='bottom center'))
 
-    fig.update_layout(title_text='Deviated Deliveries by Month', showlegend=False)
+    fig.update_layout(showlegend=False)
 
     return fig
 
@@ -217,12 +221,12 @@ def sp_by_org_chart(df: pd.DataFrame,
                     purchasing_org: str = None,
                     plant: str = None,
                     material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Pie Charts comparing Ordered Spend and Number
-    of Orders of deviated Orders by Purchasing Organisation.
+    """Creates a Bar Chart Traces showing either Ordered Spend or Number of Deviated Orders by
+    Purchasing Organisation.
 
     Args:
         df: First DataFrame produced by function get_data_sp_total_deviation_and_percentage_charts.
-        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
+        number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
@@ -235,21 +239,15 @@ def sp_by_org_chart(df: pd.DataFrame,
 
     fig = go.Figure()
 
-    fig.add_trace(
-        go.Pie(labels=df['Purchasing Org.'],
-               values=df[displayed],
-               name=displayed,
-               title_text=displayed,
-               title_position='bottom center',
-               textinfo='label+percent',
-               direction='clockwise'), 1, 1)
+    fig.add_trace(go.Bar(x=df['Purchasing Org.'], y=df[displayed], name=displayed))
 
-    fig.update_layout(title='Deviated Deliveries by Purchasing Organisation')
+    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+
     return fig
 
 
 def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Supplier Performance Top 10 Suppliers Bar Charts."""
+    """Creates the DataFrame to be used for the Supplier Performance Top 10 Suppliers Charts."""
 
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
     df_bar_charts = df_bar_charts.groupby(
@@ -260,6 +258,7 @@ def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
             'Net Value': 'Ordered Spend',
             'Document Date': 'Number of Orders'
         })
+
     return df_bar_charts
 
 
@@ -269,12 +268,12 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
                               purchasing_org: str = None,
                               plant: str = None,
                               material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Bar Charts comparing Ordered Spend and Number
-    of Orders of deviated Orders of Top 10 Suppliers.
+    """Creates a Bar Chart Traces showing either Ordered Spend or Number of Deviated Orders of
+    Top 10 Suppliers by Ordered Spend.
 
     Args:
         df: DataFrame produced by function get_data_sp_top_10_suppliers_charts.
-        number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
+        number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
@@ -301,8 +300,6 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
             title_position='bottom center',
         ))
 
-    fig.update_layout(title='Deviated Deliveries by Top 10 Suppliers',
-                      barmode='group',
-                      xaxis_tickangle=-45,
-                      showlegend=False)
+    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+
     return fig
