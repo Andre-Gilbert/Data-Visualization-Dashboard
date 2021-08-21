@@ -5,7 +5,7 @@ from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
 
-def get_data_sp_point_and_pie_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
+def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Creates the DataFrames to be used for the Supplier Performance Numeric Point and Pie Charts.
 
     Returns:
@@ -27,19 +27,19 @@ def get_data_sp_point_and_pie_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     return df_deviated, df_all
 
 
-def sp_numeric_point_chart(df_deviated: pd.DataFrame,
-                           df_all: pd.DataFrame,
-                           number_of_orders: bool = False,
-                           company_code: str = None,
-                           purchasing_org: str = None,
-                           plant: str = None,
-                           material_group: str = None) -> go.Figure:
+def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
+                                            df_all: pd.DataFrame,
+                                            number_of_orders: bool = False,
+                                            company_code: str = None,
+                                            purchasing_org: str = None,
+                                            plant: str = None,
+                                            material_group: str = None) -> go.Figure:
     """Creates a Figure containing two Numeric Point Charts for total and percentage of
     either Ordered Spend or Number of Orders of deviated Orders this year.
 
     Args:
-        df_deviated: First DataFrame produced by function get_data_sp_point_and_pie_charts.
-        df_all: First DataFrame produced by function get_data_sp_point_and_pie_charts.
+        df_deviated: First DataFrame produced by function get_data_sp_total_deviation_and_percentage_charts.
+        df_all: Second DataFrame produced by function get_data_sp_total_deviation_and_percentage_charts.
         number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
@@ -83,7 +83,7 @@ def sp_numeric_point_chart(df_deviated: pd.DataFrame,
     return fig
 
 
-def get_data_sp_deviation_bar_charts(df: pd.DataFrame) -> pd.DataFrame:
+def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Creates the DataFrame to be used for the Supplier Performance Deviation Bar Charts."""
 
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -99,17 +99,17 @@ def get_data_sp_deviation_bar_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_bar_charts
 
 
-def sp_deviation_bar_chart(df: pd.DataFrame,
-                           number_of_orders: bool = False,
-                           company_code: str = None,
-                           purchasing_org: str = None,
-                           plant: str = None,
-                           material_group: str = None) -> go.Figure:
+def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
+                                           number_of_orders: bool = False,
+                                           company_code: str = None,
+                                           purchasing_org: str = None,
+                                           plant: str = None,
+                                           material_group: str = None) -> go.Figure:
     """Creates a Figure containing two Bar Charts comparing either Ordered Spend or Number
     of Orders of deviated Orders by Deviation Cause and Deviation Indicator.
 
     Args:
-        df: DataFrame produced by function get_data_sp_deviation_bar_charts.
+        df: DataFrame produced by function get_data_sp_deviation_cause_and_indicator_charts.
         number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
@@ -141,7 +141,7 @@ def sp_deviation_bar_chart(df: pd.DataFrame,
     return fig
 
 
-def get_data_sp_line_charts(df: pd.DataFrame) -> pd.DataFrame:
+def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Creates the DataFrame to be used for the Supplier Performance Line Charts."""
 
     df_line_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -156,17 +156,17 @@ def get_data_sp_line_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_line_charts
 
 
-def sp_line_chart(df: pd.DataFrame,
-                  number_of_orders: bool = False,
-                  company_code: str = None,
-                  purchasing_org: str = None,
-                  plant: str = None,
-                  material_group: str = None) -> go.Figure:
+def sp_by_month_chart(df: pd.DataFrame,
+                      number_of_orders: bool = False,
+                      company_code: str = None,
+                      purchasing_org: str = None,
+                      plant: str = None,
+                      material_group: str = None) -> go.Figure:
     """Creates a Figure containing two Line Charts comparing Ordered Spend and Number
     of Orders of deviated Orders by Month.
 
     Args:
-        df: DataFrame produced by function get_data_sp_line_charts.
+        df: DataFrame produced by function get_data_sp_by_month_charts.
         number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
@@ -211,17 +211,17 @@ def sp_line_chart(df: pd.DataFrame,
     return fig
 
 
-def sp_pie_chart(df: pd.DataFrame,
-                 number_of_orders: bool = False,
-                 company_code: str = None,
-                 purchasing_org: str = None,
-                 plant: str = None,
-                 material_group: str = None) -> go.Figure:
+def sp_by_org_chart(df: pd.DataFrame,
+                    number_of_orders: bool = False,
+                    company_code: str = None,
+                    purchasing_org: str = None,
+                    plant: str = None,
+                    material_group: str = None) -> go.Figure:
     """Creates a Figure containing two Pie Charts comparing Ordered Spend and Number
     of Orders of deviated Orders by Purchasing Organisation.
 
     Args:
-        df: First DataFrame produced by function get_data_sp_point_and_pie_charts.
+        df: First DataFrame produced by function get_data_sp_total_deviation_and_percentage_charts.
         number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
@@ -248,7 +248,7 @@ def sp_pie_chart(df: pd.DataFrame,
     return fig
 
 
-def get_data_sp_supplier_bar_charts(df: pd.DataFrame) -> pd.DataFrame:
+def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Creates the DataFrame to be used for the Supplier Performance Top 10 Suppliers Bar Charts."""
 
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -263,17 +263,17 @@ def get_data_sp_supplier_bar_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_bar_charts
 
 
-def sp_supplier_bar_chart(df: pd.DataFrame,
-                          number_of_orders: bool = False,
-                          company_code: str = None,
-                          purchasing_org: str = None,
-                          plant: str = None,
-                          material_group: str = None) -> go.Figure:
+def sp_top_10_suppliers_chart(df: pd.DataFrame,
+                              number_of_orders: bool = False,
+                              company_code: str = None,
+                              purchasing_org: str = None,
+                              plant: str = None,
+                              material_group: str = None) -> go.Figure:
     """Creates a Figure containing two Bar Charts comparing Ordered Spend and Number
     of Orders of deviated Orders of Top 10 Suppliers.
 
     Args:
-        df: DataFrame produced by function get_data_sp_supplier_bar_charts.
+        df: DataFrame produced by function get_data_sp_top_10_suppliers_charts.
         number_of_orders: Flag that dictated whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI."""
 
