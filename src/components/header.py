@@ -8,7 +8,8 @@ df = get_data()
 
 def header() -> html.Div:
     """Generate the header for the dashboard.
-
+    
+    It provides filters to calculate values.
     The page header and the numeric point charts will be re-rendered
     when the page changes, but the filters will be applied globally.
 
@@ -22,6 +23,7 @@ def header() -> html.Div:
                 html.Div([
                     html.P('Company Code:', className='filter-bar-label'),
                     dcc.Dropdown(
+                        # access values through this id
                         id='company-code',
                         options=[{
                             'label': label,
@@ -29,6 +31,7 @@ def header() -> html.Div:
                         } for label in sorted(df['Company Code'].unique())],
                     )
                 ],
+                         # className for styling
                          className='filter-bar-container'),
                 html.Div([
                     html.P('Purchasing Organization:', className='filter-bar-label'),

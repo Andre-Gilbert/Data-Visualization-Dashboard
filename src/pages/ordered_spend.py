@@ -23,7 +23,7 @@ def ordered_spend() -> html.Div:
                      className='chart-container'),
             html.Div([
                 html.Div([
-                    html.H1('Orders by Purchsing Organisation', className='chart-title'),
+                    html.H1('Orders by Purchasing Organisation', className='chart-title'),
                     dcc.Graph(id='ordered-spend-by-org-chart', figure={})
                 ],
                          className='chart-one'),
