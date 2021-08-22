@@ -71,12 +71,12 @@ def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     Returns:
         The page header, numeric point charts and the page content.
     """
-    if active_tab == 'tab-ordered-spend':
+    if active_tab == 'tab-ordered-spend' or active_tab == "tab-ordered-spend-ibcs":
         page_header = 'Ordered Spend'
         page_numeric_point_chart = ordered_spend_npc()
         page_content = ordered_spend()
 
-    elif active_tab == 'tab-supplier-performance':
+    elif active_tab == 'tab-supplier-performance' or active_tab == "tab-supplier-performance-ibcs":
         page_header = 'Supplier Performance'
         page_numeric_point_chart = supplier_performance_npc()
         page_content = supplier_performance()
@@ -119,6 +119,54 @@ def update_ordered_spend_charts(
         The updated charts.
     """
     if active_tab == 'tab-ordered-spend':
+        if dropdown_label == 'Ordered Spend Amount':
+            total_by_year_chart = os_total_by_year_chart(df=df_os_total_by_year_charts,
+                                                         company_code=company_code,
+                                                         purchasing_org=purchasing_org,
+                                                         plant=plant,
+                                                         material_group=material_group)
+            by_month_chart = os_by_month_chart(df=df_os_by_month_charts,
+                                               company_code=company_code,
+                                               purchasing_org=purchasing_org,
+                                               plant=plant,
+                                               material_group=material_group)
+            by_org_chart = os_by_org_chart(df=df_os_total_by_year_charts,
+                                           company_code=company_code,
+                                           purchasing_org=purchasing_org,
+                                           plant=plant,
+                                           material_group=material_group)
+            top_10_suppliers_chart = os_top_10_suppliers_chart(df=df_os_top_10_suppliers_charts,
+                                                               company_code=company_code,
+                                                               purchasing_org=purchasing_org,
+                                                               plant=plant,
+                                                               material_group=material_group)
+
+        elif dropdown_label == 'Number of Orders':
+            total_by_year_chart = os_total_by_year_chart(df=df_os_total_by_year_charts,
+                                                         number_of_orders=True,
+                                                         company_code=company_code,
+                                                         purchasing_org=purchasing_org,
+                                                         plant=plant,
+                                                         material_group=material_group)
+            by_month_chart = os_by_month_chart(df=df_os_by_month_charts,
+                                               number_of_orders=True,
+                                               company_code=company_code,
+                                               purchasing_org=purchasing_org,
+                                               plant=plant,
+                                               material_group=material_group)
+            by_org_chart = os_by_org_chart(df=df_os_total_by_year_charts,
+                                           number_of_orders=True,
+                                           company_code=company_code,
+                                           purchasing_org=purchasing_org,
+                                           plant=plant,
+                                           material_group=material_group)
+            top_10_suppliers_chart = os_top_10_suppliers_chart(df=df_os_top_10_suppliers_charts,
+                                                               number_of_orders=True,
+                                                               company_code=company_code,
+                                                               purchasing_org=purchasing_org,
+                                                               plant=plant,
+                                                               material_group=material_group)
+    elif active_tab == 'tab-ordered-spend-ibcs':
         if dropdown_label == 'Ordered Spend Amount':
             total_by_year_chart = os_total_by_year_chart(df=df_os_total_by_year_charts,
                                                          company_code=company_code,
@@ -211,6 +259,71 @@ def update_supplier_performance_charts(
         The updated charts.
     """
     if active_tab == 'tab-supplier-performance':
+        if dropdown_label == 'Ordered Spend Amount':
+            total_deviation_and_percentage_chart = sp_total_deviation_and_percentage_chart(
+                df_deviated=df_sp_total_deviation_charts,
+                df_all=df_sp_reference,
+                company_code=company_code,
+                purchasing_org=purchasing_org,
+                plant=plant,
+                material_group=material_group)
+            deviation_cause_and_indicator_chart = sp_deviation_cause_and_indicator_chart(
+                df=df_sp_deviation_cause_and_indicator_charts,
+                company_code=company_code,
+                purchasing_org=purchasing_org,
+                plant=plant,
+                material_group=material_group)
+            by_month_chart = sp_by_month_chart(df=df_sp_by_month_charts,
+                                               company_code=company_code,
+                                               purchasing_org=purchasing_org,
+                                               plant=plant,
+                                               material_group=material_group)
+            by_org_chart = sp_by_org_chart(df=df_sp_total_deviation_charts,
+                                           company_code=company_code,
+                                           purchasing_org=purchasing_org,
+                                           plant=plant,
+                                           material_group=material_group)
+            top_10_suppliers_chart = sp_top_10_suppliers_chart(df=df_sp_top_10_suppliers_charts,
+                                                               company_code=company_code,
+                                                               purchasing_org=purchasing_org,
+                                                               plant=plant,
+                                                               material_group=material_group)
+
+        elif dropdown_label == 'Number of Orders':
+            total_deviation_and_percentage_chart = sp_total_deviation_and_percentage_chart(
+                df_deviated=df_sp_total_deviation_charts,
+                df_all=df_sp_reference,
+                number_of_orders=True,
+                company_code=company_code,
+                purchasing_org=purchasing_org,
+                plant=plant,
+                material_group=material_group)
+            deviation_cause_and_indicator_chart = sp_deviation_cause_and_indicator_chart(
+                df=df_sp_deviation_cause_and_indicator_charts,
+                number_of_orders=True,
+                company_code=company_code,
+                purchasing_org=purchasing_org,
+                plant=plant,
+                material_group=material_group)
+            by_month_chart = sp_by_month_chart(df=df_sp_by_month_charts,
+                                               number_of_orders=True,
+                                               company_code=company_code,
+                                               purchasing_org=purchasing_org,
+                                               plant=plant,
+                                               material_group=material_group)
+            by_org_chart = sp_by_org_chart(df=df_sp_total_deviation_charts,
+                                           number_of_orders=True,
+                                           company_code=company_code,
+                                           purchasing_org=purchasing_org,
+                                           plant=plant,
+                                           material_group=material_group)
+            top_10_suppliers_chart = sp_top_10_suppliers_chart(df=df_sp_top_10_suppliers_charts,
+                                                               number_of_orders=True,
+                                                               company_code=company_code,
+                                                               purchasing_org=purchasing_org,
+                                                               plant=plant,
+                                                               material_group=material_group)
+    elif active_tab == 'tab-supplier-performance-ibcs':
         if dropdown_label == 'Ordered Spend Amount':
             total_deviation_and_percentage_chart = sp_total_deviation_and_percentage_chart(
                 df_deviated=df_sp_total_deviation_charts,
