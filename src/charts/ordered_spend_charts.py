@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.graph_objects as go
 from utils.data_prep import copy_and_apply_filter
 
+from charts.sap_color_palette import (sapUiChartPaletteQualitativeHue1, sapUiChartPaletteQualitativeHue2,
+                                      sapUiPointChartLabel, sapUiPointChartNumber)
+
 empty_graph = {
     'layout': {
         'xaxis': {
@@ -17,7 +20,8 @@ empty_graph = {
             'yref': 'paper',
             'showarrow': False,
             'font': {
-                'size': 28
+                'size': 28,
+                'color': sapUiPointChartNumber
             }
         }]
     }
@@ -96,6 +100,8 @@ def os_total_by_year_chart(df: pd.DataFrame,
         'y': [0, 1]
     }, title='2019'))
 
+    fig.update_traces(number_font_color=sapUiPointChartNumber, title_font_color=sapUiPointChartLabel)
+
     return fig
 
 
@@ -160,8 +166,18 @@ def os_by_month_chart(df: pd.DataFrame,
 
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(x=df_this_year['Month'], y=df_this_year[displayed], mode='lines+markers', name=2020))
-    fig.add_trace(go.Scatter(x=df_last_year['Month'], y=df_last_year[displayed], mode='lines+markers', name=2019))
+    fig.add_trace(
+        go.Scatter(x=df_this_year['Month'],
+                   y=df_this_year[displayed],
+                   mode='lines+markers',
+                   marker_color=sapUiChartPaletteQualitativeHue1,
+                   name=2020))
+    fig.add_trace(
+        go.Scatter(x=df_last_year['Month'],
+                   y=df_last_year[displayed],
+                   mode='lines+markers',
+                   marker_color=sapUiChartPaletteQualitativeHue2,
+                   name=2019))
 
     return fig
 
@@ -195,16 +211,20 @@ def os_by_org_chart(df: pd.DataFrame,
     df_last_year = df.loc[df['Year'] == 2019]
 
     fig = go.Figure()
-    fig.add_trace(go.Bar(
-        x=df_this_year['Purchasing Org.'],
-        y=df_last_year[displayed],
-        name=2020,
-    ))
-    fig.add_trace(go.Bar(
-        x=df_last_year['Purchasing Org.'],
-        y=df_last_year[displayed],
-        name=2019,
-    ))
+    fig.add_trace(
+        go.Bar(
+            x=df_this_year['Purchasing Org.'],
+            y=df_last_year[displayed],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=2020,
+        ))
+    fig.add_trace(
+        go.Bar(
+            x=df_last_year['Purchasing Org.'],
+            y=df_last_year[displayed],
+            marker_color=sapUiChartPaletteQualitativeHue2,
+            name=2019,
+        ))
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45)
 
@@ -261,16 +281,20 @@ def os_top_10_suppliers_chart(df: pd.DataFrame,
     df_last_year = df.loc[df['Year'] == 2019]
 
     fig = go.Figure()
-    fig.add_trace(go.Bar(
-        x=df_this_year['Supplier Name'],
-        y=df_last_year[displayed],
-        name=2020,
-    ))
-    fig.add_trace(go.Bar(
-        x=df_last_year['Supplier Name'],
-        y=df_last_year[displayed],
-        name=2019,
-    ))
+    fig.add_trace(
+        go.Bar(
+            x=df_this_year['Supplier Name'],
+            y=df_last_year[displayed],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=2020,
+        ))
+    fig.add_trace(
+        go.Bar(
+            x=df_last_year['Supplier Name'],
+            y=df_last_year[displayed],
+            marker_color=sapUiChartPaletteQualitativeHue2,
+            name=2019,
+        ))
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45)
 

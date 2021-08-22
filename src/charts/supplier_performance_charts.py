@@ -4,6 +4,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
+from charts.sap_color_palette import (sapUiChartPaletteQualitativeHue1, sapUiChartPaletteQualitativeHue2,
+                                      sapUiPointChartLabel, sapUiPointChartNumber)
+
 empty_graph = {
     'layout': {
         'xaxis': {
@@ -18,7 +21,8 @@ empty_graph = {
             'yref': 'paper',
             'showarrow': False,
             'font': {
-                'size': 28
+                'size': 28,
+                'color': sapUiPointChartNumber
             }
         }]
     }
@@ -110,6 +114,8 @@ def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
                      },
                      title='Percentage of all Orders'))
 
+    fig.update_traces(number_font_color=sapUiPointChartNumber, title_font_color=sapUiPointChartLabel)
+
     return fig
 
 
@@ -166,10 +172,16 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
         displayed = 'Ordered Spend'
 
     fig = make_subplots(rows=1, cols=2, subplot_titles=('Deviation Cause', 'Deviation Indicator'))
-    fig.add_trace(go.Bar(x=df_dev_cause['Deviation Cause'], y=df_dev_cause[displayed], name='Deviation Cause'), 1, 1)
     fig.add_trace(
-        go.Bar(x=df_dev_indicator['Deviation Indicator'], y=df_dev_indicator[displayed], name='Deviation Indicator'), 1,
-        2)
+        go.Bar(x=df_dev_cause['Deviation Cause'],
+               y=df_dev_cause[displayed],
+               marker_color=sapUiChartPaletteQualitativeHue1,
+               name='Deviation Cause'), 1, 1)
+    fig.add_trace(
+        go.Bar(x=df_dev_indicator['Deviation Indicator'],
+               y=df_dev_indicator[displayed],
+               marker_color=sapUiChartPaletteQualitativeHue1,
+               name='Deviation Indicator'), 1, 2)
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
 
@@ -234,7 +246,12 @@ def sp_by_month_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure(go.Scatter(x=df['Month'], y=df[displayed], mode='lines+markers', name=displayed))
+    fig = go.Figure(
+        go.Scatter(x=df['Month'],
+                   y=df[displayed],
+                   mode='lines+markers',
+                   marker_color=sapUiChartPaletteQualitativeHue1,
+                   name=displayed))
 
     fig.update_layout(showlegend=False)
 
@@ -266,7 +283,8 @@ def sp_by_org_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure(go.Bar(x=df['Purchasing Org.'], y=df[displayed], name=displayed))
+    fig = go.Figure(
+        go.Bar(x=df['Purchasing Org.'], y=df[displayed], marker_color=sapUiChartPaletteQualitativeHue1, name=displayed))
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
 
@@ -321,7 +339,8 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure(go.Bar(x=df['Supplier Name'], y=df[displayed], name=displayed))
+    fig = go.Figure(
+        go.Bar(x=df['Supplier Name'], y=df[displayed], marker_color=sapUiChartPaletteQualitativeHue1, name=displayed))
 
     fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
 
