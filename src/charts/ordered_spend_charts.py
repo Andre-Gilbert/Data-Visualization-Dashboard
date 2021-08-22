@@ -84,21 +84,30 @@ def os_total_by_year_chart(df: pd.DataFrame,
     fig = go.Figure()
 
     fig.add_trace(
-        go.Indicator(mode='number+delta',
-                     value=value_this_year,
-                     domain={
-                         'x': [0, 0.45],
-                         'y': [0, 1]
-                     },
-                     delta={
-                         'reference': reference_value,
-                         'relative': True
-                     },
-                     title='2020'))
-    fig.add_trace(go.Indicator(mode='number', value=value_last_year, domain={
-        'x': [0.55, 1],
-        'y': [0, 1]
-    }, title='2019'))
+        go.Indicator(
+            mode='number+delta',
+            value=value_this_year,
+            domain={
+                'x': [0, 0.45],
+                'y': [0, 1]
+            },
+            delta={
+                'reference': reference_value,
+                'relative': True
+            },
+            title='2020',
+        ))
+
+    fig.add_trace(
+        go.Indicator(
+            mode='number',
+            value=value_last_year,
+            domain={
+                'x': [0.55, 1],
+                'y': [0, 1]
+            },
+            title='2019',
+        ))
 
     fig.update_traces(number_font_color=sapUiPointChartNumber, title_font_color=sapUiPointChartLabel)
     return fig
@@ -255,7 +264,6 @@ def os_by_org_chart(df: pd.DataFrame,
 
 def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Creates the DataFrame to be used for the Ordered Spend by Top 10 Suppliers Charts."""
-
     df_bar_charts = df.groupby(['Year', 'Supplier Name', 'Company Code', 'Purchasing Org.', 'Plant',
                                 'Material Group']).agg({
                                     'Document Date': 'count',
@@ -279,8 +287,8 @@ def os_top_10_suppliers_chart(df: pd.DataFrame,
     Args:
         df: DataFrame produced by function get_data_os_top_10_suppliers_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
-        company_code, purchasing_org, plant, material_group: Filters from GUI."""
-
+        company_code, purchasing_org, plant, material_group: Filters from GUI.
+    """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby(['Year', 'Supplier Name']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
@@ -296,7 +304,6 @@ def os_top_10_suppliers_chart(df: pd.DataFrame,
         displayed = 'Ordered Spend'
 
     df.sort_values(displayed, ascending=False, inplace=True)
-
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
 
