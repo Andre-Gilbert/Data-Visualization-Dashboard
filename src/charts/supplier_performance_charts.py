@@ -4,6 +4,26 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
+empty_graph = {
+    'layout': {
+        'xaxis': {
+            'visible': False
+        },
+        'yaxis': {
+            'visible': False
+        },
+        'annotations': [{
+            'text': 'No matching data found',
+            'xref': 'paper',
+            'yref': 'paper',
+            'showarrow': False,
+            'font': {
+                'size': 28
+            }
+        }]
+    }
+}
+
 
 def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Creates the DataFrames to be used for the Supplier Performance Total Deviation and Percentage and
@@ -60,7 +80,15 @@ def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
     value_deviated = df_deviated[displayed]
     value_all = df_all[displayed]
 
-    percentage = (value_deviated / value_all)
+    if not value_deviated:
+        value_deviated = 0
+    if not value_all:
+        value_all = 0
+
+    if value_all == 0:
+        percentage = None
+    else:
+        percentage = (value_deviated / value_all)
 
     fig = go.Figure()
 
@@ -129,6 +157,9 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
         'Ordered Spend': 'sum'
     }).reset_index()
 
+    if df_dev_cause.empty and df_dev_indicator.empty:
+        return empty_graph
+
     if number_of_orders:
         displayed = 'Number of Orders'
     else:
@@ -195,6 +226,9 @@ def sp_by_month_chart(df: pd.DataFrame,
         },
         inplace=True)
 
+    if df.empty:
+        return empty_graph
+
     if number_of_orders:
         displayed = 'Number of Orders'
     else:
@@ -223,6 +257,9 @@ def sp_by_org_chart(df: pd.DataFrame,
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby(['Purchasing Org.']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+
+    if df.empty:
+        return empty_graph
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -273,6 +310,9 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
 
     supplier_names = df.nlargest(10, ['Ordered Spend'])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
+
+    if df.empty:
+        return empty_graph
 
     df.sort_values('Ordered Spend', ascending=False, inplace=True)
 

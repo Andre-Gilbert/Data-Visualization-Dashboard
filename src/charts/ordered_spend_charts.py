@@ -1,8 +1,27 @@
 """Ordered Spend Charts."""
 import pandas as pd
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
+
+empty_graph = {
+    'layout': {
+        'xaxis': {
+            'visible': False
+        },
+        'yaxis': {
+            'visible': False
+        },
+        'annotations': [{
+            'text': 'No matching data found',
+            'xref': 'paper',
+            'yref': 'paper',
+            'showarrow': False,
+            'font': {
+                'size': 28
+            }
+        }]
+    }
+}
 
 
 def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
@@ -43,8 +62,20 @@ def os_total_by_year_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    value_this_year = df_this_year[displayed].iloc[0]
-    value_last_year = df_last_year[displayed].iloc[0]
+    try:
+        value_this_year = df_this_year[displayed].iloc[0]
+    except IndexError:
+        value_this_year = 0
+
+    try:
+        value_last_year = df_last_year[displayed].iloc[0]
+    except IndexError:
+        value_last_year = 0
+
+    if value_last_year == 0:
+        reference_value = None
+    else:
+        reference_value = value_last_year
 
     fig = go.Figure()
 
@@ -56,7 +87,7 @@ def os_total_by_year_chart(df: pd.DataFrame,
                          'y': [0, 1]
                      },
                      delta={
-                         'reference': value_last_year,
+                         'reference': reference_value,
                          'relative': True
                      },
                      title='2020'))
@@ -116,6 +147,9 @@ def os_by_month_chart(df: pd.DataFrame,
         },
         inplace=True)
 
+    if df.empty:
+        return empty_graph
+
     if number_of_orders:
         displayed = 'Number of Orders'
     else:
@@ -148,6 +182,9 @@ def os_by_org_chart(df: pd.DataFrame,
 
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby(['Year', 'Purchasing Org.']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+
+    if df.empty:
+        return empty_graph
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -209,6 +246,9 @@ def os_top_10_suppliers_chart(df: pd.DataFrame,
 
     supplier_names = df.nlargest(10, ['Year', 'Ordered Spend'])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
+
+    if df.empty:
+        return empty_graph
 
     if number_of_orders:
         displayed = 'Number of Orders'
