@@ -16,6 +16,7 @@ python index.py
 
 ## Requirements
 View [requirements](requirements.txt).
+Also required at least python 3.9
 
 ## Usage
 How to use
