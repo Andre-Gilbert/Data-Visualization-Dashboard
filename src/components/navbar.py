@@ -44,7 +44,6 @@ def navbar() -> html.Div:
                 dbc.Tab(label='Ordered Spend', tab_id='tab-ordered-spend'),
                 dbc.Tab(label='Supplier Performance', tab_id='tab-supplier-performance'),
                 dbc.Tab(label='Ordered Spend IBCS', tab_id='tab-ordered-spend-ibcs'),
-                dbc.Tab(label='Supplier Performance IBCS', tab_id='tab-supplier-performance-ibcs')
             ],
             id='tabs',
             # default tab
