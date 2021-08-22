@@ -4,8 +4,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_color_palette import (sapUiChartPaletteQualitativeHue1, sapUiChartPaletteQualitativeHue2,
-                                      sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
 
 empty_graph = {
     'layout': {
@@ -183,7 +183,16 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
                marker_color=sapUiChartPaletteQualitativeHue1,
                name='Deviation Indicator'), 1, 2)
 
-    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+    fig.update_layout(
+        height=520,
+        barmode='group',
+        xaxis_tickangle=-45,
+        showlegend=False,
+        title='Deviated Orders by Deviation Cause and Indicator',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     return fig
 
@@ -253,7 +262,14 @@ def sp_by_month_chart(df: pd.DataFrame,
                    marker_color=sapUiChartPaletteQualitativeHue1,
                    name=displayed))
 
-    fig.update_layout(showlegend=False)
+    fig.update_layout(
+        height=520,
+        showlegend=False,
+        title='Deviated Orders by Month',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     return fig
 
@@ -286,10 +302,18 @@ def sp_by_org_chart(df: pd.DataFrame,
     fig = go.Figure(
         go.Bar(x=df['Purchasing Org.'], y=df[displayed], marker_color=sapUiChartPaletteQualitativeHue1, name=displayed))
 
-    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+    fig.update_layout(
+        height=520,
+        barmode='group',
+        xaxis_tickangle=-45,
+        showlegend=False,
+        title='Deviated Orders by Purchasing Organisation',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     fig.update_xaxes(type='category')
-
     return fig
 
 
@@ -340,8 +364,22 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
         displayed = 'Ordered Spend'
 
     fig = go.Figure(
-        go.Bar(x=df['Supplier Name'], y=df[displayed], marker_color=sapUiChartPaletteQualitativeHue1, name=displayed))
+        go.Bar(
+            x=df['Supplier Name'],
+            y=df[displayed],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=displayed,
+        ))
 
-    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+    fig.update_layout(
+        height=520,
+        barmode='group',
+        xaxis_tickangle=-45,
+        showlegend=False,
+        title='Deviated Orders of Top Ten Suppliers',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     return fig

@@ -13,38 +13,11 @@ def supplier_performance() -> html.Div:
     """
     supplier_performance = html.Div([
         html.Div([
-            html.Div([
-                html.Div([
-                    html.H1('Deviated Orders by Deviation Cause and Indicator', className='chart-title'),
-                    dcc.Graph(id='supplier-performance-deviation-cause-and-indicator-chart', figure={})
-                ],
-                         className='chart-one'),
-            ],
+            html.Div([dcc.Graph(id='supplier-performance-deviation-cause-and-indicator-chart')],
                      className='chart-container'),
-            html.Div([
-                html.Div([
-                    html.H1('Deviated Orders by Month', className='chart-title'),
-                    dcc.Graph(id='supplier-performance-by-month-chart', figure={})
-                ],
-                         className='chart-one'),
-            ],
-                     className='chart-container'),
-            html.Div([
-                html.Div([
-                    html.H1('Deviated Orders by Purchasing Organisation', className='chart-title'),
-                    dcc.Graph(id='supplier-performance-by-org-chart', figure={})
-                ],
-                         className='chart-one'),
-            ],
-                     className='chart-container'),
-            html.Div([
-                html.Div([
-                    html.H1('Deviated Orders of Top Ten Suppliers', className='chart-title'),
-                    dcc.Graph(id='supplier-performance-top-10-suppliers-chart', figure={})
-                ],
-                         className='chart-one'),
-            ],
-                     className='chart-container')
+            html.Div([dcc.Graph(id='supplier-performance-by-month-chart')], className='chart-container'),
+            html.Div([dcc.Graph(id='supplier-performance-by-org-chart')], className='chart-container'),
+            html.Div([dcc.Graph(id='supplier-performance-top-10-suppliers-chart')], className='chart-container')
         ],
                  className='page-main')
     ],
