@@ -131,23 +131,11 @@
   position: relative;
 }
 
-.npc-supplier-performance {
-  margin: 0 0 3rem;
-}
-
-.npc-container-current-year {
-  margin: 0 0 3rem;
-}
-
 .npc-title {
   margin: 0 0 2rem;
   font-size: 2rem;
   font-weight: 400;
   color: $sap-text-color;
-}
-
-.npc-chart-current-year {
-  margin: 0 0 3rem;
 }
 
 /* medium size screen
@@ -160,23 +148,6 @@
   .filter-bar-container:not(:last-child) {
     margin: 0 2rem 0 0;
   }
-
-  .npc-chart-container {
-    display: flex;
-  }
-
-  .npc-supplier-performance {
-    margin: 0 15rem 0 0;
-  }
-
-  .npc-chart-current-year {
-    flex: 1 1 50%;
-    margin: 0 2rem 0 0;
-  }
-
-  .npc-chart-prior-year {
-    flex: 1 1 50%;
-  }
 }
 
 /* large size screen
@@ -184,22 +155,5 @@
 @media screen and (min-width: 1024px) {
   .header {
     padding: 4rem 3.2rem;
-  }
-
-  .numeric-point-chart {
-    flex-direction: row;
-  }
-
-  .npc-container-current-year {
-    flex: 1 1 50%;
-    margin: 0 2rem 0 0;
-  }
-
-  .npc-container-prior-year {
-    flex: 1 1 50%;
-  }
-
-  .npc-supplier-performance {
-    margin: 0 30rem 0 0;
   }
 }

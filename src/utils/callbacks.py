@@ -21,10 +21,12 @@ from utils.data_prep import get_data
 
 df = get_data()
 
+# Ordered Spend Page
 df_os_total_by_year_charts = get_data_os_total_by_year_charts(df)
 df_os_by_month_charts = get_data_os_by_month_charts(df)
 df_os_top_10_suppliers_charts = get_data_os_top_10_suppliers_charts(df)
 
+# Supplier Performance Page
 df_sp_total_deviation_charts, df_sp_reference = get_data_sp_total_deviation_and_percentage_charts(df)
 df_sp_deviation_cause_and_indicator_charts = get_data_sp_deviation_cause_and_indicator_charts(df)
 df_sp_by_month_charts = get_data_sp_by_month_charts(df)

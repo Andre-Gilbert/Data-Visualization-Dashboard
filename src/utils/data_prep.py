@@ -45,7 +45,7 @@ def copy_and_apply_filter(
         filtered_df = filtered_df.loc[filtered_df['Plant'] == plant]
 
     if material_group:
-        filtered_df = filtered_df.loc[filtered_df['Material Group'] == material_group]
+        filtered_df = filtered_df.loc[filtered_df['Material Group'].astype(str) == material_group]
 
     return filtered_df
 

@@ -144,23 +144,11 @@
   position: relative;
 }
 
-.npc-supplier-performance {
-  margin: 0 0 3rem;
-}
-
-.npc-container-current-year {
-  margin: 0 0 3rem;
-}
-
 .npc-title {
   margin: 0 0 2rem;
   font-size: 2rem;
   font-weight: 400;
   color: #32363a;
-}
-
-.npc-chart-current-year {
-  margin: 0 0 3rem;
 }
 
 /* medium size screen
@@ -175,25 +163,6 @@
   .filter-bar-container:not(:last-child) {
     margin: 0 2rem 0 0;
   }
-  .npc-chart-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  .npc-supplier-performance {
-    margin: 0 15rem 0 0;
-  }
-  .npc-chart-current-year {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 50%;
-            flex: 1 1 50%;
-    margin: 0 2rem 0 0;
-  }
-  .npc-chart-prior-year {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 50%;
-            flex: 1 1 50%;
-  }
 }
 
 /* large size screen
@@ -201,25 +170,5 @@
 @media screen and (min-width: 1024px) {
   .header {
     padding: 4rem 3.2rem;
-  }
-  .numeric-point-chart {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-  }
-  .npc-container-current-year {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 50%;
-            flex: 1 1 50%;
-    margin: 0 2rem 0 0;
-  }
-  .npc-container-prior-year {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 50%;
-            flex: 1 1 50%;
-  }
-  .npc-supplier-performance {
-    margin: 0 30rem 0 0;
   }
 }

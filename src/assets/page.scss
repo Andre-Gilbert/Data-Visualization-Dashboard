@@ -15,8 +15,7 @@
 
 .chart-container {
   width: 100%;
-  margin: 2rem 0 0;
-  padding: 0.5rem;
+  margin: 1.6rem 0 0;
   border-radius: 0.4rem;
 
   display: flex;
@@ -27,21 +26,10 @@
   box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
 }
 
-.chart-title {
-  margin: 2rem 2rem 0;
-  font-size: 2rem;
-  font-weight: 400;
-  color: $sap-text-color;
-}
-
-.chart-one {
-  margin: 0 0 2rem;
-}
-
 /* large size screen
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
   .page {
-    padding: 0 3.2rem 2rem;
+    padding: 0 2.4rem 1.6rem;
   }
 }

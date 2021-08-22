@@ -42,6 +42,10 @@ p {
   margin: 0;
 }
 
+svg {
+  border-radius: 0.4rem;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 1.2rem;

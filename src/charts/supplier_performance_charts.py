@@ -4,6 +4,30 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
+
+empty_graph = {
+    'layout': {
+        'xaxis': {
+            'visible': False
+        },
+        'yaxis': {
+            'visible': False
+        },
+        'annotations': [{
+            'text': 'No matching data found',
+            'xref': 'paper',
+            'yref': 'paper',
+            'showarrow': False,
+            'font': {
+                'size': 28,
+                'color': sapUiPointChartNumber
+            }
+        }]
+    }
+}
+
 
 def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Creates the DataFrames to be used for the Supplier Performance Total Deviation and Percentage and
@@ -60,7 +84,15 @@ def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
     value_deviated = df_deviated[displayed]
     value_all = df_all[displayed]
 
-    percentage = (value_deviated / value_all)
+    if not value_deviated:
+        value_deviated = 0
+    if not value_all:
+        value_all = 0
+
+    if value_all == 0:
+        percentage = None
+    else:
+        percentage = (value_deviated / value_all)
 
     fig = go.Figure()
 
@@ -81,6 +113,8 @@ def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
                          'y': [0, 1]
                      },
                      title='Percentage of all Orders'))
+
+    fig.update_traces(number_font_color=sapUiPointChartNumber, title_font_color=sapUiPointChartLabel)
 
     return fig
 
@@ -129,18 +163,36 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
         'Ordered Spend': 'sum'
     }).reset_index()
 
+    if df_dev_cause.empty and df_dev_indicator.empty:
+        return empty_graph
+
     if number_of_orders:
         displayed = 'Number of Orders'
     else:
         displayed = 'Ordered Spend'
 
     fig = make_subplots(rows=1, cols=2, subplot_titles=('Deviation Cause', 'Deviation Indicator'))
-    fig.add_trace(go.Bar(x=df_dev_cause['Deviation Cause'], y=df_dev_cause[displayed], name='Deviation Cause'), 1, 1)
     fig.add_trace(
-        go.Bar(x=df_dev_indicator['Deviation Indicator'], y=df_dev_indicator[displayed], name='Deviation Indicator'), 1,
-        2)
+        go.Bar(x=df_dev_cause['Deviation Cause'],
+               y=df_dev_cause[displayed],
+               marker_color=sapUiChartPaletteQualitativeHue1,
+               name='Deviation Cause'), 1, 1)
+    fig.add_trace(
+        go.Bar(x=df_dev_indicator['Deviation Indicator'],
+               y=df_dev_indicator[displayed],
+               marker_color=sapUiChartPaletteQualitativeHue1,
+               name='Deviation Indicator'), 1, 2)
 
-    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+    fig.update_layout(
+        height=520,
+        barmode='group',
+        xaxis_tickangle=-45,
+        showlegend=False,
+        title='Deviated Orders by Deviation Cause and Indicator',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     return fig
 
@@ -195,14 +247,29 @@ def sp_by_month_chart(df: pd.DataFrame,
         },
         inplace=True)
 
+    if df.empty:
+        return empty_graph
+
     if number_of_orders:
         displayed = 'Number of Orders'
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure(go.Scatter(x=df['Month'], y=df[displayed], mode='lines+markers', name=displayed))
+    fig = go.Figure(
+        go.Scatter(x=df['Month'],
+                   y=df[displayed],
+                   mode='lines+markers',
+                   marker_color=sapUiChartPaletteQualitativeHue1,
+                   name=displayed))
 
-    fig.update_layout(showlegend=False)
+    fig.update_layout(
+        height=520,
+        showlegend=False,
+        title='Deviated Orders by Month',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     return fig
 
@@ -224,17 +291,29 @@ def sp_by_org_chart(df: pd.DataFrame,
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby(['Purchasing Org.']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
+    if df.empty:
+        return empty_graph
+
     if number_of_orders:
         displayed = 'Number of Orders'
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure(go.Bar(x=df['Purchasing Org.'], y=df[displayed], name=displayed))
+    fig = go.Figure(
+        go.Bar(x=df['Purchasing Org.'], y=df[displayed], marker_color=sapUiChartPaletteQualitativeHue1, name=displayed))
 
-    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+    fig.update_layout(
+        height=520,
+        barmode='group',
+        xaxis_tickangle=-45,
+        showlegend=False,
+        title='Deviated Orders by Purchasing Organisation',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     fig.update_xaxes(type='category')
-
     return fig
 
 
@@ -274,6 +353,9 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
     supplier_names = df.nlargest(10, ['Ordered Spend'])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
+    if df.empty:
+        return empty_graph
+
     df.sort_values('Ordered Spend', ascending=False, inplace=True)
 
     if number_of_orders:
@@ -281,8 +363,23 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    fig = go.Figure(go.Bar(x=df['Supplier Name'], y=df[displayed], name=displayed))
+    fig = go.Figure(
+        go.Bar(
+            x=df['Supplier Name'],
+            y=df[displayed],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=displayed,
+        ))
 
-    fig.update_layout(barmode='group', xaxis_tickangle=-45, showlegend=False)
+    fig.update_layout(
+        height=520,
+        barmode='group',
+        xaxis_tickangle=-45,
+        showlegend=False,
+        title='Deviated Orders of Top Ten Suppliers',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+    )
 
     return fig
