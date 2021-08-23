@@ -10,13 +10,11 @@ pip install -r requirements.txt
 ```
 To start the application:
 ```
-cd src
-python index.py
+python src/index.py
 ```
 
 ## Requirements
 View [requirements](requirements.txt).
-Also required at least python 3.9
 
 ## Usage
 How to use
