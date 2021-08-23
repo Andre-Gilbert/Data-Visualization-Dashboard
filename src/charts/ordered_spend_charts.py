@@ -30,7 +30,6 @@ empty_graph = {
 
 def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Creates the DataFrame to be used for the Ordered Spend Total by Year Charts."""
-
     df_point_charts = df.groupby(['Year', 'Company Code', 'Purchasing Org.', 'Plant', 'Material Group']).agg({
         'Document Date': 'count',
         'Net Value': 'sum'
@@ -53,8 +52,11 @@ def os_total_by_year_chart(df: pd.DataFrame,
     Args:
         df: DataFrame produced by function get_data_os_total_by_year_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
-        company_code, purchasing_org, plant, material_group: Filters from GUI."""
+        company_code, purchasing_org, plant, material_group: Filters from GUI.
 
+    Returns:
+
+    """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby('Year').agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
@@ -109,7 +111,11 @@ def os_total_by_year_chart(df: pd.DataFrame,
             title='2019',
         ))
 
-    fig.update_traces(number_font_color=sapUiPointChartNumber, title_font_color=sapUiPointChartLabel)
+    fig.update_traces(
+        number_font_color=sapUiPointChartNumber,
+        title_font_color=sapUiPointChartLabel,
+    )
+
     return fig
 
 
@@ -138,6 +144,9 @@ def os_by_month_chart(df: pd.DataFrame,
         df: DataFrame produced by function get_data_os_by_month_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
+
+    Returns:
+
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby(['Year', 'Month']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()

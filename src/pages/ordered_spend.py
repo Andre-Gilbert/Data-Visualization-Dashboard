@@ -13,11 +13,9 @@ def ordered_spend() -> html.Div:
     """
     ordered_spend = html.Div([
         html.Div([
-            html.Div([dcc.Graph(id='ordered-spend-by-month-chart')], className='chart-container'),
-            html.Div([dcc.Graph(id='ordered-spend-by-org-chart')], className='chart-container'),
-            html.Div([
-                dcc.Graph(id='ordered-spend-top-10-suppliers-chart'),
-            ], className='chart-container')
+            html.Div(dcc.Graph(id='ordered-spend-by-month-chart'), className='chart-container'),
+            html.Div(dcc.Graph(id='ordered-spend-by-org-chart'), className='chart-container'),
+            html.Div(dcc.Graph(id='ordered-spend-top-10-suppliers-chart'), className='chart-container')
         ],
                  className='page-main')
     ],
