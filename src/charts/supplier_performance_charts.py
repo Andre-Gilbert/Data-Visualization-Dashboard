@@ -4,8 +4,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR,
+                              sapUiChartPaletteQualitativeHue1,
+                              sapUiChartPaletteQualitativeHue2,
+                              sapUiPointChartLabel, sapUiPointChartNumber)
 
 empty_graph = {
     'layout': {
@@ -223,7 +225,6 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
 
 def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Creates the DataFrame to be used for the Supplier Performance by Month Charts."""
-
     df_line_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
     df_line_charts = df_line_charts.groupby(['Month', 'Company Code', 'Purchasing Org.', 'Plant',
                                              'Material Group']).agg({
@@ -248,8 +249,8 @@ def sp_by_month_chart(df: pd.DataFrame,
     Args:
         df: DataFrame produced by function get_data_sp_by_month_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
-        company_code, purchasing_org, plant, material_group: Filters from GUI."""
-
+        company_code, purchasing_org, plant, material_group: Filters from GUI.
+    """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby(['Month']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
     df.replace(
@@ -280,11 +281,13 @@ def sp_by_month_chart(df: pd.DataFrame,
         displayed = 'Ordered Spend'
 
     fig = go.Figure(
-        go.Scatter(x=df['Month'],
-                   y=df[displayed],
-                   mode='lines+markers',
-                   marker_color=sapUiChartPaletteQualitativeHue1,
-                   name=displayed))
+        go.Scatter(
+            x=df['Month'],
+            y=df[displayed],
+            mode='lines+markers',
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=displayed,
+        ))
 
     fig.update_layout(
         height=520,
