@@ -116,6 +116,7 @@ def os_total_by_year_chart(df: pd.DataFrame,
         title_font_color=sapUiPointChartLabel,
     )
 
+    fig.update_layout(height=200, margin={'t': 50, 'b': 10, 'l': 10, 'r': 10})
     return fig
 
 

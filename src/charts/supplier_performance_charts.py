@@ -4,10 +4,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR,
-                              sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2,
-                              sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
 
 empty_graph = {
     'layout': {
@@ -126,6 +124,7 @@ def sp_total_deviation_and_percentage_chart(df_deviated: pd.DataFrame,
         title_font_color=sapUiPointChartLabel,
     )
 
+    fig.update_layout(height=200, margin={'t': 50, 'b': 10, 'l': 10, 'r': 10})
     return fig
 
 

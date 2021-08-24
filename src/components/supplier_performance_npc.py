@@ -12,10 +12,9 @@ def supplier_performance_npc() -> html.Div:
         The html containing the charts.
     """
     supplier_performance_npc = html.Div([
-        html.Div([
-            html.H1('Delivery Deviation', className='npc-title'),
-            html.Div(dcc.Graph(id='supplier-performance-total-deviation-and-percentage-chart'),
-                     className='npc-chart-container')
-        ])
-    ])
+        html.H1('Delivery Deviation', className='npc-title'),
+        html.Div(dcc.Graph(id='supplier-performance-total-deviation-and-percentage-chart'),
+                 className='npc-chart-container')
+    ],
+                                        className='numeric-point-chart')
     return supplier_performance_npc

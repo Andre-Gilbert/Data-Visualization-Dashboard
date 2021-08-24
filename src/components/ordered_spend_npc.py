@@ -12,12 +12,9 @@ def ordered_spend_npc() -> html.Div:
         The html containing the charts.
     """
     ordered_spend_npc = html.Div([
-        html.Div([
-            html.H1('2020', className='npc-title'),
-            html.Div(dcc.Graph(id='ordered-spend-total-by-year-chart', className='npc-chart-current-year'),
-                     className='npc-chart-container')
-        ],
-                 className='npc-container-current-year')
+        html.H1('Total Orders', className='npc-title'),
+        html.Div(dcc.Graph(id='ordered-spend-total-by-year-chart', className='npc-chart-current-year'),
+                 className='npc-chart-container')
     ],
                                  className='numeric-point-chart')
     return ordered_spend_npc
