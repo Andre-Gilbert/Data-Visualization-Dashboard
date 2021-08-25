@@ -6,7 +6,10 @@ import dash_html_components as html
 def ordered_spend() -> html.Div:
     """Generate the ordered spend page.
 
-    Summary
+    The Ordered Spend page contains 3 charts:
+        - ordered spend by month
+        - ordered spend by purchasing organization
+        - ordered spend by top 10 suppliers
 
     Returns:
         The html of the chart containers and the charts.

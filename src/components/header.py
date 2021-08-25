@@ -9,7 +9,6 @@ df = get_data()
 def header() -> html.Div:
     """Generate the header for the dashboard.
 
-    It provides filters to calculate values.
     The page header and the numeric point charts will be re-rendered
     when the page changes, but the filters will be applied globally.
 

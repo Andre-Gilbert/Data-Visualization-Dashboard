@@ -6,7 +6,8 @@ import dash_html_components as html
 def supplier_performance_npc() -> html.Div:
     """Generate the numeric point charts for supplier performance.
 
-    Summary
+    The numeric point charts shows the total Ordered Spend
+    or Number of Deviated Orders of the current and prior year.
 
     Returns:
         The html containing the charts.

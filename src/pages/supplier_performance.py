@@ -6,7 +6,11 @@ import dash_html_components as html
 def supplier_performance() -> html.Div:
     """Generate the supplier performance page.
 
-    Summary
+    The Supplier Performance page contains 4 charts:
+        - supplier performance by month
+        - supplier performance by purchasing organization
+        - supplier performance by top 10 suppliers
+        - supplier performance by deviation cause and indicator
 
     Returns:
         The html of the chart containers and the charts.

@@ -7,9 +7,14 @@ from app import app
 def navbar() -> html.Div:
     """Generate the navbar for the dashboard.
 
-    The navbar allows one to switch between two views:
-        - Ordered Spend
+    The navbar allows one to switch between 2 views:
+        - Ordered Spend Amount
         - Number of Orders
+
+    and switch between 3 pages:
+        - Ordered Spend
+        - Supplier Performance
+        - Ordered Spend IBCS
 
     Returns:
         The html containing the logo and the dropdown menu.

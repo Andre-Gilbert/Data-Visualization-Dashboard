@@ -6,7 +6,8 @@ import dash_html_components as html
 def ordered_spend_npc() -> html.Div:
     """Generate the numeric point charts for ordered spend.
 
-    Summary
+    The numeric point charts shows the Ordered Spend
+    or Number of Orders of the current and prior year.
 
     Returns:
         The html containing the charts.
