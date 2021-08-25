@@ -3,10 +3,8 @@ import pandas as pd
 import plotly.graph_objects as go
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR,
-                              sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2,
-                              sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
 
 empty_graph = {
     'layout': {
@@ -122,7 +120,15 @@ def os_total_by_year_chart(df: pd.DataFrame,
         title_font_color=sapUiPointChartLabel,
     )
 
-    fig.update_layout(height=200, margin={'t': 50, 'b': 10, 'l': 10, 'r': 10},)
+    fig.update_layout(
+        height=200,
+        margin={
+            't': 50,
+            'b': 10,
+            'l': 10,
+            'r': 10
+        },
+    )
 
     return fig
 
@@ -209,7 +215,7 @@ def os_by_month_chart(df: pd.DataFrame,
         ))
 
     fig.update_layout(
-        height=520,
+        height=600,
         title='Orders by Month',
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
@@ -266,7 +272,7 @@ def os_by_org_chart(df: pd.DataFrame,
         ))
 
     fig.update_layout(
-        height=520,
+        height=600,
         barmode='group',
         xaxis_tickangle=-45,
         title='Orders by Purchsing Organisation',
@@ -343,7 +349,7 @@ def os_top_10_suppliers_chart(df: pd.DataFrame,
         ))
 
     fig.update_layout(
-        height=520,
+        height=600,
         barmode='group',
         xaxis_tickangle=-45,
         title='Orders by Top Ten Suppliers',

@@ -218,7 +218,7 @@ def sp_deviation_cause_and_indicator_chart(df: pd.DataFrame,
     )
 
     fig.update_layout(
-        height=520,
+        height=600,
         barmode='group',
         xaxis_tickangle=-45,
         showlegend=False,
@@ -298,7 +298,7 @@ def sp_by_month_chart(df: pd.DataFrame,
         ))
 
     fig.update_layout(
-        height=520,
+        height=600,
         showlegend=False,
         title='Deviated Orders by Month',
         title_font_size=20,
@@ -345,7 +345,7 @@ def sp_by_org_chart(df: pd.DataFrame,
         ))
 
     fig.update_layout(
-        height=520,
+        height=600,
         barmode='group',
         xaxis_tickangle=-45,
         showlegend=False,
@@ -415,7 +415,7 @@ def sp_top_10_suppliers_chart(df: pd.DataFrame,
         ))
 
     fig.update_layout(
-        height=520,
+        height=600,
         barmode='group',
         xaxis_tickangle=-45,
         showlegend=False,
