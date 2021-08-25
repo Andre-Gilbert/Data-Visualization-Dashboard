@@ -13,8 +13,7 @@ def ordered_spend_npc() -> html.Div:
     """
     ordered_spend_npc = html.Div([
         html.H1('Total Orders', className='npc-title'),
-        html.Div(dcc.Graph(id='ordered-spend-total-by-year-chart', className='npc-chart-current-year'),
-                 className='npc-chart-container')
+        dcc.Graph(id='ordered-spend-total-by-year-chart', style={'width': '100%'}),
     ],
                                  className='numeric-point-chart')
     return ordered_spend_npc
