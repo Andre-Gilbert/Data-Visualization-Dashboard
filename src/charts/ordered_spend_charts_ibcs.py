@@ -4,7 +4,8 @@ import plotly.graph_objects as go
 from utils.data_prep import copy_and_apply_filter
 
 from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
+                              sapUiPointChartLabel, sapUiPointChartNumber,
+                              sapUiChartPaletteQualitativeHue1Bright, sapUiPointChartNumberBrighter)
 
 empty_graph = {
     'layout': {
@@ -100,6 +101,8 @@ def os_total_by_year_chart_ibcs(df: pd.DataFrame,
                 'relative': True
             },
             title='2020',
+            number_font_color=sapUiPointChartNumber,
+
         ))
 
     fig.add_trace(
@@ -111,10 +114,10 @@ def os_total_by_year_chart_ibcs(df: pd.DataFrame,
                 'y': [0, 1]
             },
             title='2019',
+            number_font_color=sapUiPointChartNumberBrighter,
         ))
 
     fig.update_traces(
-        number_font_color=sapUiPointChartNumber,
         title_font_color=sapUiPointChartLabel,
 
     )
@@ -201,7 +204,7 @@ def os_by_month_chart_ibcs(df: pd.DataFrame,
             x=df_last_year['Month'],
             y=df_last_year[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteQualitativeHue2,
+            marker_color=sapUiChartPaletteQualitativeHue1Bright,
             name=2019,
         ))
 
@@ -252,23 +255,29 @@ def os_by_org_chart_ibcs(df: pd.DataFrame,
         go.Bar(
             x=df_this_year['Purchasing Org.'],
             y=df_last_year[displayed],
+            # x=df_last_year[displayed],
+            # y=df_this_year['Purchasing Org.'],
             marker_color=sapUiChartPaletteQualitativeHue1,
             name=2020,
+            # orientation='h'
         ))
 
     fig.add_trace(
         go.Bar(
             x=df_last_year['Purchasing Org.'],
             y=df_last_year[displayed],
-            marker_color=sapUiChartPaletteQualitativeHue2,
+            # x=df_last_year[displayed],
+            # y=df_this_year['Purchasing Org.'],
+            marker_color=sapUiChartPaletteQualitativeHue1Bright,
             name=2019,
+            # orientation='h'
         ))
 
     fig.update_layout(
         height=520,
         barmode='group',
         xaxis_tickangle=-45,
-        title='Orders by Purchsing Organisation',
+        title='Orders by Purchasing Organisation',
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
@@ -330,18 +339,27 @@ def os_top_10_suppliers_chart_ibcs(df: pd.DataFrame,
 
     fig.add_trace(
         go.Bar(
-            x=df_this_year['Supplier Name'],
-            y=df_last_year[displayed],
+            x=df_last_year[displayed],
+            y=df_this_year['Supplier Name'],
             marker_color=sapUiChartPaletteQualitativeHue1,
             name=2020,
+            orientation='h',
+            text=df_last_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}'
         ))
 
     fig.add_trace(
         go.Bar(
-            x=df_last_year['Supplier Name'],
-            y=df_last_year[displayed],
-            marker_color=sapUiChartPaletteQualitativeHue2,
+            x=df_last_year[displayed],
+            y=df_last_year['Supplier Name'],
+            marker_color=sapUiChartPaletteQualitativeHue1Bright,  # color of bar
             name=2019,
+            orientation='h',
+            text=df_last_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}'  # round values when display
+
         ))
 
     fig.update_layout(

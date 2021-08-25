@@ -1,6 +1,7 @@
 SAP_FONT = "'72', '72full', Arial, Helvetica, sans-serif"
 SAP_TEXT_COLOR = '#32363a'
 sapUiChartPaletteQualitativeHue1 = '#5899DA'
+sapUiChartPaletteQualitativeHue1Bright = '#9bbee0'
 sapUiChartPaletteQualitativeHue2 = '#E8743B'
 sapUiChartPaletteQualitativeHue3 = '#19A979'
 sapUiChartPaletteQualitativeHue4 = '#ED4A7B'
@@ -121,4 +122,5 @@ sapUiChartPaletteSequentialNeutrals = [
 
 sapUiPointChartCurrency = '#89919A'
 sapUiPointChartNumber = '#0854A0'
+sapUiPointChartNumberBrighter = '#3c83c9'
 sapUiPointChartLabel = '#6A6D70'
