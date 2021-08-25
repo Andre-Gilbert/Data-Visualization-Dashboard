@@ -260,6 +260,9 @@ def os_by_org_chart_ibcs(df: pd.DataFrame,
             marker_color=sapUiChartPaletteQualitativeHue1,
             name=2020,
             # orientation='h'
+            text=df_last_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}'
         ))
 
     fig.add_trace(
@@ -270,7 +273,10 @@ def os_by_org_chart_ibcs(df: pd.DataFrame,
             # y=df_this_year['Purchasing Org.'],
             marker_color=sapUiChartPaletteQualitativeHue1Bright,
             name=2019,
-            # orientation='h'
+            # orientation='h',
+            text=df_last_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}'
         ))
 
     fig.update_layout(
