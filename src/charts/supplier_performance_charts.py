@@ -4,8 +4,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1, sapUiPointChartLabel,
+                              sapUiPointChartNumber)
 
 empty_graph = {
     'layout': {

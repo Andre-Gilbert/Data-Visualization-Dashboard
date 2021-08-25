@@ -29,25 +29,33 @@ empty_graph = {
 
 
 def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Ordered Spend Total by Year Charts."""
-    df_point_charts = df.groupby(['Year', 'Company Code', 'Purchasing Org.', 'Plant', 'Material Group']).agg({
+    """Create DataFrame for total Ordered Spend by year charts."""
+    df_point_charts = df.groupby([
+        'Year',
+        'Company Code',
+        'Purchasing Org.',
+        'Plant',
+        'Material Group',
+    ]).agg({
         'Document Date': 'count',
-        'Net Value': 'sum'
+        'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders'
+        'Document Date': 'Number of Orders',
     })
+
     return df_point_charts
 
 
-def os_total_by_year_chart(df: pd.DataFrame,
-                           number_of_orders: bool = False,
-                           company_code: str = None,
-                           purchasing_org: str = None,
-                           plant: str = None,
-                           material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Numeric Point Charts for Ordered Spend and Number of Orders
-    this or last year.
+def os_total_by_year_chart(
+    df: pd.DataFrame,
+    number_of_orders: bool,
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> go.Figure:
+    """Creates a figure showing Ordered Spend or Number of Orders of the current and prior year.
 
     Args:
         df: DataFrame produced by function get_data_os_total_by_year_charts.
@@ -55,10 +63,13 @@ def os_total_by_year_chart(df: pd.DataFrame,
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:
-
+        Two plotly indicators.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby('Year').agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = df.groupby('Year').agg({
+        'Number of Orders': 'sum',
+        'Ordered Spend': 'sum',
+    }).reset_index()
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
@@ -134,25 +145,34 @@ def os_total_by_year_chart(df: pd.DataFrame,
 
 
 def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Ordered Spend by Month Charts."""
-    df_line_charts = df.groupby(['Year', 'Month', 'Company Code', 'Purchasing Org.', 'Plant', 'Material Group']).agg({
+    """Create DataFrame for the Ordered Spend by month chart."""
+    df_line_charts = df.groupby([
+        'Year',
+        'Month',
+        'Company Code',
+        'Purchasing Org.',
+        'Plant',
+        'Material Group',
+    ]).agg({
         'Document Date': 'count',
-        'Net Value': 'sum'
+        'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders'
+        'Document Date': 'Number of Orders',
     })
+
     return df_line_charts
 
 
-def os_by_month_chart(df: pd.DataFrame,
-                      number_of_orders: bool = False,
-                      company_code: str = None,
-                      purchasing_org: str = None,
-                      plant: str = None,
-                      material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Line Chart Traces comparing either
-    Ordered Spend or Number of Orders by Month for this and last year.
+def os_by_month_chart(
+    df: pd.DataFrame,
+    number_of_orders: bool,
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> go.Figure:
+    """Create a figure showing Ordered Spend or Number of Orders by month for the current and prior year.
 
     Args:
         df: DataFrame produced by function get_data_os_by_month_charts.
@@ -160,10 +180,17 @@ def os_by_month_chart(df: pd.DataFrame,
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:
-
+        Two line chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Month']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = df.groupby([
+        'Year',
+        'Month',
+    ]).agg({
+        'Number of Orders': 'sum',
+        'Ordered Spend': 'sum',
+    }).reset_index()
+
     df.replace(
         {
             'Month': {
@@ -225,22 +252,32 @@ def os_by_month_chart(df: pd.DataFrame,
     return fig
 
 
-def os_by_org_chart(df: pd.DataFrame,
-                    number_of_orders: bool = False,
-                    company_code: str = None,
-                    purchasing_org: str = None,
-                    plant: str = None,
-                    material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Bar Chart Traces comparing either Ordered Spend or
-    Number of Orders by Purchasing Organisation for this and last year.
+def os_by_org_chart(
+    df: pd.DataFrame,
+    number_of_orders: bool,
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> go.Figure:
+    """Create a figure showing Ordered Spend or Number of Orders by Purchasing Organisation for this & last year.
 
     Args:
         df: DataFrame produced by function get_data_os_total_by_year_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
+
+    Returns:
+        Two bar chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Purchasing Org.']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = df.groupby([
+        'Year',
+        'Purchasing Org.',
+    ]).agg({
+        'Number of Orders': 'sum',
+        'Ordered Spend': 'sum',
+    }).reset_index()
 
     if df.empty:
         return empty_graph
@@ -286,34 +323,51 @@ def os_by_org_chart(df: pd.DataFrame,
 
 
 def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Ordered Spend by Top 10 Suppliers Charts."""
-    df_bar_charts = df.groupby(['Year', 'Supplier Name', 'Company Code', 'Purchasing Org.', 'Plant',
-                                'Material Group']).agg({
-                                    'Document Date': 'count',
-                                    'Net Value': 'sum'
-                                }).reset_index().rename(columns={
-                                    'Net Value': 'Ordered Spend',
-                                    'Document Date': 'Number of Orders'
-                                })
+    """Create DataFrame for the Ordered Spend by top 10 suppliers chart."""
+    df_bar_charts = df.groupby([
+        'Year',
+        'Supplier Name',
+        'Company Code',
+        'Purchasing Org.',
+        'Plant',
+        'Material Group',
+    ]).agg({
+        'Document Date': 'count',
+        'Net Value': 'sum',
+    }).reset_index().rename(columns={
+        'Net Value': 'Ordered Spend',
+        'Document Date': 'Number of Orders',
+    })
+
     return df_bar_charts
 
 
-def os_top_10_suppliers_chart(df: pd.DataFrame,
-                              number_of_orders: bool = False,
-                              company_code: str = None,
-                              purchasing_org: str = None,
-                              plant: str = None,
-                              material_group: str = None) -> go.Figure:
-    """Creates a Figure containing two Bar Chart Traces comparing either Ordered Spend or Number of Orders by Top 10
-    Suppliers for this and last year, determines Top 10 Suppliers by Ordered Spend in 2020 and filters in GUI.
+def os_top_10_suppliers_chart(
+    df: pd.DataFrame,
+    number_of_orders: bool,
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> go.Figure:
+    """Create a figure showing Ordered Spend or Number of Orders by top 10 suppliers for this & last year.
 
     Args:
         df: DataFrame produced by function get_data_os_top_10_suppliers_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
+
+    Returns:
+        Two bar chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Supplier Name']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = df.groupby([
+        'Year',
+        'Supplier Name',
+    ]).agg({
+        'Number of Orders': 'sum',
+        'Ordered Spend': 'sum',
+    }).reset_index()
 
     supplier_names = df.nlargest(10, ['Year', 'Ordered Spend'])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
