@@ -11,7 +11,7 @@ def get_data() -> pd.DataFrame:
     and returns the data frame. Should be the only function called from outside.
 
     Returns:
-        Prepared DataFrame, usable for the Dashboard.
+        Prepared DataFrame.
     """
     data_path = os.path.join(os.path.dirname(__file__), '../../data/Daten I.xlsx')
     df = pd.read_excel(data_path)
