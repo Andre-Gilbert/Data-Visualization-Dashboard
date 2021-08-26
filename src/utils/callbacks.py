@@ -16,6 +16,7 @@ from charts.supplier_performance_charts import (get_data_sp_by_month_charts,
 from components.ordered_spend_npc import ordered_spend_npc
 from components.supplier_performance_npc import supplier_performance_npc
 from dash.dependencies import Input, Output
+from dash.exceptions import PreventUpdate
 from pages.ordered_spend import ordered_spend
 from pages.supplier_performance import supplier_performance
 
@@ -52,7 +53,7 @@ def update_dropdown_label(ordered_spend_amount: int, number_of_orders: int) -> s
     id_lookup = {'ordered-spend-amount': 'Ordered Spend Amount', 'number-of-orders': 'Number of Orders'}
     ctx = dash.callback_context
 
-    if not ordered_spend and not number_of_orders or not ctx.triggered:
+    if not ordered_spend_amount and not number_of_orders or not ctx.triggered:
         dropdown_label = 'Ordered Spend Amount'
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
@@ -204,12 +205,14 @@ def update_ordered_spend_charts(
         )
 
     else:
-        total_by_year_chart = None
-        by_month_chart = None
-        by_org_chart = None
-        top_10_suppliers_chart = None
+        raise PreventUpdate
 
-    return total_by_year_chart, by_month_chart, by_org_chart, top_10_suppliers_chart
+    return (
+        total_by_year_chart,
+        by_month_chart,
+        by_org_chart,
+        top_10_suppliers_chart,
+    )
 
 
 @app.callback([
@@ -297,10 +300,12 @@ def update_supplier_performance_charts(
         )
 
     else:
-        total_deviation_and_percentage_chart = None
-        deviation_cause_and_indicator_chart = None
-        by_month_chart = None
-        by_org_chart = None
-        top_10_suppliers_chart = None
+        raise PreventUpdate
 
-    return total_deviation_and_percentage_chart, deviation_cause_and_indicator_chart, by_month_chart, by_org_chart, top_10_suppliers_chart
+    return (
+        total_deviation_and_percentage_chart,
+        deviation_cause_and_indicator_chart,
+        by_month_chart,
+        by_org_chart,
+        top_10_suppliers_chart,
+    )
