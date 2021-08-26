@@ -1,12 +1,14 @@
 """Supplier Performance Charts."""
 import pandas as pd
 import plotly.graph_objects as go
+from app import cache
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
 from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1, sapUiPointChartLabel,
                               sapUiPointChartNumber)
 
+template = 'plotly_white'
 empty_graph = {
     'layout': {
         'xaxis': {
@@ -28,9 +30,8 @@ empty_graph = {
     }
 }
 
-template = 'plotly_white'
 
-
+@cache.memoize()
 def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Create DataFrames for total deviation and percentage of deviation by purchasing organisation."""
     group_columns = ['Company Code', 'Purchasing Org.', 'Plant', 'Material Group']
@@ -143,6 +144,7 @@ def sp_total_deviation_and_percentage_chart(
     return fig
 
 
+@cache.memoize()
 def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for deviation cause and indicator charts."""
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -260,6 +262,7 @@ def sp_deviation_cause_and_indicator_chart(
     return fig
 
 
+@cache.memoize()
 def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for supplier performance by month chart."""
     df_line_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -420,6 +423,7 @@ def sp_by_org_chart(
     return fig
 
 
+@cache.memoize()
 def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for top 10 suppliers chart."""
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -503,5 +507,4 @@ def sp_top_10_suppliers_chart(
     )
 
     fig.update_yaxes(categoryorder='total ascending')
-
     return fig

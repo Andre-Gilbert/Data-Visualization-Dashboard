@@ -1,13 +1,13 @@
 """Ordered Spend Charts."""
 import pandas as pd
 import plotly.graph_objects as go
+from app import cache
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR,
-                              sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2,
-                              sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
 
+template = 'plotly_white'
 empty_graph = {
     'layout': {
         'xaxis': {
@@ -29,9 +29,8 @@ empty_graph = {
     }
 }
 
-template = 'plotly_white'
 
-
+@cache.memoize()
 def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for total Ordered Spend by year charts."""
     df_point_charts = df.groupby([
@@ -148,6 +147,7 @@ def os_total_by_year_chart(
     return fig
 
 
+@cache.memoize()
 def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for the Ordered Spend by month chart."""
     df_line_charts = df.groupby([
@@ -339,6 +339,7 @@ def os_by_org_chart(
     return fig
 
 
+@cache.memoize()
 def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for the Ordered Spend by top 10 suppliers chart."""
     df_bar_charts = df.groupby([

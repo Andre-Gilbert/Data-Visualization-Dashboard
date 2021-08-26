@@ -4,10 +4,8 @@ import os
 import pandas as pd
 from app import cache
 
-TIMEOUT = 60
 
-
-@cache.memoize(timeout=TIMEOUT)
+@cache.memoize()
 def get_data() -> pd.DataFrame:
     """Read and prepare the data.
 
@@ -28,7 +26,7 @@ def get_data() -> pd.DataFrame:
     return df
 
 
-@cache.memoize(timeout=TIMEOUT)
+@cache.memoize()
 def copy_and_apply_filter(
     df: pd.DataFrame,
     company_code: str,
