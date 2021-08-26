@@ -4,8 +4,8 @@ import plotly.graph_objects as go
 from utils.data_prep import copy_and_apply_filter
 
 from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
-                              sapUiPointChartLabel, sapUiPointChartNumber,
-                              sapUiChartPaletteQualitativeHue1Bright, sapUiPointChartNumberBrighter)
+                              sapUiChartPaletteQualitativeHue1Bright, sapUiPointChartLabel, sapUiPointChartNumber,
+                              sapUiPointChartNumberBrighter)
 
 empty_graph = {
     'layout': {
@@ -28,17 +28,7 @@ empty_graph = {
     }
 }
 
-
-def get_data_os_total_by_year_charts_ibcs(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Ordered Spend Total by Year Charts."""
-    df_point_charts = df.groupby(['Year', 'Company Code', 'Purchasing Org.', 'Plant', 'Material Group']).agg({
-        'Document Date': 'count',
-        'Net Value': 'sum'
-    }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders'
-    })
-    return df_point_charts
+template = 'plotly_white'
 
 
 def os_total_by_year_chart_ibcs(df: pd.DataFrame,
@@ -58,10 +48,8 @@ def os_total_by_year_chart_ibcs(df: pd.DataFrame,
     Returns:
 
     """
-    df = copy_and_apply_filter(
-        df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby('Year').agg(
-        {'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
+    df = df.groupby('Year').agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
@@ -102,7 +90,6 @@ def os_total_by_year_chart_ibcs(df: pd.DataFrame,
             },
             title='2020',
             number_font_color=sapUiPointChartNumber,
-
         ))
 
     fig.add_trace(
@@ -117,24 +104,9 @@ def os_total_by_year_chart_ibcs(df: pd.DataFrame,
             number_font_color=sapUiPointChartNumberBrighter,
         ))
 
-    fig.update_traces(
-        title_font_color=sapUiPointChartLabel,
-
-    )
+    fig.update_traces(title_font_color=sapUiPointChartLabel,)
 
     return fig
-
-
-def get_data_os_by_month_charts_ibcs(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Ordered Spend by Month Charts."""
-    df_line_charts = df.groupby(['Year', 'Month', 'Company Code', 'Purchasing Org.', 'Plant', 'Material Group']).agg({
-        'Document Date': 'count',
-        'Net Value': 'sum'
-    }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders'
-    })
-    return df_line_charts
 
 
 def os_by_month_chart_ibcs(df: pd.DataFrame,
@@ -154,10 +126,8 @@ def os_by_month_chart_ibcs(df: pd.DataFrame,
     Returns:
 
     """
-    df = copy_and_apply_filter(
-        df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Month']).agg(
-        {'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
+    df = df.groupby(['Year', 'Month']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
     df.replace(
         {
             'Month': {
@@ -208,13 +178,12 @@ def os_by_month_chart_ibcs(df: pd.DataFrame,
             name=2019,
         ))
 
-    fig.update_layout(
-        height=520,
-        title='Orders by Month',
-        title_font_size=20,
-        font_color=SAP_TEXT_COLOR,
-        font_family=SAP_FONT,
-    )
+    fig.update_layout(height=520,
+                      title='Orders by Month',
+                      title_font_size=20,
+                      font_color=SAP_TEXT_COLOR,
+                      font_family=SAP_FONT,
+                      template=template)
 
     return fig
 
@@ -233,10 +202,8 @@ def os_by_org_chart_ibcs(df: pd.DataFrame,
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
     """
-    df = copy_and_apply_filter(
-        df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Purchasing Org.']).agg(
-        {'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
+    df = df.groupby(['Year', 'Purchasing Org.']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
     if df.empty:
         return empty_graph
@@ -246,64 +213,47 @@ def os_by_org_chart_ibcs(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
+    sort_array = df.sort_values(['Year', displayed], ascending=True)['Purchasing Org.'].drop_duplicates(keep='last')
+
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
+
+    df_this_year.sort_values([displayed], ascending=True, inplace=True)
 
     fig = go.Figure()
 
     fig.add_trace(
-        go.Bar(
-            x=df_this_year['Purchasing Org.'],
-            y=df_last_year[displayed],
-            # x=df_last_year[displayed],
-            # y=df_this_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
-            name=2020,
-            # orientation='h'
-            text=df_last_year[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}'
-        ))
+        go.Bar(x=df_last_year[displayed],
+               y=df_last_year['Purchasing Org.'],
+               marker_color=sapUiChartPaletteQualitativeHue1Bright,
+               name=2019,
+               orientation='h',
+               text=df_last_year[displayed],
+               textposition='outside',
+               texttemplate='%{text:.2s}'))
 
     fig.add_trace(
-        go.Bar(
-            x=df_last_year['Purchasing Org.'],
-            y=df_last_year[displayed],
-            # x=df_last_year[displayed],
-            # y=df_this_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteQualitativeHue1Bright,
-            name=2019,
-            # orientation='h',
-            text=df_last_year[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}'
-        ))
+        go.Bar(x=df_this_year[displayed],
+               y=df_this_year['Purchasing Org.'],
+               marker_color=sapUiChartPaletteQualitativeHue1,
+               name=2020,
+               orientation='h',
+               text=df_this_year[displayed],
+               textposition='outside',
+               texttemplate='%{text:.2s}'))
 
-    fig.update_layout(
-        height=520,
-        barmode='group',
-        xaxis_tickangle=-45,
-        title='Orders by Purchasing Organisation',
-        title_font_size=20,
-        font_color=SAP_TEXT_COLOR,
-        font_family=SAP_FONT,
-    )
+    fig.update_layout(height=520,
+                      barmode='group',
+                      title='Orders by Purchasing Organisation',
+                      title_font_size=20,
+                      font_color=SAP_TEXT_COLOR,
+                      font_family=SAP_FONT,
+                      template=template,
+                      legend_traceorder='reversed')
 
-    fig.update_xaxes(type='category')
+    fig.update_yaxes(type='category', categoryorder='array', categoryarray=sort_array)
+
     return fig
-
-
-def get_data_os_top_10_suppliers_charts_ibcs(df: pd.DataFrame) -> pd.DataFrame:
-    """Creates the DataFrame to be used for the Ordered Spend by Top 10 Suppliers Charts."""
-    df_bar_charts = df.groupby(['Year', 'Supplier Name', 'Company Code', 'Purchasing Org.', 'Plant',
-                                'Material Group']).agg({
-                                    'Document Date': 'count',
-                                    'Net Value': 'sum'
-                                }).reset_index().rename(columns={
-                                    'Net Value': 'Ordered Spend',
-                                    'Document Date': 'Number of Orders'
-                                })
-    return df_bar_charts
 
 
 def os_top_10_suppliers_chart_ibcs(df: pd.DataFrame,
@@ -320,13 +270,10 @@ def os_top_10_suppliers_chart_ibcs(df: pd.DataFrame,
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
     """
-    df = copy_and_apply_filter(
-        df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Supplier Name']).agg(
-        {'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
+    df = df.groupby(['Year', 'Supplier Name']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
 
-    supplier_names = df.nlargest(10, ['Year', 'Ordered Spend'])[
-        'Supplier Name']
+    supplier_names = df.nlargest(10, ['Year', 'Ordered Spend'])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
     if df.empty:
@@ -337,45 +284,44 @@ def os_top_10_suppliers_chart_ibcs(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    df.sort_values(displayed, ascending=False, inplace=True)
+    sort_array = df.sort_values(['Year', displayed], ascending=True)['Supplier Name'].drop_duplicates(keep='last')
+
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
+
+    df_this_year.sort_values([displayed], ascending=True, inplace=True)
 
     fig = go.Figure()
 
     fig.add_trace(
-        go.Bar(
-            x=df_last_year[displayed],
-            y=df_this_year['Supplier Name'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
-            name=2020,
-            orientation='h',
-            text=df_last_year[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}'
-        ))
+        go.Bar(x=df_last_year[displayed],
+               y=df_last_year['Supplier Name'],
+               marker_color=sapUiChartPaletteQualitativeHue1Bright,
+               name=2019,
+               orientation='h',
+               text=df_last_year[displayed],
+               textposition='outside',
+               texttemplate='%{text:.2s}'))
 
     fig.add_trace(
-        go.Bar(
-            x=df_last_year[displayed],
-            y=df_last_year['Supplier Name'],
-            marker_color=sapUiChartPaletteQualitativeHue1Bright,  # color of bar
-            name=2019,
-            orientation='h',
-            text=df_last_year[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}'  # round values when display
+        go.Bar(x=df_this_year[displayed],
+               y=df_this_year['Supplier Name'],
+               marker_color=sapUiChartPaletteQualitativeHue1,
+               name=2020,
+               orientation='h',
+               text=df_this_year[displayed],
+               textposition='outside',
+               texttemplate='%{text:.2s}'))
 
-        ))
+    fig.update_layout(height=520,
+                      barmode='group',
+                      title='Orders by Top Ten Suppliers',
+                      title_font_size=20,
+                      font_color=SAP_TEXT_COLOR,
+                      font_family=SAP_FONT,
+                      template=template,
+                      legend_traceorder='reversed')
 
-    fig.update_layout(
-        height=520,
-        barmode='group',
-        xaxis_tickangle=-45,
-        title='Orders by Top Ten Suppliers',
-        title_font_size=20,
-        font_color=SAP_TEXT_COLOR,
-        font_family=SAP_FONT,
-    )
+    fig.update_yaxes(categoryorder='array', categoryarray=sort_array)
 
     return fig
