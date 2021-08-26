@@ -3,8 +3,10 @@ import pandas as pd
 import plotly.graph_objects as go
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR,
+                              sapUiChartPaletteQualitativeHue1,
+                              sapUiChartPaletteQualitativeHue2,
+                              sapUiPointChartLabel, sapUiPointChartNumber)
 
 empty_graph = {
     'layout': {
@@ -243,12 +245,14 @@ def os_by_month_chart(
             name=2019,
         ))
 
-    fig.update_layout(height=520,
-                      title='Orders by Month',
-                      title_font_size=20,
-                      font_color=SAP_TEXT_COLOR,
-                      font_family=SAP_FONT,
-                      template=template)
+    fig.update_layout(
+        height=500,
+        title='Orders by Month',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+        template=template,
+    )
 
     return fig
 
@@ -292,35 +296,46 @@ def os_by_org_chart(
     fig = go.Figure()
 
     fig.add_trace(
-        go.Bar(x=df_last_year[displayed],
-               y=df_last_year['Purchasing Org.'],
-               marker_color=sapUiChartPaletteQualitativeHue2,
-               name=2019,
-               orientation='h',
-               text=df_last_year[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'))
+        go.Bar(
+            x=df_last_year[displayed],
+            y=df_last_year['Purchasing Org.'],
+            marker_color=sapUiChartPaletteQualitativeHue2,
+            name=2019,
+            orientation='h',
+            text=df_last_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ))
 
     fig.add_trace(
-        go.Bar(x=df_this_year[displayed],
-               y=df_this_year['Purchasing Org.'],
-               marker_color=sapUiChartPaletteQualitativeHue1,
-               name=2020,
-               orientation='h',
-               text=df_this_year[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'))
+        go.Bar(
+            x=df_this_year[displayed],
+            y=df_this_year['Purchasing Org.'],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=2020,
+            orientation='h',
+            text=df_this_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ))
 
-    fig.update_layout(height=520,
-                      barmode='group',
-                      title='Orders by Purchasing Organisation',
-                      title_font_size=20,
-                      font_color=SAP_TEXT_COLOR,
-                      font_family=SAP_FONT,
-                      template=template,
-                      legend_traceorder='reversed')
+    fig.update_layout(
+        height=650,
+        barmode='group',
+        title='Orders by Purchasing Organisation',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+        template=template,
+        legend_traceorder='reversed',
+    )
 
-    fig.update_yaxes(type='category', categoryorder='array', categoryarray=sort_array)
+    fig.update_yaxes(
+        type='category',
+        categoryorder='array',
+        categoryarray=sort_array,
+    )
+
     return fig
 
 
@@ -386,34 +401,43 @@ def os_top_10_suppliers_chart(
     fig = go.Figure()
 
     fig.add_trace(
-        go.Bar(x=df_last_year[displayed],
-               y=df_last_year['Supplier Name'],
-               marker_color=sapUiChartPaletteQualitativeHue2,
-               name=2019,
-               orientation='h',
-               text=df_last_year[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'))
+        go.Bar(
+            x=df_last_year[displayed],
+            y=df_last_year['Supplier Name'],
+            marker_color=sapUiChartPaletteQualitativeHue2,
+            name=2019,
+            orientation='h',
+            text=df_last_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ))
 
     fig.add_trace(
-        go.Bar(x=df_this_year[displayed],
-               y=df_this_year['Supplier Name'],
-               marker_color=sapUiChartPaletteQualitativeHue1,
-               name=2020,
-               orientation='h',
-               text=df_this_year[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'))
+        go.Bar(
+            x=df_this_year[displayed],
+            y=df_this_year['Supplier Name'],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=2020,
+            orientation='h',
+            text=df_this_year[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ))
 
-    fig.update_layout(height=520,
-                      barmode='group',
-                      title='Orders by Top Ten Suppliers',
-                      title_font_size=20,
-                      font_color=SAP_TEXT_COLOR,
-                      font_family=SAP_FONT,
-                      template=template,
-                      legend_traceorder='reversed')
+    fig.update_layout(
+        height=750,
+        barmode='group',
+        title='Orders by Top Ten Suppliers',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+        template=template,
+        legend_traceorder='reversed',
+    )
 
-    fig.update_yaxes(categoryorder='array', categoryarray=sort_array)
+    fig.update_yaxes(
+        categoryorder='array',
+        categoryarray=sort_array,
+    )
 
     return fig

@@ -215,39 +215,45 @@ def sp_deviation_cause_and_indicator_chart(
     )
 
     fig.add_trace(
-        go.Bar(x=df_dev_cause[displayed],
-               y=df_dev_cause['Deviation Cause'],
-               marker_color=sapUiChartPaletteQualitativeHue1,
-               name='Deviation Cause',
-               orientation='h',
-               text=df_dev_cause[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'),
+        go.Bar(
+            x=df_dev_cause[displayed],
+            y=df_dev_cause['Deviation Cause'],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name='Deviation Cause',
+            orientation='h',
+            text=df_dev_cause[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ),
         row=1,
         col=1,
     )
 
     fig.add_trace(
-        go.Bar(x=df_dev_indicator[displayed],
-               y=df_dev_indicator['Deviation Indicator'],
-               marker_color=sapUiChartPaletteQualitativeHue1,
-               name='Deviation Indicator',
-               orientation='h',
-               text=df_dev_indicator[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'),
+        go.Bar(
+            x=df_dev_indicator[displayed],
+            y=df_dev_indicator['Deviation Indicator'],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name='Deviation Indicator',
+            orientation='h',
+            text=df_dev_indicator[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ),
         row=1,
         col=2,
     )
 
-    fig.update_layout(height=600,
-                      barmode='group',
-                      showlegend=False,
-                      title='Deviated Orders by Deviation Cause and Indicator',
-                      title_font_size=20,
-                      font_color=SAP_TEXT_COLOR,
-                      font_family=SAP_FONT,
-                      template=template)
+    fig.update_layout(
+        height=400,
+        barmode='group',
+        showlegend=False,
+        title='Deviated Orders by Deviation Cause and Indicator',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+        template=template,
+    )
 
     fig.update_yaxes(categoryorder='total ascending')
 
@@ -336,13 +342,15 @@ def sp_by_month_chart(
             name=displayed,
         ))
 
-    fig.update_layout(height=520,
-                      showlegend=False,
-                      title='Deviated Orders by Month',
-                      title_font_size=20,
-                      font_color=SAP_TEXT_COLOR,
-                      font_family=SAP_FONT,
-                      template=template)
+    fig.update_layout(
+        height=500,
+        showlegend=False,
+        title='Deviated Orders by Month',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+        template=template,
+    )
 
     return fig
 
@@ -382,25 +390,32 @@ def sp_by_org_chart(
         displayed = 'Ordered Spend'
 
     fig = go.Figure(
-        go.Bar(x=df[displayed],
-               y=df['Purchasing Org.'],
-               marker_color=sapUiChartPaletteQualitativeHue1,
-               name=displayed,
-               orientation='h',
-               text=df[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'))
+        go.Bar(
+            x=df[displayed],
+            y=df['Purchasing Org.'],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=displayed,
+            orientation='h',
+            text=df[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ))
 
-    fig.update_layout(height=520,
-                      barmode='group',
-                      showlegend=False,
-                      title='Deviated Orders by Purchasing Organisation',
-                      title_font_size=20,
-                      font_color=SAP_TEXT_COLOR,
-                      font_family=SAP_FONT,
-                      template=template)
+    fig.update_layout(
+        height=250,
+        barmode='group',
+        showlegend=False,
+        title='Deviated Orders by Purchasing Organisation',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+        template=template,
+    )
 
-    fig.update_yaxes(type='category', categoryorder='total ascending')
+    fig.update_yaxes(
+        type='category',
+        categoryorder='total ascending',
+    )
 
     return fig
 
@@ -465,23 +480,27 @@ def sp_top_10_suppliers_chart(
         displayed = 'Ordered Spend'
 
     fig = go.Figure(
-        go.Bar(x=df[displayed],
-               y=df['Supplier Name'],
-               marker_color=sapUiChartPaletteQualitativeHue1,
-               name=displayed,
-               orientation='h',
-               text=df[displayed],
-               textposition='outside',
-               texttemplate='%{text:.2s}'))
+        go.Bar(
+            x=df[displayed],
+            y=df['Supplier Name'],
+            marker_color=sapUiChartPaletteQualitativeHue1,
+            name=displayed,
+            orientation='h',
+            text=df[displayed],
+            textposition='outside',
+            texttemplate='%{text:.2s}',
+        ))
 
-    fig.update_layout(height=520,
-                      barmode='group',
-                      showlegend=False,
-                      title='Deviated Orders of Top Ten Suppliers',
-                      title_font_size=20,
-                      font_color=SAP_TEXT_COLOR,
-                      font_family=SAP_FONT,
-                      template=template)
+    fig.update_layout(
+        height=500,
+        barmode='group',
+        showlegend=False,
+        title='Deviated Orders of Top Ten Suppliers',
+        title_font_size=20,
+        font_color=SAP_TEXT_COLOR,
+        font_family=SAP_FONT,
+        template=template,
+    )
 
     fig.update_yaxes(categoryorder='total ascending')
 
