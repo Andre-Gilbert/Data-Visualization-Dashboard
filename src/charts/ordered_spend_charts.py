@@ -8,6 +8,8 @@ from utils.data_prep import copy_and_apply_filter
 from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
                               SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER)
 
+pd.options.mode.chained_assignment = None
+
 display_column = 'Display'
 template = 'plotly_white'
 empty_graph = {

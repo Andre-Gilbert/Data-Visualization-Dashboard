@@ -5,7 +5,9 @@ from app import cache
 from utils.data_prep import copy_and_apply_filter
 
 from charts.sap_theme import (IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
-                              SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER)
+                              SAP_UI_POINT_CHART_LABEL)
+
+pd.options.mode.chained_assignment = None
 
 template = 'plotly_white'
 empty_graph = {
@@ -23,7 +25,7 @@ empty_graph = {
             'showarrow': False,
             'font': {
                 'size': 28,
-                'color': SAP_UI_POINT_CHART_NUMBER
+                'color': IBCS_HUE_1
             }
         }]
     }
@@ -263,8 +265,7 @@ def os_by_org_chart_ibcs(
     title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
-    sort_array = sort_array.loc[:, 'Purchasing Org.']
-    sort_array.drop_duplicates(keep='last', inplace=True)
+    sort_array = sort_array.loc[:, 'Purchasing Org.'].drop_duplicates(keep='last')
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
@@ -358,8 +359,7 @@ def os_top_10_suppliers_chart_ibcs(
     title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
-    sort_array = sort_array.loc[:, 'Supplier Name']
-    sort_array.drop_duplicates(keep='last', inplace=True)
+    sort_array = sort_array.loc[:, 'Supplier Name'].drop_duplicates(keep='last')
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
