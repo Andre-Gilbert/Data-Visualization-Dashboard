@@ -134,14 +134,14 @@ def os_total_by_year_chart(
     fig.update_traces(
         number_font_color=sapUiPointChartNumber,
         title_font_color=sapUiPointChartLabel,
-        number_font_size=30,
+        number_font_size=42,
     )
 
     fig.update_layout(
-        height=90,
+        height=96,
         margin={
             't': 30,
-            'b': 10,
+            'b': 0,
             'l': 10,
             'r': 10
         },

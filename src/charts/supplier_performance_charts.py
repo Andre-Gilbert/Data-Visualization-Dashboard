@@ -5,7 +5,8 @@ from app import cache
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
+                              sapUiChartPaletteQualitativeHue1,
                               sapUiPointChartLabel, sapUiPointChartNumber)
 
 template = 'plotly_white'
@@ -129,14 +130,14 @@ def sp_total_deviation_and_percentage_chart(
     fig.update_traces(
         number_font_color=sapUiPointChartNumber,
         title_font_color=sapUiPointChartLabel,
-        number_font_size=40,
+        number_font_size=42,
     )
 
     fig.update_layout(
-        height=90,
+        height=96,
         margin={
             't': 30,
-            'b': 10,
+            'b': 0,
             'l': 10,
             'r': 10
         },

@@ -115,14 +115,14 @@ def os_total_by_year_chart_ibcs(
 
     fig.update_traces(
         title_font_color=sapUiPointChartLabel,
-        number_font_size=30,
+        number_font_size=42,
     )
 
     fig.update_layout(
-        height=90,
+        height=96,
         margin={
-            't': 50,
-            'b': 10,
+            't': 30,
+            'b': 0,
             'l': 10,
             'r': 10
         },
