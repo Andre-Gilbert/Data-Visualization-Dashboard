@@ -40,8 +40,7 @@ def os_total_by_year_chart_ibcs(
     plant: str,
     material_group: str,
 ) -> go.Figure:
-    """Creates a Figure containing two Numeric Point Charts for Ordered Spend and Number of Orders
-    this or last year.
+    """Creates a figure showing Ordered Spend or Number of Orders of the current and prior year.
 
     Args:
         df: DataFrame produced by function get_data_os_total_by_year_charts.
@@ -49,7 +48,7 @@ def os_total_by_year_chart_ibcs(
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:
-
+        Two plotly indicators.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby('Year').agg({
@@ -136,8 +135,7 @@ def os_by_month_chart_ibcs(
     plant: str,
     material_group: str,
 ) -> go.Figure:
-    """Creates a Figure containing two Line Chart Traces comparing either
-    Ordered Spend or Number of Orders by Month for this and last year.
+    """Create a figure showing Ordered Spend or Number of Orders by month for the current and prior year.
 
     Args:
         df: DataFrame produced by function get_data_os_by_month_charts.
@@ -145,7 +143,7 @@ def os_by_month_chart_ibcs(
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:
-
+        Two line chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby([
@@ -230,13 +228,15 @@ def os_by_org_chart_ibcs(
     plant: str,
     material_group: str,
 ) -> go.Figure:
-    """Creates a Figure containing two Bar Chart Traces comparing either Ordered Spend or
-    Number of Orders by Purchasing Organisation for this and last year.
+    """Create a figure showing Ordered Spend or Number of Orders by Purchasing Organisation for this & last year.
 
     Args:
         df: DataFrame produced by function get_data_os_total_by_year_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
+
+    Returns:
+        Two bar chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby([
@@ -319,13 +319,15 @@ def os_top_10_suppliers_chart_ibcs(
     plant: str,
     material_group: str,
 ) -> go.Figure:
-    """Creates a Figure containing two Bar Chart Traces comparing either Ordered Spend or Number of Orders by Top 10
-    Suppliers for this and last year, determines Top 10 Suppliers by Ordered Spend in 2020 and filters in GUI.
+    """Create a figure showing Ordered Spend or Number of Orders by top 10 suppliers for this & last year.
 
     Args:
         df: DataFrame produced by function get_data_os_top_10_suppliers_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
+
+    Returns:
+        Two bar chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby([
