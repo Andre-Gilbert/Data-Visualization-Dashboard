@@ -211,7 +211,7 @@ def sp_deviation_cause_and_indicator_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = ('Deviated Orders by Deviation Cause and Indicator<br>'
              f'<sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>')
@@ -341,7 +341,7 @@ def sp_by_month_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Deviated Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -496,7 +496,7 @@ def sp_top_10_suppliers_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Deviated Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
