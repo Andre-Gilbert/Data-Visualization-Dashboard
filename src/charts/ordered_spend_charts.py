@@ -219,8 +219,12 @@ def os_by_month_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        subtitle = ''
     else:
         displayed = 'Ordered Spend'
+        subtitle = ' (in EUR)'
+
+    title = f'Orders by Month<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
@@ -247,7 +251,7 @@ def os_by_month_chart(
 
     fig.update_layout(
         height=500,
-        title='Orders by Month',
+        title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
@@ -283,8 +287,12 @@ def os_by_org_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        subtitle = ''
     else:
         displayed = 'Ordered Spend'
+        subtitle = ' (in EUR)'
+
+    title = f'Orders by Purchasing Organisation<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
     sort_array = sort_array.loc[:, 'Purchasing Org.'].drop_duplicates(keep='last')
@@ -321,7 +329,7 @@ def os_by_org_chart(
     fig.update_layout(
         height=650,
         barmode='group',
-        title='Orders by Purchasing Organisation',
+        title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
@@ -388,8 +396,12 @@ def os_top_10_suppliers_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        subtitle = ''
     else:
         displayed = 'Ordered Spend'
+        subtitle = ' (in EUR)'
+
+    title = f'Orders of Top Ten Suppliers<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
     sort_array = sort_array.loc[:, 'Supplier Name'].drop_duplicates(keep='last')
@@ -426,7 +438,7 @@ def os_top_10_suppliers_chart(
     fig.update_layout(
         height=750,
         barmode='group',
-        title='Orders by Top Ten Suppliers',
+        title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,

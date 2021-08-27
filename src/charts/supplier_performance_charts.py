@@ -207,8 +207,13 @@ def sp_deviation_cause_and_indicator_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        subtitle = ''
     else:
         displayed = 'Ordered Spend'
+        subtitle = ' (in EUR)'
+
+    title = ('Deviated Orders by Deviation Cause and Indicator<br>'
+             f'<sup class="chart-subtitle">{displayed}{subtitle}</sup>')
 
     fig = make_subplots(
         rows=1,
@@ -250,7 +255,7 @@ def sp_deviation_cause_and_indicator_chart(
         height=400,
         barmode='group',
         showlegend=False,
-        title='Deviated Orders by Deviation Cause and Indicator',
+        title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
@@ -333,8 +338,12 @@ def sp_by_month_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        subtitle = ''
     else:
         displayed = 'Ordered Spend'
+        subtitle = ' (in EUR)'
+
+    title = f'Deviated Orders by Month<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
 
     fig = go.Figure(
         go.Scatter(
@@ -348,7 +357,7 @@ def sp_by_month_chart(
     fig.update_layout(
         height=500,
         showlegend=False,
-        title='Deviated Orders by Month',
+        title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
@@ -389,8 +398,12 @@ def sp_by_org_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        subtitle = ''
     else:
         displayed = 'Ordered Spend'
+        subtitle = ' (in EUR)'
+
+    title = f'Deviated Orders by Purchasing Organisation<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
 
     fig = go.Figure(
         go.Bar(
@@ -408,7 +421,7 @@ def sp_by_org_chart(
         height=250,
         barmode='group',
         showlegend=False,
-        title='Deviated Orders by Purchasing Organisation',
+        title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
@@ -480,8 +493,12 @@ def sp_top_10_suppliers_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        subtitle = ''
     else:
         displayed = 'Ordered Spend'
+        subtitle = ' (in EUR)'
+
+    title = f'Deviated Orders of Top Ten Suppliers<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
 
     fig = go.Figure(
         go.Bar(
@@ -499,7 +516,7 @@ def sp_top_10_suppliers_chart(
         height=500,
         barmode='group',
         showlegend=False,
-        title='Deviated Orders of Top Ten Suppliers',
+        title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
