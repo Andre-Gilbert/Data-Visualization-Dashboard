@@ -129,12 +129,13 @@ def sp_total_deviation_and_percentage_chart(
     fig.update_traces(
         number_font_color=sapUiPointChartNumber,
         title_font_color=sapUiPointChartLabel,
+        number_font_size=40,
     )
 
     fig.update_layout(
-        height=200,
+        height=90,
         margin={
-            't': 50,
+            't': 30,
             'b': 10,
             'l': 10,
             'r': 10
