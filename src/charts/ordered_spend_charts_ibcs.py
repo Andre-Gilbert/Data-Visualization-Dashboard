@@ -213,12 +213,11 @@ def os_by_org_chart_ibcs(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    sort_array = df.sort_values(['Year', displayed], ascending=True)['Purchasing Org.'].drop_duplicates(keep='last')
+    sort_array = df.sort_values(['Year', displayed], ascending=True)['Purchasing Org.']
+    sort_array.drop_duplicates(keep='last')
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
-
-    df_this_year.sort_values([displayed], ascending=True, inplace=True)
 
     fig = go.Figure()
 
@@ -284,7 +283,8 @@ def os_top_10_suppliers_chart_ibcs(df: pd.DataFrame,
     else:
         displayed = 'Ordered Spend'
 
-    sort_array = df.sort_values(['Year', displayed], ascending=True)['Supplier Name'].drop_duplicates(keep='last')
+    sort_array = df.sort_values(['Year', displayed], ascending=True)['Supplier Name']
+    sort_array.drop_duplicates(keep='last')
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
