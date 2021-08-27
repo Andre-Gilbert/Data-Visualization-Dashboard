@@ -29,13 +29,8 @@
           box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
 }
 
-.chart-subtitle {
-  font-size: 14;
-  color: #89919a;
-}
-
 /* large size screen
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
   .page {
     padding: 0 2.4rem 2.4rem;

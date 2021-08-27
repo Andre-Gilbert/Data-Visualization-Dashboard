@@ -138,11 +138,6 @@
   color: $sap-text-color;
 }
 
-.npc-subtitle {
-  font-size: 14;
-  color: $sap-label-border-color;
-}
-
 /* medium size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 768px) {
@@ -156,7 +151,7 @@
 }
 
 /* large size screen
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
   .header {
     padding: 4rem 3.2rem 2rem;

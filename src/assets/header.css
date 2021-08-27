@@ -151,11 +151,6 @@
   color: #32363a;
 }
 
-.npc-subtitle {
-  font-size: 14;
-  color: #89919a;
-}
-
 /* medium size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 768px) {
@@ -171,7 +166,7 @@
 }
 
 /* large size screen
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
   .header {
     padding: 4rem 3.2rem 2rem;
