@@ -225,7 +225,7 @@ def os_by_month_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -414,7 +414,7 @@ def os_top_10_suppliers_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     df[display_column] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
 

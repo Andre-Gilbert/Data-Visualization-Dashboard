@@ -184,7 +184,7 @@ def os_by_month_chart_ibcs(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -258,7 +258,7 @@ def os_by_org_chart_ibcs(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -353,7 +353,7 @@ def os_top_10_suppliers_chart_ibcs(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
