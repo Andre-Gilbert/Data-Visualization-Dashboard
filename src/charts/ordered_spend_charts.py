@@ -250,7 +250,7 @@ def os_by_month_chart(
         ))
 
     fig.update_layout(
-        height=500,
+        height=600,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
@@ -280,7 +280,13 @@ def os_by_org_chart(
         Two bar chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Purchasing Org.']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = df.groupby([
+        'Year',
+        'Purchasing Org.',
+    ]).agg({
+        'Number of Orders': 'sum',
+        'Ordered Spend': 'sum',
+    }).reset_index()
 
     if df.empty:
         return empty_graph
@@ -327,7 +333,7 @@ def os_by_org_chart(
         ))
 
     fig.update_layout(
-        height=650,
+        height=600,
         barmode='group',
         title=title,
         title_font_size=20,
@@ -386,7 +392,13 @@ def os_top_10_suppliers_chart(
         Two bar chart subplots.
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
-    df = df.groupby(['Year', 'Supplier Name']).agg({'Number of Orders': 'sum', 'Ordered Spend': 'sum'}).reset_index()
+    df = df.groupby([
+        'Year',
+        'Supplier Name',
+    ]).agg({
+        'Number of Orders': 'sum',
+        'Ordered Spend': 'sum',
+    }).reset_index()
 
     supplier_names = df.nlargest(10, ['Year', 'Ordered Spend'])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
@@ -436,7 +448,7 @@ def os_top_10_suppliers_chart(
         ))
 
     fig.update_layout(
-        height=750,
+        height=600,
         barmode='group',
         title=title,
         title_font_size=20,

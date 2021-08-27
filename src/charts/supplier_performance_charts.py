@@ -252,7 +252,7 @@ def sp_deviation_cause_and_indicator_chart(
     )
 
     fig.update_layout(
-        height=400,
+        height=600,
         barmode='group',
         showlegend=False,
         title=title,
@@ -263,7 +263,6 @@ def sp_deviation_cause_and_indicator_chart(
     )
 
     fig.update_yaxes(categoryorder='total ascending')
-
     return fig
 
 
@@ -355,7 +354,7 @@ def sp_by_month_chart(
         ))
 
     fig.update_layout(
-        height=500,
+        height=600,
         showlegend=False,
         title=title,
         title_font_size=20,
@@ -418,7 +417,7 @@ def sp_by_org_chart(
         ))
 
     fig.update_layout(
-        height=250,
+        height=600,
         barmode='group',
         showlegend=False,
         title=title,
@@ -513,7 +512,7 @@ def sp_top_10_suppliers_chart(
         ))
 
     fig.update_layout(
-        height=500,
+        height=600,
         barmode='group',
         showlegend=False,
         title=title,
