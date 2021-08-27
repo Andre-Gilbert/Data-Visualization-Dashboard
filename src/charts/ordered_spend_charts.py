@@ -309,7 +309,7 @@ def os_by_org_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     df[display_column] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
 

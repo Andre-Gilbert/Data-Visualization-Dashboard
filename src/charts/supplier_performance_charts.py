@@ -407,7 +407,7 @@ def sp_by_org_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = (f'Deviated Orders by Purchasing Organisation'
              f'<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>')
