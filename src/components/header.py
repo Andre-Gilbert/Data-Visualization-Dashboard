@@ -17,54 +17,58 @@ def header() -> html.Div:
     """
     header = html.Div([
         html.Div([
-            html.H1(id='page-header', className='page-title'),
             html.Div([
+                html.H1(id='page-header', className='page-title'),
                 html.Div([
-                    html.P('Company Code:', className='filter-bar-label'),
-                    dcc.Dropdown(
-                        id='company-code',
-                        options=[{
-                            'label': label,
-                            'value': label
-                        } for label in sorted(df['Company Code'].unique())],
-                    )
+                    html.Div([
+                        html.P('Company Code:', className='filter-bar-label'),
+                        dcc.Dropdown(
+                            id='company-code',
+                            options=[{
+                                'label': label,
+                                'value': label
+                            } for label in sorted(df['Company Code'].unique())],
+                        )
+                    ],
+                             className='filter-bar-container'),
+                    html.Div([
+                        html.P('Purchasing Org.:', className='filter-bar-label'),
+                        dcc.Dropdown(
+                            id='purchasing-org',
+                            options=[{
+                                'label': label,
+                                'value': label
+                            } for label in sorted(df['Purchasing Org.'].unique())],
+                        )
+                    ],
+                             className='filter-bar-container'),
+                    html.Div([
+                        html.P('Plant:', className='filter-bar-label'),
+                        dcc.Dropdown(
+                            id='plant',
+                            options=[{
+                                'label': label,
+                                'value': label
+                            } for label in sorted(df['Plant'].unique())],
+                        )
+                    ],
+                             className='filter-bar-container'),
+                    html.Div([
+                        html.P('Material Group:', className='filter-bar-label'),
+                        dcc.Dropdown(
+                            id='material-group',
+                            options=[{
+                                'label': label,
+                                'value': label
+                            } for label in sorted(df['Material Group'].unique().astype(str))],
+                        )
+                    ],
+                             className='filter-bar-container')
                 ],
-                         className='filter-bar-container'),
-                html.Div([
-                    html.P('Purchasing Organization:', className='filter-bar-label'),
-                    dcc.Dropdown(
-                        id='purchasing-org',
-                        options=[{
-                            'label': label,
-                            'value': label
-                        } for label in sorted(df['Purchasing Org.'].unique())],
-                    )
-                ],
-                         className='filter-bar-container'),
-                html.Div([
-                    html.P('Plant:', className='filter-bar-label'),
-                    dcc.Dropdown(
-                        id='plant',
-                        options=[{
-                            'label': label,
-                            'value': label
-                        } for label in sorted(df['Plant'].unique())],
-                    )
-                ],
-                         className='filter-bar-container'),
-                html.Div([
-                    html.P('Material Group:', className='filter-bar-label'),
-                    dcc.Dropdown(
-                        id='material-group',
-                        options=[{
-                            'label': label,
-                            'value': label
-                        } for label in sorted(df['Material Group'].unique().astype(str))],
-                    )
-                ],
-                         className='filter-bar-container')
+                         className='filter-bar')
             ],
-                     className='filter-bar')
+                     className='header-flex-container'),
+            html.Div(id='numeric-point-chart')
         ],
                  className='header-main')
     ],
