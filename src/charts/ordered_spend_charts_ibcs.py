@@ -4,9 +4,10 @@ import plotly.graph_objects as go
 from app import cache
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue1Bright, sapUiPointChartLabel, sapUiPointChartNumber,
-                              sapUiPointChartNumberBrighter)
+from charts.sap_theme import (IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
+                              SAP_UI_POINT_CHART_LABEL)
+
+pd.options.mode.chained_assignment = None
 
 template = 'plotly_white'
 empty_graph = {
@@ -24,7 +25,7 @@ empty_graph = {
             'showarrow': False,
             'font': {
                 'size': 28,
-                'color': sapUiPointChartNumber
+                'color': IBCS_HUE_1
             }
         }]
     }
@@ -94,7 +95,7 @@ def os_total_by_year_chart_ibcs(
                 'relative': True
             },
             title='2020',
-            number_font_color=sapUiPointChartNumber,
+            number_font_color=IBCS_HUE_1,
         ))
 
     fig.add_trace(
@@ -110,12 +111,12 @@ def os_total_by_year_chart_ibcs(
                 'relative': True,
             },
             title='2019',
-            number_font_color=sapUiPointChartNumberBrighter,
+            number_font_color=IBCS_HUE_2,
         ))
 
     fig.update_traces(
-        title_font_color=sapUiPointChartLabel,
         number_font_size=42,
+        title_font_color=SAP_UI_POINT_CHART_LABEL,
     )
 
     fig.update_layout(
@@ -185,7 +186,7 @@ def os_by_month_chart_ibcs(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -199,7 +200,7 @@ def os_by_month_chart_ibcs(
             x=df_this_year['Month'],
             y=df_this_year[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=IBCS_HUE_1,
             name=2020,
         ))
 
@@ -208,7 +209,7 @@ def os_by_month_chart_ibcs(
             x=df_last_year['Month'],
             y=df_last_year[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteQualitativeHue1Bright,
+            marker_color=IBCS_HUE_2,
             name=2019,
         ))
 
@@ -259,7 +260,7 @@ def os_by_org_chart_ibcs(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -275,7 +276,7 @@ def os_by_org_chart_ibcs(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteQualitativeHue1Bright,
+            marker_color=IBCS_HUE_2,
             name=2019,
             orientation='h',
             text=df_last_year[displayed],
@@ -287,7 +288,7 @@ def os_by_org_chart_ibcs(
         go.Bar(
             x=df_this_year[displayed],
             y=df_this_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=IBCS_HUE_1,
             name=2020,
             orientation='h',
             text=df_this_year[displayed],
@@ -353,7 +354,7 @@ def os_top_10_suppliers_chart_ibcs(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -371,7 +372,7 @@ def os_top_10_suppliers_chart_ibcs(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Supplier Name'],
-            marker_color=sapUiChartPaletteQualitativeHue1Bright,
+            marker_color=IBCS_HUE_2,
             name=2019,
             orientation='h',
             text=df_last_year[displayed],
@@ -383,7 +384,7 @@ def os_top_10_suppliers_chart_ibcs(
         go.Bar(
             x=df_this_year[displayed],
             y=df_this_year['Supplier Name'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=IBCS_HUE_1,
             name=2020,
             orientation='h',
             text=df_this_year[displayed],

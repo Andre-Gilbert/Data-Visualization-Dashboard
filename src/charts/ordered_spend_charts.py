@@ -5,8 +5,10 @@ from app import cache
 from utils.chart_display import format_numbers
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
-                              sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
+                              SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER)
+
+pd.options.mode.chained_assignment = None
 
 display_column = 'Display'
 template = 'plotly_white'
@@ -25,7 +27,7 @@ empty_graph = {
             'showarrow': False,
             'font': {
                 'size': 28,
-                'color': sapUiPointChartNumber
+                'color': SAP_UI_POINT_CHART_NUMBER
             }
         }]
     }
@@ -132,9 +134,9 @@ def os_total_by_year_chart(
         ))
 
     fig.update_traces(
-        number_font_color=sapUiPointChartNumber,
-        title_font_color=sapUiPointChartLabel,
         number_font_size=42,
+        number_font_color=SAP_UI_POINT_CHART_NUMBER,
+        title_font_color=SAP_UI_POINT_CHART_LABEL,
     )
 
     fig.update_layout(
@@ -225,7 +227,7 @@ def os_by_month_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
@@ -239,7 +241,7 @@ def os_by_month_chart(
             x=df_this_year['Month'],
             y=df_this_year[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=2020,
         ))
 
@@ -248,7 +250,7 @@ def os_by_month_chart(
             x=df_last_year['Month'],
             y=df_last_year[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteQualitativeHue2,
+            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
             name=2019,
         ))
 
@@ -317,7 +319,7 @@ def os_by_org_chart(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteQualitativeHue2,
+            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
             name=2019,
             orientation='h',
             text=df_last_year[display_column],
@@ -328,7 +330,7 @@ def os_by_org_chart(
         go.Bar(
             x=df_this_year[displayed],
             y=df_this_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=2020,
             orientation='h',
             text=df_this_year[display_column],
@@ -414,7 +416,7 @@ def os_top_10_suppliers_chart(
         subtitle = ''
     else:
         displayed = 'Ordered Spend'
-        subtitle = ' (in EUR)'
+        subtitle = ' | EUR'
 
     df[display_column] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
 
@@ -432,7 +434,7 @@ def os_top_10_suppliers_chart(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Supplier Name'],
-            marker_color=sapUiChartPaletteQualitativeHue2,
+            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
             name=2019,
             orientation='h',
             text=df_last_year[display_column],
@@ -443,7 +445,7 @@ def os_top_10_suppliers_chart(
         go.Bar(
             x=df_this_year[displayed],
             y=df_this_year['Supplier Name'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=2020,
             orientation='h',
             text=df_this_year[display_column],
