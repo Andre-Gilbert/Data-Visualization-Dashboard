@@ -64,8 +64,7 @@ def header() -> html.Div:
                 ],
                          className='filter-bar-container')
             ],
-                     className='filter-bar'),
-            html.Div(id='numeric-point-chart')
+                     className='filter-bar')
         ],
                  className='header-main')
     ],

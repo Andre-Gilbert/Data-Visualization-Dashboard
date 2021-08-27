@@ -17,6 +17,11 @@ def supplier_performance() -> html.Div:
     """
     supplier_performance = html.Div([
         html.Div([
+            html.Div([
+                html.H1('Delivery Deviation', className='npc-title'),
+                dcc.Graph(id='supplier-performance-total-deviation-and-percentage-chart', style={'width': '100%'}),
+            ],
+                     className='chart-container'),
             html.Div(dcc.Graph(id='supplier-performance-by-month-chart'), className='chart-container'),
             html.Div(dcc.Graph(id='supplier-performance-by-org-chart'), className='chart-container'),
             html.Div(dcc.Graph(id='supplier-performance-top-10-suppliers-chart'), className='chart-container'),

@@ -13,8 +13,6 @@ from charts.supplier_performance_charts import (get_data_sp_by_month_charts,
                                                 get_data_sp_total_deviation_and_percentage_charts, sp_by_month_chart,
                                                 sp_by_org_chart, sp_deviation_cause_and_indicator_chart,
                                                 sp_top_10_suppliers_chart, sp_total_deviation_and_percentage_chart)
-from components.ordered_spend_npc import ordered_spend_npc
-from components.supplier_performance_npc import supplier_performance_npc
 from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
 from pages.ordered_spend import ordered_spend
@@ -64,9 +62,8 @@ def update_dropdown_label(ordered_spend_amount: int, number_of_orders: int) -> s
 
 @app.callback([
     Output(component_id='page-header', component_property='children'),
-    Output(component_id='numeric-point-chart', component_property='children'),
     Output(component_id='page-content', component_property='children')
-], [Input(component_id='tabs', component_property='active_tab')])
+], Input(component_id='tabs', component_property='active_tab'))
 def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     """Callback that updates the page.
 
@@ -78,15 +75,13 @@ def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     """
     if active_tab == 'tab-ordered-spend' or active_tab == "tab-ordered-spend-ibcs":
         page_header = 'Ordered Spend'
-        page_numeric_point_chart = ordered_spend_npc()
         page_content = ordered_spend()
 
     elif active_tab == 'tab-supplier-performance':
         page_header = 'Supplier Performance'
-        page_numeric_point_chart = supplier_performance_npc()
         page_content = supplier_performance()
 
-    return page_header, page_numeric_point_chart, page_content
+    return page_header, page_content
 
 
 @app.callback([
