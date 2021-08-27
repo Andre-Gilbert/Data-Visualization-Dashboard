@@ -3,7 +3,7 @@
 .header {
   display: block;
   position: relative;
-  padding: 4rem 1.2rem 2rem;
+  padding: 1.6rem 1.2rem;
 
   background-color: $sap-base-color;
   box-shadow: inset 0 -0.1rem rgb(217, 217, 217), 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.08);
@@ -17,14 +17,14 @@
 }
 
 .page-title {
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
   font-size: 2.4rem;
   font-weight: 400;
   color: $sap-text-color;
 }
 
 .filter-bar {
-  margin: 0 0 4rem;
+  margin: 0;
   display: flex;
   flex-direction: column;
 }
@@ -34,7 +34,7 @@
 }
 
 .filter-bar-label {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.2rem;
   font-size: 1.4rem;
   color: $sap-label-border-color;
 }
@@ -125,19 +125,6 @@
   color: $sap-text-color;
 }
 
-.numeric-point-chart {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.npc-title {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 400;
-  color: $sap-text-color;
-}
-
 /* medium size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 768px) {
@@ -146,7 +133,7 @@
   }
 
   .filter-bar-container:not(:last-child) {
-    margin: 0 2rem 0 0;
+    margin: 0 3rem 0 0;
   }
 }
 
@@ -154,6 +141,6 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
   .header {
-    padding: 4rem 3.2rem 2rem;
+    padding: 1.6rem 3.2rem;
   }
 }
