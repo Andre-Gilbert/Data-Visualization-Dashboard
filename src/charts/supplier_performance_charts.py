@@ -5,8 +5,8 @@ from app import cache
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1, sapUiPointChartLabel,
-                              sapUiPointChartNumber)
+from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+                              sapUiPointChartLabel, sapUiPointChartNumber)
 
 template = 'plotly_white'
 empty_graph = {
@@ -213,7 +213,7 @@ def sp_deviation_cause_and_indicator_chart(
         subtitle = ' (in EUR)'
 
     title = ('Deviated Orders by Deviation Cause and Indicator<br>'
-             f'<sup class="chart-subtitle">{displayed}{subtitle}</sup>')
+             f'<sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>')
 
     fig = make_subplots(
         rows=1,
@@ -342,7 +342,7 @@ def sp_by_month_chart(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
-    title = f'Deviated Orders by Month<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
+    title = f'Deviated Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     fig = go.Figure(
         go.Scatter(
@@ -402,7 +402,7 @@ def sp_by_org_chart(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
-    title = f'Deviated Orders by Purchasing Organisation<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
+    title = f'Deviated Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     fig = go.Figure(
         go.Bar(
@@ -497,7 +497,7 @@ def sp_top_10_suppliers_chart(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
-    title = f'Deviated Orders of Top Ten Suppliers<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
+    title = f'Deviated Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     fig = go.Figure(
         go.Bar(

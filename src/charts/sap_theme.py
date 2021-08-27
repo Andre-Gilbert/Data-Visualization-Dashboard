@@ -1,5 +1,6 @@
 SAP_FONT = "'72', '72full', Arial, Helvetica, sans-serif"
 SAP_TEXT_COLOR = '#32363a'
+SAP_LABEL_COLOR = '#89919a'
 
 sapUiChartPaletteQualitativeHue1 = '#5899DA'
 sapUiChartPaletteQualitativeHue1Bright = '#9bbee0'

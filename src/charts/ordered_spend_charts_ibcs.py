@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 from app import cache
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
+from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
                               sapUiChartPaletteQualitativeHue1Bright, sapUiPointChartLabel, sapUiPointChartNumber,
                               sapUiPointChartNumberBrighter)
 
@@ -183,7 +183,7 @@ def os_by_month_chart_ibcs(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
-    title = f'Orders by Month<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
+    title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
@@ -257,7 +257,7 @@ def os_by_org_chart_ibcs(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
-    title = f'Orders by Purchasing Organisation<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
+    title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
     sort_array = sort_array.loc[:, 'Purchasing Org.'].drop_duplicates(keep='last')
@@ -351,7 +351,7 @@ def os_top_10_suppliers_chart_ibcs(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
-    title = f'Orders of Top Ten Suppliers<br><sup class="chart-subtitle">{displayed}{subtitle}</sup>'
+    title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
     sort_array = sort_array.loc[:, 'Supplier Name'].drop_duplicates(keep='last')
