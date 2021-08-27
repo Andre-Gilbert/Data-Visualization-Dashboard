@@ -5,17 +5,8 @@ from app import cache
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-<<<<<<< HEAD
-from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
-                              sapUiChartPaletteQualitativeHue1,
-                              sapUiPointChartLabel, sapUiPointChartNumber)
-
-=======
-from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
-                              SAP_UI_POINT_CHART_LABEL,
+from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL,
                               SAP_UI_POINT_CHART_NUMBER)
-
->>>>>>> cfd6ea20bb90f80867658c8057ade7176f743b2e
 
 template = 'plotly_white'
 empty_graph = {
@@ -120,7 +111,7 @@ def sp_total_deviation_and_percentage_chart(
                 'x': [0, 0.45],
                 'y': [0, 1]
             },
-            title='Total of Deviated Orders',
+            title='Total Deviated Orders',
         ))
 
     fig.add_trace(
@@ -132,20 +123,25 @@ def sp_total_deviation_and_percentage_chart(
                 'x': [0.55, 1],
                 'y': [0, 1]
             },
-            title='Percentage of all Orders',
+            title='Deviation',
         ))
 
     fig.update_traces(
-        number_font_size=42,
+        number_font_size=36,
+        title_font_size=14,
+        delta_font_size=14,
+        number_font_family=SAP_FONT,
+        title_font_family=SAP_FONT,
         number_font_color=SAP_UI_POINT_CHART_NUMBER,
         title_font_color=SAP_UI_POINT_CHART_LABEL,
-
+        align='left',
+        title_align='left',
     )
 
     fig.update_layout(
         height=96,
         margin={
-            't': 30,
+            't': 66,
             'b': 0,
             'l': 10,
             'r': 10

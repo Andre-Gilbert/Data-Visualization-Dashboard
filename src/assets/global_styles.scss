@@ -23,7 +23,7 @@ body {
 }
 
 input {
-  min-width: 11rem;
+  min-width: 10rem;
 }
 
 button {
@@ -66,4 +66,12 @@ svg {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: $sap-scrollbar-hover-color;
+}
+
+/* large size screen
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 1400px) {
+  input {
+    min-width: 14rem;
+  }
 }

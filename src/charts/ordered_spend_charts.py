@@ -134,15 +134,23 @@ def os_total_by_year_chart(
         ))
 
     fig.update_traces(
-        number_font_size=42,
+        number_font_size=36,
+        title_font_size=14,
+        delta_font_size=14,
         number_font_color=SAP_UI_POINT_CHART_NUMBER,
+        number_font_family=SAP_FONT,
+        title_font_family=SAP_FONT,
+        delta_font_family=SAP_FONT,
         title_font_color=SAP_UI_POINT_CHART_LABEL,
+        align='left',
+        title_align='left',
+        number_suffix='€',
     )
 
     fig.update_layout(
         height=96,
         margin={
-            't': 30,
+            't': 50,
             'b': 0,
             'l': 10,
             'r': 10

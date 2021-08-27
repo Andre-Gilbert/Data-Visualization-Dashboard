@@ -26,7 +26,7 @@
 }
 
 .header-flex-container {
-  max-width: 72rem;
+  max-width: 68rem;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 100%;
           flex: 1 1 100%;
@@ -100,11 +100,7 @@
 }
 
 .Select-arrow-zone {
-  display: table-cell;
-  position: relative;
-  vertical-align: middle;
-  width: 25px;
-  padding-right: 5px;
+  padding-right: 0.8rem;
 }
 
 .Select-arrow {
@@ -152,7 +148,6 @@
 
 .numeric-point-chart {
   width: 100%;
-  margin: 1rem 0 0;
 }
 
 /* medium size screen
@@ -185,23 +180,14 @@
             align-items: center;
   }
   .numeric-point-chart {
-    max-width: 28rem;
-    margin: 0;
+    max-width: 32rem;
   }
 }
 
 /* very large size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (min-width: 1200px) {
-  .numeric-point-chart {
-    max-width: 40rem;
-  }
-}
-
-/* ultra large size screen
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1400px) {
   .numeric-point-chart {
-    max-width: 60rem;
+    max-width: 40rem;
   }
 }

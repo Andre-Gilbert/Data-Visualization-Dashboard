@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *,
 :after,
 :before {
@@ -22,7 +23,7 @@ body {
 }
 
 input {
-  min-width: 11rem;
+  min-width: 10rem;
 }
 
 button {
@@ -65,4 +66,12 @@ svg {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #747474;
+}
+
+/* large size screen
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-width: 1400px) {
+  input {
+    min-width: 14rem;
+  }
 }
