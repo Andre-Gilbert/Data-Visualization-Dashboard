@@ -99,10 +99,6 @@
   color: #89919a;
 }
 
-.Select-arrow-zone {
-  padding-right: 0.8rem;
-}
-
 .Select-arrow {
   border: solid #0854a0;
   border-width: 0 0.15rem 0.15rem 0;
@@ -111,6 +107,14 @@
   margin: 0 0 0.4rem;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+}
+
+.Select-arrow-zone {
+  padding-right: 0.8rem;
+}
+
+.Select-clear-zone {
+  padding-right: 0.8rem;
 }
 
 .Select-menu-outer {
