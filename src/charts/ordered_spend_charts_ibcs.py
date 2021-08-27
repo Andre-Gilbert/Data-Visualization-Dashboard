@@ -5,7 +5,7 @@ from app import cache
 from utils.data_prep import copy_and_apply_filter
 
 from charts.sap_theme import (IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
-                              SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER, SAP_UI_POINT_CHART_NUMBER_BRIGHTER)
+                              SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER)
 
 template = 'plotly_white'
 empty_graph = {

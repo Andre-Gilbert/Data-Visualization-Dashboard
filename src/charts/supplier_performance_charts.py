@@ -6,7 +6,7 @@ from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
 from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL,
-                              SAP_UI_POINT_CHART_NUMBER, sapUiChartPaletteQualitativeHue1)
+                              SAP_UI_POINT_CHART_NUMBER)
 
 template = 'plotly_white'
 empty_graph = {
@@ -226,7 +226,7 @@ def sp_deviation_cause_and_indicator_chart(
         go.Bar(
             x=df_dev_cause[displayed],
             y=df_dev_cause['Deviation Cause'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name='Deviation Cause',
             orientation='h',
             text=df_dev_cause[displayed],
@@ -241,7 +241,7 @@ def sp_deviation_cause_and_indicator_chart(
         go.Bar(
             x=df_dev_indicator[displayed],
             y=df_dev_indicator['Deviation Indicator'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name='Deviation Indicator',
             orientation='h',
             text=df_dev_indicator[displayed],
@@ -350,7 +350,7 @@ def sp_by_month_chart(
             x=df['Month'],
             y=df[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=displayed,
         ))
 
@@ -403,13 +403,14 @@ def sp_by_org_chart(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
-    title = f'Deviated Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
+    title = (f'Deviated Orders by Purchasing Organisation'
+             f'<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>')
 
     fig = go.Figure(
         go.Bar(
             x=df[displayed],
             y=df['Purchasing Org.'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=displayed,
             orientation='h',
             text=df[displayed],
@@ -504,7 +505,7 @@ def sp_top_10_suppliers_chart(
         go.Bar(
             x=df[displayed],
             y=df['Supplier Name'],
-            marker_color=sapUiChartPaletteQualitativeHue1,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=displayed,
             orientation='h',
             text=df[displayed],

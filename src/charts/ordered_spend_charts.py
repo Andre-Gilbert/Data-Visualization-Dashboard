@@ -5,9 +5,8 @@ from app import cache
 from utils.chart_display import format_numbers
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL,
-                              SAP_UI_POINT_CHART_NUMBER, sapUiChartPaletteSequentialHue1Dark2,
-                              sapUiChartPaletteSequentialNeutral)
+from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
+                              SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER)
 
 display_column = 'Display'
 template = 'plotly_white'
@@ -240,7 +239,7 @@ def os_by_month_chart(
             x=df_this_year['Month'],
             y=df_this_year[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteSequentialHue1Dark2,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=2020,
         ))
 
@@ -249,7 +248,7 @@ def os_by_month_chart(
             x=df_last_year['Month'],
             y=df_last_year[displayed],
             mode='lines+markers',
-            marker_color=sapUiChartPaletteSequentialNeutral,
+            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
             name=2019,
         ))
 
@@ -318,7 +317,7 @@ def os_by_org_chart(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteSequentialNeutral,
+            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
             name=2019,
             orientation='h',
             text=df_last_year[display_column],
@@ -329,7 +328,7 @@ def os_by_org_chart(
         go.Bar(
             x=df_this_year[displayed],
             y=df_this_year['Purchasing Org.'],
-            marker_color=sapUiChartPaletteSequentialHue1Dark2,
+            marker_color=SAP_UI_POINT_CHART_NUMBER,
             name=2020,
             orientation='h',
             text=df_this_year[display_column],
@@ -433,7 +432,7 @@ def os_top_10_suppliers_chart(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Supplier Name'],
-            marker_color=sapUiChartPaletteSequentialNeutral,
+            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
             name=2019,
             orientation='h',
             text=df_last_year[display_column],
