@@ -2,11 +2,13 @@
 import pandas as pd
 import plotly.graph_objects as go
 from app import cache
+from utils.chart_display import format_numbers
 from utils.data_prep import copy_and_apply_filter
 
 from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, sapUiChartPaletteQualitativeHue1,
                               sapUiChartPaletteQualitativeHue2, sapUiPointChartLabel, sapUiPointChartNumber)
 
+display_column = 'Display'
 template = 'plotly_white'
 empty_graph = {
     'layout': {
@@ -298,6 +300,8 @@ def os_by_org_chart(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
+    df[display_column] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
+
     title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
@@ -315,9 +319,8 @@ def os_by_org_chart(
             marker_color=sapUiChartPaletteQualitativeHue2,
             name=2019,
             orientation='h',
-            text=df_last_year[displayed],
+            text=df_last_year[display_column],
             textposition='outside',
-            texttemplate='%{text:.2s}',
         ))
 
     fig.add_trace(
@@ -327,9 +330,8 @@ def os_by_org_chart(
             marker_color=sapUiChartPaletteQualitativeHue1,
             name=2020,
             orientation='h',
-            text=df_this_year[displayed],
+            text=df_this_year[display_column],
             textposition='outside',
-            texttemplate='%{text:.2s}',
         ))
 
     fig.update_layout(
@@ -413,6 +415,8 @@ def os_top_10_suppliers_chart(
         displayed = 'Ordered Spend'
         subtitle = ' (in EUR)'
 
+    df[display_column] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
+
     title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
@@ -430,9 +434,8 @@ def os_top_10_suppliers_chart(
             marker_color=sapUiChartPaletteQualitativeHue2,
             name=2019,
             orientation='h',
-            text=df_last_year[displayed],
+            text=df_last_year[display_column],
             textposition='outside',
-            texttemplate='%{text:.2s}',
         ))
 
     fig.add_trace(
@@ -442,9 +445,8 @@ def os_top_10_suppliers_chart(
             marker_color=sapUiChartPaletteQualitativeHue1,
             name=2020,
             orientation='h',
-            text=df_this_year[displayed],
+            text=df_this_year[display_column],
             textposition='outside',
-            texttemplate='%{text:.2s}',
         ))
 
     fig.update_layout(
