@@ -188,9 +188,9 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
   .app-bar {
-    padding: 0 3.2rem;
+    padding: 0 2.4rem;
   }
   .navbar {
-    padding: 0 3.2rem;
+    padding: 0 2.4rem;
   }
 }

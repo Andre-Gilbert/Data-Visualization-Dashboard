@@ -14,18 +14,20 @@ def ordered_spend() -> html.Div:
     Returns:
         The html of the chart containers and the charts.
     """
-    ordered_spend = html.Div([
-        html.Div([
-            html.Div([
-                html.H1('Total Orders', className='npc-title'),
-                dcc.Graph(id='ordered-spend-total-by-year-chart', style={'width': '100%'}),
-            ],
-                     className='chart-container'),
-            html.Div(dcc.Graph(id='ordered-spend-by-month-chart'), className='chart-container'),
-            html.Div(dcc.Graph(id='ordered-spend-by-org-chart'), className='chart-container'),
-            html.Div(dcc.Graph(id='ordered-spend-top-10-suppliers-chart'), className='chart-container')
+    ordered_spend = html.Div(
+        [
+            html.Div(
+                [
+                    # html.Div([
+                    #     html.H1('Total Orders', className='npc-title'),
+                    #     dcc.Graph(id='ordered-spend-total-by-year-chart', style={'width': '100%'}),
+                    # ],
+                    #          className='chart-container'),
+                    html.Div(dcc.Graph(id='ordered-spend-by-month-chart'), className='chart-container'),
+                    html.Div(dcc.Graph(id='ordered-spend-by-org-chart'), className='chart-container'),
+                    html.Div(dcc.Graph(id='ordered-spend-top-10-suppliers-chart'), className='chart-container')
+                ],
+                className='page-main')
         ],
-                 className='page-main')
-    ],
-                             className='page')
+        className='page')
     return ordered_spend
