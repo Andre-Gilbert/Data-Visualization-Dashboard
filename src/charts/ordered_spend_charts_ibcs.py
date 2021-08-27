@@ -112,9 +112,13 @@ def os_total_by_year_chart_ibcs(
             number_font_color=IBCS_HUE_2,
         ))
 
-    fig.update_traces(title_font_color=SAP_UI_POINT_CHART_LABEL)
+    fig.update_traces(
+        title_font_color=SAP_UI_POINT_CHART_LABEL,
+        number_font_size=30,
+    )
+
     fig.update_layout(
-        height=200,
+        height=90,
         margin={
             't': 50,
             'b': 10,
