@@ -1,10 +1,8 @@
 """Dashboard Supplier Performance Page."""
 import dash_core_components as dcc
 import dash_html_components as html
-from app import cache
 
 
-@cache.memoize()
 def supplier_performance() -> html.Div:
     """Generate the supplier performance page.
 

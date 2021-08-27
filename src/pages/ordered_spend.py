@@ -1,10 +1,8 @@
 """Dashboard Ordered Spend Page."""
 import dash_core_components as dcc
 import dash_html_components as html
-from app import cache
 
 
-@cache.memoize()
 def ordered_spend() -> html.Div:
     """Generate the ordered spend page.
 

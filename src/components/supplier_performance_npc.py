@@ -1,10 +1,8 @@
 """Supplier Performance Numeric Point Charts."""
 import dash_core_components as dcc
 import dash_html_components as html
-from app import cache
 
 
-@cache.memoize()
 def supplier_performance_npc() -> html.Div:
     """Generate the numeric point charts for supplier performance.
 
