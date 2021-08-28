@@ -27,52 +27,28 @@ def header() -> html.Div:
                                     html.Div(
                                         [
                                             html.P('Company Code:', className='filter-bar-label'),
-                                            dcc.Dropdown(
-                                                id='company-code',
-                                                options=[{
-                                                    'label': label,
-                                                    'value': label
-                                                } for label in sorted(df['Company Code'].unique())],
-                                            )
+                                            dcc.Dropdown(id='company-code'),
                                         ],
                                         className='filter-bar-container',
                                     ),
                                     html.Div(
                                         [
                                             html.P('Purchasing Org.:', className='filter-bar-label'),
-                                            dcc.Dropdown(
-                                                id='purchasing-org',
-                                                options=[{
-                                                    'label': label,
-                                                    'value': label
-                                                } for label in sorted(df['Purchasing Org.'].unique())],
-                                            )
+                                            dcc.Dropdown(id='purchasing-org'),
                                         ],
                                         className='filter-bar-container',
                                     ),
                                     html.Div(
                                         [
                                             html.P('Plant:', className='filter-bar-label'),
-                                            dcc.Dropdown(
-                                                id='plant',
-                                                options=[{
-                                                    'label': label,
-                                                    'value': label
-                                                } for label in sorted(df['Plant'].unique())],
-                                            )
+                                            dcc.Dropdown(id='plant'),
                                         ],
                                         className='filter-bar-container',
                                     ),
                                     html.Div(
                                         [
                                             html.P('Material Group:', className='filter-bar-label'),
-                                            dcc.Dropdown(
-                                                id='material-group',
-                                                options=[{
-                                                    'label': label,
-                                                    'value': label
-                                                } for label in sorted(df['Material Group'].unique().astype(str))],
-                                            )
+                                            dcc.Dropdown(id='material-group'),
                                         ],
                                         className='filter-bar-container',
                                     )

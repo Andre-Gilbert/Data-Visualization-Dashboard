@@ -1,3 +1,5 @@
+from typing import Any
+
 import dash
 import dash_html_components as html
 import plotly.graph_objects as go
@@ -13,12 +15,13 @@ from charts.supplier_performance_charts import (get_data_sp_by_month_charts,
                                                 sp_top_10_suppliers_chart, sp_total_deviation_and_percentage_chart)
 from components.ordered_spend_npc import ordered_spend_npc
 from components.supplier_performance_npc import supplier_performance_npc
+from dash import no_update
 from dash.dependencies import ClientsideFunction, Input, Output
 from dash.exceptions import PreventUpdate
 from pages.ordered_spend import ordered_spend
 from pages.supplier_performance import supplier_performance
 
-from utils.data_prep import get_data
+from utils.data_prep import copy_and_apply_filter, get_data
 
 df = get_data()
 
@@ -97,6 +100,63 @@ def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
         page_content = supplier_performance()
 
     return page_header, page_numeric_point_chart, page_content
+
+
+@app.callback(
+    [
+        Output('company-code', 'options'),
+        Output('purchasing-org', 'options'),
+        Output('plant', 'options'),
+        Output('material-group', 'options'),
+    ],
+    [
+        Input('company-code', 'value'),
+        Input('purchasing-org', 'value'),
+        Input('plant', 'value'),
+        Input('material-group', 'value'),
+    ],
+)
+def update_filters(
+    company_code: str,
+    purchasing_org: str,
+    plant: str,
+    material_group: str,
+) -> tuple[list[dict[str, Any]]]:
+    """Update filters based on user input."""
+    filtered_df = copy_and_apply_filter(
+        df=df,
+        company_code=company_code,
+        purchasing_org=purchasing_org,
+        plant=plant,
+        material_group=material_group,
+    )
+
+    company_code_filter = [{
+        'label': label,
+        'value': label,
+    } for label in sorted(filtered_df['Company Code'].unique())]
+
+    purchasing_org_filter = [{
+        'label': label,
+        'value': label,
+    } for label in sorted(filtered_df['Purchasing Org.'].unique())]
+
+    plant_filter = [{
+        'label': label,
+        'value': label,
+    } for label in sorted(filtered_df['Plant'].unique())]
+
+    material_group_filter = [{
+        'label': label,
+        'value': label,
+    } for label in sorted(filtered_df['Material Group'].unique().astype(str))]
+
+    return (
+        company_code_filter,
+        purchasing_org_filter,
+        plant_filter,
+        material_group_filter,
+    )
 
 
 @app.callback(
