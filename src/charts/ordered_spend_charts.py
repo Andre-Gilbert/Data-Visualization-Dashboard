@@ -5,9 +5,9 @@ from app import cache
 from utils.chart_display import format_numbers
 from utils.data_prep import copy_and_apply_filter
 
-from charts.config import (DISPLAY, EMPTY_GRAPH, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
-                           SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL, SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER,
-                           TEMPLATE)
+from charts.config import (DISPLAY, EMPTY_GRAPH, EMPTY_GRAPH_IBCS, IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, SAP_LABEL_COLOR,
+                           SAP_TEXT_COLOR, SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL, SAP_UI_POINT_CHART_LABEL,
+                           SAP_UI_POINT_CHART_NUMBER, TEMPLATE)
 
 pd.options.mode.chained_assignment = None
 
@@ -35,6 +35,7 @@ def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
 def os_total_by_year_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
+    ibcs: bool,
     company_code: str,
     purchasing_org: str,
     plant: str,
@@ -61,8 +62,10 @@ def os_total_by_year_chart(
 
     if number_of_orders:
         displayed = 'Number of Orders'
+        number_suffix = ''
     else:
         displayed = 'Ordered Spend'
+        number_suffix = '€'
 
     try:
         value_this_year = df_this_year[displayed].iloc[0]
@@ -79,6 +82,13 @@ def os_total_by_year_chart(
     else:
         reference_value = value_last_year
 
+    if ibcs:
+        number_font_color_this_year = IBCS_HUE_1
+        number_font_color_last_year = IBCS_HUE_2
+    else:
+        number_font_color_this_year = SAP_UI_POINT_CHART_NUMBER
+        number_font_color_last_year = SAP_UI_POINT_CHART_NUMBER
+
     fig = go.Figure()
 
     fig.add_trace(
@@ -94,6 +104,7 @@ def os_total_by_year_chart(
                 'relative': True
             },
             title='2020',
+            number_font_color=number_font_color_this_year,
         ))
 
     fig.add_trace(
@@ -109,20 +120,20 @@ def os_total_by_year_chart(
                 'relative': True,
             },
             title='2019',
+            number_font_color=number_font_color_last_year,
         ))
 
     fig.update_traces(
         number_font_size=36,
         title_font_size=14,
         delta_font_size=14,
-        number_font_color=SAP_UI_POINT_CHART_NUMBER,
         number_font_family=SAP_FONT,
         title_font_family=SAP_FONT,
         delta_font_family=SAP_FONT,
         title_font_color=SAP_UI_POINT_CHART_LABEL,
         align='left',
         title_align='left',
-        number_suffix='€',
+        number_suffix=number_suffix,
     )
 
     fig.update_layout(
@@ -162,6 +173,7 @@ def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
 def os_by_month_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
+    ibcs: bool,
     company_code: str,
     purchasing_org: str,
     plant: str,
@@ -206,6 +218,8 @@ def os_by_month_chart(
         inplace=True)
 
     if df.empty:
+        if ibcs:
+            return EMPTY_GRAPH_IBCS
         return EMPTY_GRAPH
 
     if number_of_orders:
@@ -220,6 +234,13 @@ def os_by_month_chart(
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
 
+    if ibcs:
+        trace_color_this_year = IBCS_HUE_1
+        trace_color_last_year = IBCS_HUE_2
+    else:
+        trace_color_this_year = SAP_UI_POINT_CHART_NUMBER
+        trace_color_last_year = SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL
+
     fig = go.Figure()
 
     fig.add_trace(
@@ -227,7 +248,7 @@ def os_by_month_chart(
             x=df_this_year['Month'],
             y=df_this_year[displayed],
             mode='lines+markers',
-            marker_color=SAP_UI_POINT_CHART_NUMBER,
+            marker_color=trace_color_this_year,
             name=2020,
         ))
 
@@ -236,7 +257,7 @@ def os_by_month_chart(
             x=df_last_year['Month'],
             y=df_last_year[displayed],
             mode='lines+markers',
-            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
+            marker_color=trace_color_last_year,
             name=2019,
         ))
 
@@ -255,6 +276,7 @@ def os_by_month_chart(
 def os_by_org_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
+    ibcs: bool,
     company_code: str,
     purchasing_org: str,
     plant: str,
@@ -280,6 +302,8 @@ def os_by_org_chart(
     }).reset_index()
 
     if df.empty:
+        if ibcs:
+            return EMPTY_GRAPH_IBCS
         return EMPTY_GRAPH
 
     if number_of_orders:
@@ -299,13 +323,20 @@ def os_by_org_chart(
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
 
+    if ibcs:
+        trace_color_this_year = IBCS_HUE_1
+        trace_color_last_year = IBCS_HUE_2
+    else:
+        trace_color_this_year = SAP_UI_POINT_CHART_NUMBER
+        trace_color_last_year = SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL
+
     fig = go.Figure()
 
     fig.add_trace(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Purchasing Org.'],
-            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
+            marker_color=trace_color_last_year,
             name=2019,
             orientation='h',
             text=df_last_year[DISPLAY],
@@ -316,7 +347,7 @@ def os_by_org_chart(
         go.Bar(
             x=df_this_year[displayed],
             y=df_this_year['Purchasing Org.'],
-            marker_color=SAP_UI_POINT_CHART_NUMBER,
+            marker_color=trace_color_this_year,
             name=2020,
             orientation='h',
             text=df_this_year[DISPLAY],
@@ -367,6 +398,7 @@ def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
 def os_top_10_suppliers_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
+    ibcs: bool,
     company_code: str,
     purchasing_org: str,
     plant: str,
@@ -395,6 +427,8 @@ def os_top_10_suppliers_chart(
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
     if df.empty:
+        if ibcs:
+            return EMPTY_GRAPH_IBCS
         return EMPTY_GRAPH
 
     if number_of_orders:
@@ -414,13 +448,20 @@ def os_top_10_suppliers_chart(
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
 
+    if ibcs:
+        trace_color_this_year = IBCS_HUE_1
+        trace_color_last_year = IBCS_HUE_2
+    else:
+        trace_color_this_year = SAP_UI_POINT_CHART_NUMBER
+        trace_color_last_year = SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL
+
     fig = go.Figure()
 
     fig.add_trace(
         go.Bar(
             x=df_last_year[displayed],
             y=df_last_year['Supplier Name'],
-            marker_color=SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL,
+            marker_color=trace_color_last_year,
             name=2019,
             orientation='h',
             text=df_last_year[DISPLAY],
@@ -431,7 +472,7 @@ def os_top_10_suppliers_chart(
         go.Bar(
             x=df_this_year[displayed],
             y=df_this_year['Supplier Name'],
-            marker_color=SAP_UI_POINT_CHART_NUMBER,
+            marker_color=trace_color_this_year,
             name=2020,
             orientation='h',
             text=df_this_year[DISPLAY],
