@@ -122,7 +122,14 @@ def update_filters(
     plant: str,
     material_group: str,
 ) -> tuple[list[dict[str, Any]]]:
-    """Update filters based on user input."""
+    """Update filters based on user input.
+
+    Args:
+        company_code, purchasing_org, plant, material_group: GUI filters.
+
+    Returns:
+        A tuple containing lists of dictionaries with the new labels and values of the filters.
+    """
     filtered_df = copy_and_apply_filter(
         df=df,
         company_code=company_code,
