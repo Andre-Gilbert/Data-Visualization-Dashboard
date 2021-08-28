@@ -28,10 +28,30 @@ def supplier_performance() -> html.Div:
                         ),
                         className='chart-container',
                     ),
-                    html.Div(dcc.Graph(id='supplier-performance-by-org-chart'), className='chart-container'),
-                    html.Div(dcc.Graph(id='supplier-performance-top-10-suppliers-chart'), className='chart-container'),
-                    html.Div(dcc.Graph(id='supplier-performance-deviation-cause-and-indicator-chart'),
-                             className='chart-container')
+                    html.Div(
+                        dcc.Loading(
+                            dcc.Graph(id='supplier-performance-by-org-chart'),
+                            color=LOADING_COLOR,
+                            type=LOADING_TYPE,
+                        ),
+                        className='chart-container',
+                    ),
+                    html.Div(
+                        dcc.Loading(
+                            dcc.Graph(id='supplier-performance-top-10-suppliers-chart'),
+                            color=LOADING_COLOR,
+                            type=LOADING_TYPE,
+                        ),
+                        className='chart-container',
+                    ),
+                    html.Div(
+                        dcc.Loading(
+                            dcc.Graph(id='supplier-performance-deviation-cause-and-indicator-chart'),
+                            color=LOADING_COLOR,
+                            type=LOADING_TYPE,
+                        ),
+                        className='chart-container',
+                    )
                 ],
                 className='page-main',
             )
