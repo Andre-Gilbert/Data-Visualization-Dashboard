@@ -5,8 +5,6 @@ from app import app
 from charts.ordered_spend_charts import (get_data_os_by_month_charts, get_data_os_top_10_suppliers_charts,
                                          get_data_os_total_by_year_charts, os_by_month_chart, os_by_org_chart,
                                          os_top_10_suppliers_chart, os_total_by_year_chart)
-from charts.ordered_spend_charts_ibcs import (os_by_month_chart_ibcs, os_by_org_chart_ibcs,
-                                              os_top_10_suppliers_chart_ibcs, os_total_by_year_chart_ibcs)
 from charts.supplier_performance_charts import (get_data_sp_by_month_charts,
                                                 get_data_sp_deviation_cause_and_indicator_charts,
                                                 get_data_sp_top_10_suppliers_charts,
@@ -129,6 +127,7 @@ def update_ordered_spend_charts(
         total_by_year_chart = os_total_by_year_chart(
             df=df_os_total_by_year_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=False,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
@@ -138,6 +137,7 @@ def update_ordered_spend_charts(
         by_month_chart = os_by_month_chart(
             df=df_os_by_month_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=False,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
@@ -147,6 +147,7 @@ def update_ordered_spend_charts(
         by_org_chart = os_by_org_chart(
             df=df_os_total_by_year_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=False,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
@@ -156,6 +157,7 @@ def update_ordered_spend_charts(
         top_10_suppliers_chart = os_top_10_suppliers_chart(
             df=df_os_top_10_suppliers_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=False,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
@@ -168,36 +170,40 @@ def update_ordered_spend_charts(
         elif dropdown_label == 'Number of Orders':
             number_of_orders_para = True
 
-        total_by_year_chart = os_total_by_year_chart_ibcs(
+        total_by_year_chart = os_total_by_year_chart(
             df=df_os_total_by_year_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=True,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
             material_group=material_group,
         )
 
-        by_month_chart = os_by_month_chart_ibcs(
+        by_month_chart = os_by_month_chart(
             df=df_os_by_month_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=True,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
             material_group=material_group,
         )
 
-        by_org_chart = os_by_org_chart_ibcs(
+        by_org_chart = os_by_org_chart(
             df=df_os_total_by_year_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=True,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
             material_group=material_group,
         )
 
-        top_10_suppliers_chart = os_top_10_suppliers_chart_ibcs(
+        top_10_suppliers_chart = os_top_10_suppliers_chart(
             df=df_os_top_10_suppliers_charts,
             number_of_orders=number_of_orders_para,
+            ibcs=True,
             company_code=company_code,
             purchasing_org=purchasing_org,
             plant=plant,
