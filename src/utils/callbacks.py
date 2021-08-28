@@ -37,7 +37,7 @@ df_sp_top_10_suppliers_charts = get_data_sp_top_10_suppliers_charts(df)
 
 app.clientside_callback(
     ClientsideFunction('clientside', 'stickyHeader'),
-    Output('header', 'data-loaded'),
+    Output('header', 'id'),
     Input('header', 'id'),
 )
 
