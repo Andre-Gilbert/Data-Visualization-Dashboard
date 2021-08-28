@@ -5,30 +5,8 @@ from app import cache
 from plotly.subplots import make_subplots
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL,
-                              SAP_UI_POINT_CHART_NUMBER)
-
-template = 'plotly_white'
-empty_graph = {
-    'layout': {
-        'xaxis': {
-            'visible': False
-        },
-        'yaxis': {
-            'visible': False
-        },
-        'annotations': [{
-            'text': 'No matching data found',
-            'xref': 'paper',
-            'yref': 'paper',
-            'showarrow': False,
-            'font': {
-                'size': 28,
-                'color': SAP_UI_POINT_CHART_NUMBER
-            }
-        }]
-    }
-}
+from charts.config import (EMPTY_GRAPH, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL,
+                           SAP_UI_POINT_CHART_NUMBER, TEMPLATE)
 
 
 @cache.memoize()
@@ -210,7 +188,7 @@ def sp_deviation_cause_and_indicator_chart(
     }).reset_index()
 
     if df_dev_cause.empty and df_dev_indicator.empty:
-        return empty_graph
+        return EMPTY_GRAPH
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -266,7 +244,7 @@ def sp_deviation_cause_and_indicator_chart(
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
-        template=template,
+        template=TEMPLATE,
     )
 
     fig.update_yaxes(categoryorder='total ascending')
@@ -340,7 +318,7 @@ def sp_by_month_chart(
         inplace=True)
 
     if df.empty:
-        return empty_graph
+        return EMPTY_GRAPH
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -367,7 +345,7 @@ def sp_by_month_chart(
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
-        template=template,
+        template=TEMPLATE,
     )
 
     return fig
@@ -400,7 +378,7 @@ def sp_by_org_chart(
     }).reset_index()
 
     if df.empty:
-        return empty_graph
+        return EMPTY_GRAPH
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -432,7 +410,7 @@ def sp_by_org_chart(
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
-        template=template,
+        template=TEMPLATE,
     )
 
     fig.update_yaxes(
@@ -494,7 +472,7 @@ def sp_top_10_suppliers_chart(
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
     if df.empty:
-        return empty_graph
+        return EMPTY_GRAPH
 
     df.sort_values('Ordered Spend', ascending=False, inplace=True)
 
@@ -527,7 +505,7 @@ def sp_top_10_suppliers_chart(
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
-        template=template,
+        template=TEMPLATE,
     )
 
     fig.update_yaxes(categoryorder='total ascending')
