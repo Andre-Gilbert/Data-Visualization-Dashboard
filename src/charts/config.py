@@ -1,17 +1,12 @@
 # Style
-
 SAP_FONT = "'72', '72full', Arial, Helvetica, sans-serif"
 SAP_TEXT_COLOR = '#32363a'
 SAP_LABEL_COLOR = '#89919a'
-
 IBCS_HUE_1 = '#000000'
 IBCS_HUE_2 = '#999999'
-
 SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL = '#848f94'
-
 SAP_UI_POINT_CHART_NUMBER = '#0854A0'
 SAP_UI_POINT_CHART_LABEL = '#89919A'
-
 SAP_UI_CHART_PALETTE_QUALITATIVE_HUE_1 = '#5899DA'
 SAP_UI_CHART_PALETTE_QUALITATIVE_HUE_2 = '#E8743B'
 SAP_UI_CHART_PALETTE_QUALITATIVE_HUE_3 = '#19A979'
@@ -55,18 +50,14 @@ DEVIATION_CAUSES = [
 DEVIATION_CAUSE_COLORS = dict(zip(DEVIATION_CAUSES, SAP_UI_CHART_PALETTE_QUALITATIVE_HUES))
 
 # Strings
-
 SUBTITLE_ORDERED_SPEND = 'Ordered Spend | EUR'
 SUBTITLE_NUMBER_OF_ORDERS = 'Number of Orders'
-
 DISPLAY = 'Display'
 ORDERED_SPEND = 'Ordered Spend'
 NUMBER_OF_ORDERS = 'Number of Orders'
-
 TEMPLATE = 'plotly_white'
 
 # Empty Graphs
-
 EMPTY_GRAPH = {
     'layout': {
         'xaxis': {
@@ -87,6 +78,7 @@ EMPTY_GRAPH = {
         }]
     }
 }
+
 EMPTY_GRAPH_IBCS = {
     'layout': {
         'xaxis': {
