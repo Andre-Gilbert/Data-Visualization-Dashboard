@@ -4,32 +4,10 @@ import plotly.graph_objects as go
 from app import cache
 from utils.data_prep import copy_and_apply_filter
 
-from charts.sap_theme import (IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
-                              SAP_UI_POINT_CHART_LABEL)
+from charts.config import (EMPTY_GRAPH_IBCS, IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
+                           SAP_UI_POINT_CHART_LABEL, TEMPLATE)
 
 pd.options.mode.chained_assignment = None
-
-template = 'plotly_white'
-empty_graph = {
-    'layout': {
-        'xaxis': {
-            'visible': False
-        },
-        'yaxis': {
-            'visible': False
-        },
-        'annotations': [{
-            'text': 'No matching data found',
-            'xref': 'paper',
-            'yref': 'paper',
-            'showarrow': False,
-            'font': {
-                'size': 28,
-                'color': IBCS_HUE_1
-            }
-        }]
-    }
-}
 
 
 @cache.memoize()
@@ -187,7 +165,7 @@ def os_by_month_chart_ibcs(
         inplace=True)
 
     if df.empty:
-        return empty_graph
+        return EMPTY_GRAPH_IBCS
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -227,7 +205,7 @@ def os_by_month_chart_ibcs(
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
-        template=template,
+        template=TEMPLATE,
     )
 
     return fig
@@ -261,7 +239,7 @@ def os_by_org_chart_ibcs(
     }).reset_index()
 
     if df.empty:
-        return empty_graph
+        return EMPTY_GRAPH_IBCS
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -311,7 +289,7 @@ def os_by_org_chart_ibcs(
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
-        template=template,
+        template=TEMPLATE,
         legend_traceorder='reversed',
     )
 
@@ -355,7 +333,7 @@ def os_top_10_suppliers_chart_ibcs(
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
     if df.empty:
-        return empty_graph
+        return EMPTY_GRAPH_IBCS
 
     if number_of_orders:
         displayed = 'Number of Orders'
@@ -407,7 +385,7 @@ def os_top_10_suppliers_chart_ibcs(
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
-        template=template,
+        template=TEMPLATE,
         legend_traceorder='reversed',
     )
 
