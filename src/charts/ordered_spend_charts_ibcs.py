@@ -118,6 +118,7 @@ def os_total_by_year_chart_ibcs(
     return fig
 
 
+@cache.memoize()
 def os_by_month_chart_ibcs(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -212,6 +213,7 @@ def os_by_month_chart_ibcs(
     return fig
 
 
+@cache.memoize()
 def os_by_org_chart_ibcs(
     df: pd.DataFrame,
     number_of_orders: bool,

@@ -9,7 +9,6 @@ from charts.config import (EMPTY_GRAPH, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLO
                            SAP_UI_POINT_CHART_NUMBER, TEMPLATE)
 
 
-@cache.memoize()
 def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Create DataFrames for total deviation and percentage of deviation by purchasing organisation."""
     group_columns = ['Company Code', 'Purchasing Org.', 'Plant', 'Material Group']
@@ -29,6 +28,7 @@ def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple
     return df_reference, df_total_deviation_and_percentage_charts
 
 
+@cache.memoize()
 def sp_total_deviation_and_percentage_chart(
     df_deviated: pd.DataFrame,
     df_all: pd.DataFrame,
@@ -129,7 +129,6 @@ def sp_total_deviation_and_percentage_chart(
     return fig
 
 
-@cache.memoize()
 def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for deviation cause and indicator charts."""
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -151,6 +150,7 @@ def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.Dat
     return df_bar_charts
 
 
+@cache.memoize()
 def sp_deviation_cause_and_indicator_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -252,7 +252,6 @@ def sp_deviation_cause_and_indicator_chart(
     return fig
 
 
-@cache.memoize()
 def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for supplier performance by month chart."""
     df_line_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -273,6 +272,7 @@ def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_line_charts
 
 
+@cache.memoize()
 def sp_by_month_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -353,6 +353,7 @@ def sp_by_month_chart(
     return fig
 
 
+@cache.memoize()
 def sp_by_org_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -424,7 +425,6 @@ def sp_by_org_chart(
     return fig
 
 
-@cache.memoize()
 def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for top 10 suppliers chart."""
     df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
@@ -445,6 +445,7 @@ def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_bar_charts
 
 
+@cache.memoize()
 def sp_top_10_suppliers_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
