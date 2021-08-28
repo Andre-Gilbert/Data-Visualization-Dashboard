@@ -8,6 +8,7 @@
   display: block;
   position: relative;
   background-color: $sap-header-color;
+  transition: all 0.2s;
 }
 
 .app-bar-main {
@@ -133,6 +134,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  transition: all 0.2s;
 }
 
 .nav {

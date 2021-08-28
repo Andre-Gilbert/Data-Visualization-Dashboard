@@ -1,3 +1,5 @@
+from time import sleep
+
 import dash
 import dash_html_components as html
 import plotly.graph_objects as go
@@ -13,7 +15,7 @@ from charts.supplier_performance_charts import (get_data_sp_by_month_charts,
                                                 sp_top_10_suppliers_chart, sp_total_deviation_and_percentage_chart)
 from components.ordered_spend_npc import ordered_spend_npc
 from components.supplier_performance_npc import supplier_performance_npc
-from dash.dependencies import Input, Output
+from dash.dependencies import ClientsideFunction, Input, Output
 from dash.exceptions import PreventUpdate
 from pages.ordered_spend import ordered_spend
 from pages.supplier_performance import supplier_performance
@@ -32,6 +34,12 @@ df_sp_total_deviation_charts, df_sp_reference = get_data_sp_total_deviation_and_
 df_sp_deviation_cause_and_indicator_charts = get_data_sp_deviation_cause_and_indicator_charts(df)
 df_sp_by_month_charts = get_data_sp_by_month_charts(df)
 df_sp_top_10_suppliers_charts = get_data_sp_top_10_suppliers_charts(df)
+
+app.clientside_callback(
+    ClientsideFunction('clientside', 'stickyHeader'),
+    Output('header', 'data-loaded'),
+    Input('header', 'id'),
+)
 
 
 @app.callback(Output(component_id='dropdown-menu', component_property='label'), [
@@ -118,6 +126,7 @@ def update_ordered_spend_charts(
     Returns:
         The updated charts.
     """
+    sleep(0.1)
     if active_tab == 'tab-ordered-spend':
         if dropdown_label == 'Ordered Spend Amount':
             number_of_orders_para = False
@@ -253,6 +262,7 @@ def update_supplier_performance_charts(
     Returns:
         The updated charts.
     """
+    sleep(0.1)
     if active_tab == 'tab-supplier-performance':
         if dropdown_label == 'Ordered Spend Amount':
             number_of_orders_para = False

@@ -15,62 +15,79 @@ def header() -> html.Div:
     Returns:
         The html containing the page header, filter bar and the numeric point charts.
     """
-    header = html.Div([
-        html.Div([
-            html.Div([
-                html.H1(id='page-header', className='page-title'),
-                html.Div([
-                    html.Div([
-                        html.P('Company Code:', className='filter-bar-label'),
-                        dcc.Dropdown(
-                            id='company-code',
-                            options=[{
-                                'label': label,
-                                'value': label
-                            } for label in sorted(df['Company Code'].unique())],
-                        )
-                    ],
-                             className='filter-bar-container'),
-                    html.Div([
-                        html.P('Purchasing Org.:', className='filter-bar-label'),
-                        dcc.Dropdown(
-                            id='purchasing-org',
-                            options=[{
-                                'label': label,
-                                'value': label
-                            } for label in sorted(df['Purchasing Org.'].unique())],
-                        )
-                    ],
-                             className='filter-bar-container'),
-                    html.Div([
-                        html.P('Plant:', className='filter-bar-label'),
-                        dcc.Dropdown(
-                            id='plant',
-                            options=[{
-                                'label': label,
-                                'value': label
-                            } for label in sorted(df['Plant'].unique())],
-                        )
-                    ],
-                             className='filter-bar-container'),
-                    html.Div([
-                        html.P('Material Group:', className='filter-bar-label'),
-                        dcc.Dropdown(
-                            id='material-group',
-                            options=[{
-                                'label': label,
-                                'value': label
-                            } for label in sorted(df['Material Group'].unique().astype(str))],
-                        )
-                    ],
-                             className='filter-bar-container')
+    header = html.Div(
+        [
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            html.H1(id='page-header', className='page-title'),
+                            html.Div(
+                                [
+                                    html.Div(
+                                        [
+                                            html.P('Company Code:', className='filter-bar-label'),
+                                            dcc.Dropdown(
+                                                id='company-code',
+                                                options=[{
+                                                    'label': label,
+                                                    'value': label
+                                                } for label in sorted(df['Company Code'].unique())],
+                                            )
+                                        ],
+                                        className='filter-bar-container',
+                                    ),
+                                    html.Div(
+                                        [
+                                            html.P('Purchasing Org.:', className='filter-bar-label'),
+                                            dcc.Dropdown(
+                                                id='purchasing-org',
+                                                options=[{
+                                                    'label': label,
+                                                    'value': label
+                                                } for label in sorted(df['Purchasing Org.'].unique())],
+                                            )
+                                        ],
+                                        className='filter-bar-container',
+                                    ),
+                                    html.Div(
+                                        [
+                                            html.P('Plant:', className='filter-bar-label'),
+                                            dcc.Dropdown(
+                                                id='plant',
+                                                options=[{
+                                                    'label': label,
+                                                    'value': label
+                                                } for label in sorted(df['Plant'].unique())],
+                                            )
+                                        ],
+                                        className='filter-bar-container',
+                                    ),
+                                    html.Div(
+                                        [
+                                            html.P('Material Group:', className='filter-bar-label'),
+                                            dcc.Dropdown(
+                                                id='material-group',
+                                                options=[{
+                                                    'label': label,
+                                                    'value': label
+                                                } for label in sorted(df['Material Group'].unique().astype(str))],
+                                            )
+                                        ],
+                                        className='filter-bar-container',
+                                    )
+                                ],
+                                className='filter-bar',
+                            )
+                        ],
+                        className='header-flex-container',
+                    ),
+                    html.Div(id='numeric-point-chart')
                 ],
-                         className='filter-bar')
-            ],
-                     className='header-flex-container'),
-            html.Div(id='numeric-point-chart')
+                className='header-main',
+            )
         ],
-                 className='header-main')
-    ],
-                      className='header')
+        id='header',
+    )
+
     return header
