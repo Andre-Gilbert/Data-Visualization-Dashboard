@@ -1,6 +1,7 @@
 """Dashboard Ordered Spend Page."""
 import dash_core_components as dcc
 import dash_html_components as html
+from utils.loading_indicator_config import LOADING_COLOR, LOADING_TYPE
 
 
 def ordered_spend() -> html.Div:
@@ -18,16 +19,35 @@ def ordered_spend() -> html.Div:
         [
             html.Div(
                 [
-                    # html.Div([
-                    #     html.H1('Total Orders', className='npc-title'),
-                    #     dcc.Graph(id='ordered-spend-total-by-year-chart', style={'width': '100%'}),
-                    # ],
-                    #          className='chart-container'),
-                    html.Div(dcc.Graph(id='ordered-spend-by-month-chart'), className='chart-container'),
-                    html.Div(dcc.Graph(id='ordered-spend-by-org-chart'), className='chart-container'),
-                    html.Div(dcc.Graph(id='ordered-spend-top-10-suppliers-chart'), className='chart-container')
+                    html.Div(
+                        dcc.Loading(
+                            dcc.Graph(id='ordered-spend-by-month-chart'),
+                            color=LOADING_COLOR,
+                            type=LOADING_TYPE,
+                        ),
+                        className='chart-container',
+                    ),
+                    html.Div(
+                        dcc.Loading(
+                            dcc.Graph(id='ordered-spend-by-org-chart'),
+                            color=LOADING_COLOR,
+                            type=LOADING_TYPE,
+                        ),
+                        className='chart-container',
+                    ),
+                    html.Div(
+                        dcc.Loading(
+                            dcc.Graph(id='ordered-spend-top-10-suppliers-chart'),
+                            color=LOADING_COLOR,
+                            type=LOADING_TYPE,
+                        ),
+                        className='chart-container',
+                    )
                 ],
-                className='page-main')
+                className='page-main',
+            )
         ],
-        className='page')
+        className='page',
+    )
+
     return ordered_spend

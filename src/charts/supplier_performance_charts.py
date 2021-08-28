@@ -117,7 +117,7 @@ def sp_total_deviation_and_percentage_chart(
     )
 
     fig.update_layout(
-        height=96,
+        height=97,
         margin={
             't': 66,
             'b': 0,

@@ -106,7 +106,7 @@ def os_total_by_year_chart_ibcs(
     )
 
     fig.update_layout(
-        height=96,
+        height=97,
         margin={
             't': 50,
             'b': 0,
