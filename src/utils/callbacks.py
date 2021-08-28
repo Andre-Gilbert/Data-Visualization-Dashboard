@@ -1,5 +1,3 @@
-from time import sleep
-
 import dash
 import dash_html_components as html
 import plotly.graph_objects as go
@@ -42,10 +40,13 @@ app.clientside_callback(
 )
 
 
-@app.callback(Output(component_id='dropdown-menu', component_property='label'), [
-    Input(component_id='ordered-spend-amount', component_property='n_clicks'),
-    Input(component_id='number-of-orders', component_property='n_clicks')
-])
+@app.callback(
+    Output('dropdown-menu', 'label'),
+    [
+        Input('ordered-spend-amount', 'n_clicks'),
+        Input('number-of-orders', 'n_clicks'),
+    ],
+)
 def update_dropdown_label(ordered_spend_amount: int, number_of_orders: int) -> str:
     """Callback that updates the dropdown label.
 
@@ -68,11 +69,14 @@ def update_dropdown_label(ordered_spend_amount: int, number_of_orders: int) -> s
     return dropdown_label
 
 
-@app.callback([
-    Output(component_id='page-header', component_property='children'),
-    Output(component_id='numeric-point-chart', component_property='children'),
-    Output(component_id='page-content', component_property='children')
-], Input(component_id='tabs', component_property='active_tab'))
+@app.callback(
+    [
+        Output('page-header', 'children'),
+        Output('numeric-point-chart', 'children'),
+        Output('page-content', 'children'),
+    ],
+    Input('tabs', 'active_tab'),
+)
 def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     """Callback that updates the page.
 
@@ -95,19 +99,22 @@ def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     return page_header, page_numeric_point_chart, page_content
 
 
-@app.callback([
-    Output(component_id='ordered-spend-total-by-year-chart', component_property='figure'),
-    Output(component_id='ordered-spend-by-month-chart', component_property='figure'),
-    Output(component_id='ordered-spend-by-org-chart', component_property='figure'),
-    Output(component_id='ordered-spend-top-10-suppliers-chart', component_property='figure')
-], [
-    Input(component_id='tabs', component_property='active_tab'),
-    Input(component_id='dropdown-menu', component_property='label'),
-    Input(component_id='company-code', component_property='value'),
-    Input(component_id='purchasing-org', component_property='value'),
-    Input(component_id='plant', component_property='value'),
-    Input(component_id='material-group', component_property='value')
-])
+@app.callback(
+    [
+        Output('ordered-spend-total-by-year-chart', 'figure'),
+        Output('ordered-spend-by-month-chart', 'figure'),
+        Output('ordered-spend-by-org-chart', 'figure'),
+        Output('ordered-spend-top-10-suppliers-chart', 'figure'),
+    ],
+    [
+        Input('tabs', 'active_tab'),
+        Input('dropdown-menu', 'label'),
+        Input('company-code', 'value'),
+        Input('purchasing-org', 'value'),
+        Input('plant', 'value'),
+        Input('material-group', 'value'),
+    ],
+)
 def update_ordered_spend_charts(
     active_tab: str,
     dropdown_label: str,
@@ -126,7 +133,6 @@ def update_ordered_spend_charts(
     Returns:
         The updated charts.
     """
-    sleep(0.1)
     if active_tab == 'tab-ordered-spend':
         if dropdown_label == 'Ordered Spend Amount':
             number_of_orders_para = False
@@ -230,20 +236,23 @@ def update_ordered_spend_charts(
     )
 
 
-@app.callback([
-    Output(component_id='supplier-performance-total-deviation-and-percentage-chart', component_property='figure'),
-    Output(component_id='supplier-performance-deviation-cause-and-indicator-chart', component_property='figure'),
-    Output(component_id='supplier-performance-by-month-chart', component_property='figure'),
-    Output(component_id='supplier-performance-by-org-chart', component_property='figure'),
-    Output(component_id='supplier-performance-top-10-suppliers-chart', component_property='figure')
-], [
-    Input(component_id='tabs', component_property='active_tab'),
-    Input(component_id='dropdown-menu', component_property='label'),
-    Input(component_id='company-code', component_property='value'),
-    Input(component_id='purchasing-org', component_property='value'),
-    Input(component_id='plant', component_property='value'),
-    Input(component_id='material-group', component_property='value')
-])
+@app.callback(
+    [
+        Output('supplier-performance-total-deviation-and-percentage-chart', 'figure'),
+        Output('supplier-performance-deviation-cause-and-indicator-chart', 'figure'),
+        Output('supplier-performance-by-month-chart', 'figure'),
+        Output('supplier-performance-by-org-chart', 'figure'),
+        Output('supplier-performance-top-10-suppliers-chart', 'figure'),
+    ],
+    [
+        Input('tabs', 'active_tab'),
+        Input('dropdown-menu', 'label'),
+        Input('company-code', 'value'),
+        Input('purchasing-org', 'value'),
+        Input('plant', 'value'),
+        Input('material-group', 'value'),
+    ],
+)
 def update_supplier_performance_charts(
     active_tab: str,
     dropdown_label: str,
@@ -262,7 +271,6 @@ def update_supplier_performance_charts(
     Returns:
         The updated charts.
     """
-    sleep(0.1)
     if active_tab == 'tab-supplier-performance':
         if dropdown_label == 'Ordered Spend Amount':
             number_of_orders_para = False
