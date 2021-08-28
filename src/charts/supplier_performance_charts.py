@@ -237,7 +237,7 @@ def sp_deviation_cause_and_indicator_chart(
     )
 
     fig.update_layout(
-        height=600,
+        height=560,
         barmode='group',
         showlegend=False,
         title=title,
@@ -245,6 +245,7 @@ def sp_deviation_cause_and_indicator_chart(
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
+        margin_b=50,
     )
 
     fig.update_yaxes(categoryorder='total ascending')
@@ -339,13 +340,14 @@ def sp_by_month_chart(
         ))
 
     fig.update_layout(
-        height=600,
+        height=560,
         showlegend=False,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
+        margin_b=50,
     )
 
     return fig
@@ -403,7 +405,7 @@ def sp_by_org_chart(
         ))
 
     fig.update_layout(
-        height=600,
+        height=560,
         barmode='group',
         showlegend=False,
         title=title,
@@ -411,6 +413,7 @@ def sp_by_org_chart(
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
+        margin_b=50,
     )
 
     fig.update_yaxes(
@@ -498,7 +501,7 @@ def sp_top_10_suppliers_chart(
         ))
 
     fig.update_layout(
-        height=600,
+        height=560,
         barmode='group',
         showlegend=False,
         title=title,
@@ -506,6 +509,7 @@ def sp_top_10_suppliers_chart(
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
+        margin_b=50,
     )
 
     fig.update_yaxes(categoryorder='total ascending')

@@ -200,12 +200,13 @@ def os_by_month_chart_ibcs(
         ))
 
     fig.update_layout(
-        height=600,
+        height=560,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
+        margin_b=50,
     )
 
     return fig
@@ -283,7 +284,7 @@ def os_by_org_chart_ibcs(
         ))
 
     fig.update_layout(
-        height=600,
+        height=560,
         barmode='group',
         title=title,
         title_font_size=20,
@@ -291,6 +292,7 @@ def os_by_org_chart_ibcs(
         font_family=SAP_FONT,
         template=TEMPLATE,
         legend_traceorder='reversed',
+        margin_b=50,
     )
 
     fig.update_yaxes(
@@ -379,7 +381,7 @@ def os_top_10_suppliers_chart_ibcs(
         ))
 
     fig.update_layout(
-        height=600,
+        height=560,
         barmode='group',
         title=title,
         title_font_size=20,
@@ -387,6 +389,7 @@ def os_top_10_suppliers_chart_ibcs(
         font_family=SAP_FONT,
         template=TEMPLATE,
         legend_traceorder='reversed',
+        margin_b=50,
     )
 
     fig.update_yaxes(
