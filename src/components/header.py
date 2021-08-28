@@ -1,9 +1,6 @@
 """Dashboard Header."""
 import dash_core_components as dcc
 import dash_html_components as html
-from utils.data_prep import get_data
-
-df = get_data()
 
 
 def header() -> html.Div:
