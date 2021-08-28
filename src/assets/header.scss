@@ -29,7 +29,7 @@
 }
 
 .header-flex-container {
-  max-width: 68rem;
+  max-width: 66rem;
   flex: 1 1 100%;
 }
 
@@ -172,14 +172,6 @@
   }
 
   .numeric-point-chart {
-    max-width: 32rem;
-  }
-}
-
-/* very large size screen
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (min-width: 1400px) {
-  .numeric-point-chart {
-    max-width: 40rem;
+    max-width: 34rem;
   }
 }

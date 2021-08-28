@@ -36,7 +36,7 @@
 }
 
 .header-flex-container {
-  max-width: 68rem;
+  max-width: 66rem;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 100%;
           flex: 1 1 100%;
@@ -195,14 +195,6 @@
             align-items: center;
   }
   .numeric-point-chart {
-    max-width: 32rem;
-  }
-}
-
-/* very large size screen
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (min-width: 1400px) {
-  .numeric-point-chart {
-    max-width: 40rem;
+    max-width: 34rem;
   }
 }
