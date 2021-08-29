@@ -13,6 +13,7 @@ from charts.config import (DISPLAY, EMPTY_GRAPH, EMPTY_GRAPH_IBCS, IBCS_HUE_1, I
 pd.options.mode.chained_assignment = None
 
 
+@cache.memoize()
 def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for total Ordered Spend by year charts."""
     df_point_charts = df.groupby([
@@ -32,7 +33,6 @@ def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_point_charts
 
 
-@cache.memoize()
 def os_total_by_year_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -150,6 +150,7 @@ def os_total_by_year_chart(
     return fig
 
 
+@cache.memoize()
 def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for the Ordered Spend by month chart."""
     df_line_charts = df.groupby([
@@ -170,7 +171,6 @@ def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_line_charts
 
 
-@cache.memoize()
 def os_by_month_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -270,7 +270,6 @@ def os_by_month_chart(
     return fig
 
 
-@cache.memoize()
 def os_by_org_chart(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -366,6 +365,7 @@ def os_by_org_chart(
     return fig
 
 
+@cache.memoize()
 def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for the Ordered Spend by top 10 suppliers chart."""
     df_bar_charts = df.groupby([
@@ -386,7 +386,6 @@ def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     return df_bar_charts
 
 
-@cache.memoize()
 def os_top_10_suppliers_chart(
     df: pd.DataFrame,
     number_of_orders: bool,

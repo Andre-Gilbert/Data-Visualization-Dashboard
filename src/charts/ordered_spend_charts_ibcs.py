@@ -10,7 +10,6 @@ from charts.config import (EMPTY_GRAPH_IBCS, IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, S
 pd.options.mode.chained_assignment = None
 
 
-@cache.memoize()
 def os_total_by_year_chart_ibcs(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -118,7 +117,6 @@ def os_total_by_year_chart_ibcs(
     return fig
 
 
-@cache.memoize()
 def os_by_month_chart_ibcs(
     df: pd.DataFrame,
     number_of_orders: bool,
@@ -213,7 +211,6 @@ def os_by_month_chart_ibcs(
     return fig
 
 
-@cache.memoize()
 def os_by_org_chart_ibcs(
     df: pd.DataFrame,
     number_of_orders: bool,
