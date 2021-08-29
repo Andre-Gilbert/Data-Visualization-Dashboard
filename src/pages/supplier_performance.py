@@ -1,7 +1,7 @@
 """Dashboard Supplier Performance Page."""
 import dash_core_components as dcc
 import dash_html_components as html
-from utils.loading_indicator_config import LOADING_COLOR, LOADING_TYPE
+from utils.loading_indicator_config import INDICATOR_COLOR, INDICATOR_TYPE
 
 
 def supplier_performance() -> html.Div:
@@ -23,32 +23,32 @@ def supplier_performance() -> html.Div:
                     html.Div(
                         dcc.Loading(
                             dcc.Graph(id='supplier-performance-by-month-chart'),
-                            color=LOADING_COLOR,
-                            type=LOADING_TYPE,
+                            color=INDICATOR_COLOR,
+                            type=INDICATOR_TYPE,
                         ),
                         className='chart-container',
                     ),
                     html.Div(
                         dcc.Loading(
                             dcc.Graph(id='supplier-performance-by-org-chart'),
-                            color=LOADING_COLOR,
-                            type=LOADING_TYPE,
+                            color=INDICATOR_COLOR,
+                            type=INDICATOR_TYPE,
                         ),
                         className='chart-container',
                     ),
                     html.Div(
                         dcc.Loading(
                             dcc.Graph(id='supplier-performance-top-10-suppliers-chart'),
-                            color=LOADING_COLOR,
-                            type=LOADING_TYPE,
+                            color=INDICATOR_COLOR,
+                            type=INDICATOR_TYPE,
                         ),
                         className='chart-container',
                     ),
                     html.Div(
                         dcc.Loading(
                             dcc.Graph(id='supplier-performance-deviation-cause-and-indicator-chart'),
-                            color=LOADING_COLOR,
-                            type=LOADING_TYPE,
+                            color=INDICATOR_COLOR,
+                            type=INDICATOR_TYPE,
                         ),
                         className='chart-container',
                     )

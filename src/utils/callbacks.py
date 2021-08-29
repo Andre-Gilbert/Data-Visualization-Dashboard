@@ -118,7 +118,7 @@ def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     Returns:
         The page header, numeric point charts and the page content.
     """
-    if active_tab == 'tab-ordered-spend' or active_tab == "tab-ordered-spend-ibcs":
+    if active_tab == 'tab-ordered-spend' or active_tab == 'tab-ordered-spend-ibcs':
         page_header = 'Ordered Spend'
         page_numeric_point_chart = ordered_spend_npc()
         page_content = ordered_spend()
@@ -149,17 +149,12 @@ def update_filters(store: dict[str, Any]) -> tuple[list[dict[str, Any]]]:
     Returns:
         A tuple containing lists of dictionaries with the new labels and values of the filters.
     """
-    company_code = store['company_code']
-    purchasing_org = store['purchasing_org']
-    plant = store['plant']
-    material_group = store['material_group']
-
     filtered_df = copy_and_apply_filter(
         df=df,
-        company_code=company_code,
-        purchasing_org=purchasing_org,
-        plant=plant,
-        material_group=material_group,
+        company_code=store['company_code'],
+        purchasing_org=store['purchasing_org'],
+        plant=store['plant'],
+        material_group=store['material_group'],
     )
 
     company_code_filter = [{

@@ -7,6 +7,8 @@ window.dash_clientside.clientside = {
     let sticky = header.offsetTop;
 
     window.onscroll = function() {
+      
+      // Only enabled for large screen sizes
       if (window.innerWidth >= 1024 && window.pageYOffset > sticky) {
         header.classList.add('sticky');
       } else {
