@@ -91,6 +91,7 @@
 .Select--single > .Select-control .Select-value,
 .Select-placeholder {
   color: $sap-label-border-color;
+  line-height: 3.6rem;
 }
 
 .Select-arrow {
@@ -98,7 +99,7 @@
   border-width: 0 0.15rem 0.15rem 0;
   display: inline-block;
   padding: 0.3rem;
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.5rem;
   transform: rotate(45deg);
 }
 
