@@ -84,7 +84,7 @@
 .is-open > .Select-control .Select-arrow {
   top: 0;
   border-color: #0854a0;
-  border-width: 0 0.2rem 0.2rem 0;
+  border-width: 0 0.175rem 0.175rem 0;
 }
 
 .Select-control {
@@ -108,7 +108,7 @@
 
 .Select-arrow {
   border: solid #0854a0;
-  border-width: 0 0.2rem 0.2rem 0;
+  border-width: 0 0.175rem 0.175rem 0;
   display: inline-block;
   padding: 0.3rem;
   margin: 0 0 0.3rem;
