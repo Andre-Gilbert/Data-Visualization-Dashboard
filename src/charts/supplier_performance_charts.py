@@ -3,17 +3,19 @@ import pandas as pd
 import plotly.graph_objects as go
 from app import cache
 from plotly.subplots import make_subplots
+from utils.charts import apply_number_of_orders_flag, format_numbers
 from utils.data_prep import copy_and_apply_filter
 
-from charts.config import (EMPTY_GRAPH, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL,
-                           SAP_UI_POINT_CHART_NUMBER, TEMPLATE)
+from charts.config import (DEVIATION_CAUSE_COLORS, DISPLAY, EMPTY_GRAPH, NUMBER_OF_ORDERS, ORDERED_SPEND, SAP_FONT,
+                           SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER,
+                           TEMPLATE)
 
 
 def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Create DataFrames for total deviation and percentage of deviation by purchasing organisation."""
     group_columns = ['Company Code', 'Purchasing Org.', 'Plant', 'Material Group']
     aggregate_functions = {'Document Date': 'count', 'Net Value': 'sum'}
-    rename_columns = {'Net Value': 'Ordered Spend', 'Document Date': 'Number of Orders'}
+    rename_columns = {'Net Value': ORDERED_SPEND, 'Document Date': NUMBER_OF_ORDERS}
 
     # DataFrame containing sum and count of all orders of 2020
     df_total_deviation_and_percentage_charts = df.loc[df['Year'] == 2020]
@@ -51,20 +53,22 @@ def sp_total_deviation_and_percentage_chart(
     """
     df_deviated = copy_and_apply_filter(df_deviated, company_code, purchasing_org, plant, material_group)
     df_deviated = df_deviated.agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     })
 
     df_all = copy_and_apply_filter(df_all, company_code, purchasing_org, plant, material_group)
     df_all = df_all.agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     })
 
     if number_of_orders:
-        displayed = 'Number of Orders'
+        displayed = NUMBER_OF_ORDERS
+        number_suffix = ''
     else:
-        displayed = 'Ordered Spend'
+        displayed = ORDERED_SPEND
+        number_suffix = '€'
 
     value_deviated = df_deviated[displayed]
     value_all = df_all[displayed]
@@ -90,6 +94,7 @@ def sp_total_deviation_and_percentage_chart(
                 'y': [0, 1]
             },
             title='Total Deviated Orders',
+            number_suffix=number_suffix,
         ))
 
     fig.add_trace(
@@ -143,8 +148,8 @@ def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.Dat
         'Document Date': 'count',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders',
+        'Net Value': ORDERED_SPEND,
+        'Document Date': NUMBER_OF_ORDERS,
     })
 
     return df_bar_charts
@@ -174,31 +179,29 @@ def sp_deviation_cause_and_indicator_chart(
     df_dev_cause = df.groupby([
         'Deviation Cause Text',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
-
-    df_dev_cause.rename(columns={'Deviation Cause Text': 'Deviation Cause'}, inplace=True)
 
     df_dev_indicator = df.groupby([
         'Deviation Indicator',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
     if df_dev_cause.empty and df_dev_indicator.empty:
         return EMPTY_GRAPH
 
-    if number_of_orders:
-        displayed = 'Number of Orders'
-        subtitle = ''
-    else:
-        displayed = 'Ordered Spend'
-        subtitle = ' | EUR'
+    displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
+
+    df_dev_cause['Color'] = df_dev_cause['Deviation Cause Text'].map(DEVIATION_CAUSE_COLORS)
 
     title = ('Deviated Orders by Deviation Cause and Indicator<br>'
-             f'<sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>')
+             f'<sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>')
+
+    df_dev_cause[DISPLAY] = df_dev_cause.apply(lambda row: format_numbers(row, displayed), axis=1)
+    df_dev_indicator[DISPLAY] = df_dev_indicator.apply(lambda row: format_numbers(row, displayed), axis=1)
 
     fig = make_subplots(
         rows=1,
@@ -209,13 +212,11 @@ def sp_deviation_cause_and_indicator_chart(
     fig.add_trace(
         go.Bar(
             x=df_dev_cause[displayed],
-            y=df_dev_cause['Deviation Cause'],
-            marker_color=SAP_UI_POINT_CHART_NUMBER,
+            y=df_dev_cause['Deviation Cause Text'],
+            marker_color=df_dev_cause['Color'],
             name='Deviation Cause',
             orientation='h',
-            text=df_dev_cause[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}',
+            text=df_dev_cause[DISPLAY],
         ),
         row=1,
         col=1,
@@ -228,9 +229,7 @@ def sp_deviation_cause_and_indicator_chart(
             marker_color=SAP_UI_POINT_CHART_NUMBER,
             name='Deviation Indicator',
             orientation='h',
-            text=df_dev_indicator[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}',
+            text=df_dev_indicator[DISPLAY],
         ),
         row=1,
         col=2,
@@ -261,12 +260,13 @@ def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Purchasing Org.',
         'Plant',
         'Material Group',
+        'Deviation Cause Text',
     ]).agg({
         'Document Date': 'count',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders',
+        'Net Value': ORDERED_SPEND,
+        'Document Date': NUMBER_OF_ORDERS,
     })
 
     return df_line_charts
@@ -294,9 +294,10 @@ def sp_by_month_chart(
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby([
         'Month',
+        'Deviation Cause Text',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
     df.replace(
@@ -321,27 +322,29 @@ def sp_by_month_chart(
     if df.empty:
         return EMPTY_GRAPH
 
-    if number_of_orders:
-        displayed = 'Number of Orders'
-        subtitle = ''
-    else:
-        displayed = 'Ordered Spend'
-        subtitle = ' | EUR'
+    displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
 
-    title = f'Deviated Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
+    title = f'Deviated Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
-    fig = go.Figure(
-        go.Scatter(
-            x=df['Month'],
-            y=df[displayed],
-            mode='lines+markers',
-            marker_color=SAP_UI_POINT_CHART_NUMBER,
-            name=displayed,
-        ))
+    fig = go.Figure()
+
+    deviation_causes = df['Deviation Cause Text'].unique()
+
+    for deviation_cause in deviation_causes:
+        trace_df = df.loc[df['Deviation Cause Text'] == deviation_cause]
+
+        fig.add_trace(
+            go.Scatter(
+                x=trace_df['Month'],
+                y=trace_df[displayed],
+                mode='lines+markers',
+                marker_color=DEVIATION_CAUSE_COLORS[deviation_cause],
+                name=deviation_cause,
+                stackgroup='one',
+            ))
 
     fig.update_layout(
         height=560,
-        showlegend=False,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
@@ -351,6 +354,26 @@ def sp_by_month_chart(
     )
 
     return fig
+
+
+def get_data_sp_by_org_charts(df: pd.DataFrame) -> pd.DataFrame:
+    """Create DataFrame for top 10 suppliers chart."""
+    df_bar_charts = df.loc[(df['Deviation Cause'] != 0) & (df['Year'] == 2020)]
+    df_bar_charts = df_bar_charts.groupby([
+        'Company Code',
+        'Purchasing Org.',
+        'Plant',
+        'Material Group',
+        'Deviation Cause Text',
+    ]).agg({
+        'Document Date': 'count',
+        'Net Value': 'sum',
+    }).reset_index().rename(columns={
+        'Net Value': ORDERED_SPEND,
+        'Document Date': NUMBER_OF_ORDERS,
+    })
+
+    return df_bar_charts
 
 
 @cache.memoize()
@@ -375,40 +398,41 @@ def sp_by_org_chart(
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby([
         'Purchasing Org.',
+        'Deviation Cause Text',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
     if df.empty:
         return EMPTY_GRAPH
 
-    if number_of_orders:
-        displayed = 'Number of Orders'
-        subtitle = ''
-    else:
-        displayed = 'Ordered Spend'
-        subtitle = ' | EUR'
+    displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
 
     title = (f'Deviated Orders by Purchasing Organisation'
-             f'<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>')
+             f'<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>')
 
-    fig = go.Figure(
-        go.Bar(
-            x=df[displayed],
-            y=df['Purchasing Org.'],
-            marker_color=SAP_UI_POINT_CHART_NUMBER,
-            name=displayed,
-            orientation='h',
-            text=df[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}',
-        ))
+    fig = go.Figure()
+
+    deviation_causes = df['Deviation Cause Text'].unique()
+
+    for deviation_cause in deviation_causes:
+        trace_df = df.loc[df['Deviation Cause Text'] == deviation_cause]
+        trace_df[DISPLAY] = trace_df.apply(lambda row: format_numbers(row, displayed), axis=1)
+
+        fig.add_trace(
+            go.Bar(
+                x=trace_df[displayed],
+                y=trace_df['Purchasing Org.'],
+                marker_color=DEVIATION_CAUSE_COLORS[deviation_cause],
+                name=deviation_cause,
+                orientation='h',
+                text=trace_df[DISPLAY],
+            ))
 
     fig.update_layout(
         height=560,
-        barmode='group',
-        showlegend=False,
+        barmode='stack',
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
@@ -434,12 +458,13 @@ def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Purchasing Org.',
         'Plant',
         'Material Group',
+        'Deviation Cause Text',
     ]).agg({
         'Document Date': 'count',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders',
+        'Net Value': ORDERED_SPEND,
+        'Document Date': NUMBER_OF_ORDERS,
     })
 
     return df_bar_charts
@@ -467,44 +492,45 @@ def sp_top_10_suppliers_chart(
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby([
         'Supplier Name',
+        'Deviation Cause Text',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
-    supplier_names = df.nlargest(10, ['Ordered Spend'])['Supplier Name']
+    supplier_names = df.nlargest(10, [ORDERED_SPEND])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
     if df.empty:
         return EMPTY_GRAPH
 
-    df.sort_values('Ordered Spend', ascending=False, inplace=True)
+    df.sort_values(ORDERED_SPEND, ascending=False, inplace=True)
 
-    if number_of_orders:
-        displayed = 'Number of Orders'
-        subtitle = ''
-    else:
-        displayed = 'Ordered Spend'
-        subtitle = ' | EUR'
+    displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
 
-    title = f'Deviated Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
+    title = f'Deviated Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
-    fig = go.Figure(
-        go.Bar(
-            x=df[displayed],
-            y=df['Supplier Name'],
-            marker_color=SAP_UI_POINT_CHART_NUMBER,
-            name=displayed,
-            orientation='h',
-            text=df[displayed],
-            textposition='outside',
-            texttemplate='%{text:.2s}',
-        ))
+    fig = go.Figure()
+
+    deviation_causes = df['Deviation Cause Text'].unique()
+
+    for deviation_cause in deviation_causes:
+        trace_df = df.loc[df['Deviation Cause Text'] == deviation_cause]
+        trace_df[DISPLAY] = trace_df.apply(lambda row: format_numbers(row, displayed), axis=1)
+
+        fig.add_trace(
+            go.Bar(
+                x=trace_df[displayed],
+                y=trace_df['Supplier Name'],
+                marker_color=DEVIATION_CAUSE_COLORS[deviation_cause],
+                name=deviation_cause,
+                orientation='h',
+                text=trace_df[DISPLAY],
+            ))
 
     fig.update_layout(
         height=560,
-        barmode='group',
-        showlegend=False,
+        barmode='stack',
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,

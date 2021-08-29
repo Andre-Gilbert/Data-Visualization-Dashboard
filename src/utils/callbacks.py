@@ -7,7 +7,7 @@ from app import app
 from charts.ordered_spend_charts import (get_data_os_by_month_charts, get_data_os_top_10_suppliers_charts,
                                          get_data_os_total_by_year_charts, os_by_month_chart, os_by_org_chart,
                                          os_top_10_suppliers_chart, os_total_by_year_chart)
-from charts.supplier_performance_charts import (get_data_sp_by_month_charts,
+from charts.supplier_performance_charts import (get_data_sp_by_month_charts, get_data_sp_by_org_charts,
                                                 get_data_sp_deviation_cause_and_indicator_charts,
                                                 get_data_sp_top_10_suppliers_charts,
                                                 get_data_sp_total_deviation_and_percentage_charts, sp_by_month_chart,
@@ -34,6 +34,7 @@ df_os_top_10_suppliers_charts = get_data_os_top_10_suppliers_charts(df)
 df_sp_total_deviation_charts, df_sp_reference = get_data_sp_total_deviation_and_percentage_charts(df)
 df_sp_deviation_cause_and_indicator_charts = get_data_sp_deviation_cause_and_indicator_charts(df)
 df_sp_by_month_charts = get_data_sp_by_month_charts(df)
+df_sp_by_org_charts = get_data_sp_by_org_charts(df)
 df_sp_top_10_suppliers_charts = get_data_sp_top_10_suppliers_charts(df)
 
 app.clientside_callback(
@@ -373,7 +374,7 @@ def update_supplier_performance_charts(
         )
 
         by_org_chart = sp_by_org_chart(
-            df=df_sp_total_deviation_charts,
+            df=df_sp_by_org_charts,
             number_of_orders=number_of_orders_para,
             company_code=company_code,
             purchasing_org=purchasing_org,

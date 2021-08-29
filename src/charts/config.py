@@ -35,13 +35,13 @@ SAP_UI_CHART_PALETTE_QUALITATIVE_HUES = [
 
 DEVIATION_CAUSES = [
     'no deviation',
+    'delivery deviation - too late',
     'damaged goods (obvious defects)',
     'over-delivery',
     'under-delivery',
     'damaged goods and over-delivery',
     'damaged goods and under-delivery',
     'damaged goods and under-delivery',
-    'delivery deviation - too late',
     'over-delivery&delivery deviation - too late',
     'damaged goods & over-delivery & deliv. dev. - too late',
     'under-delivery&delivery deviation - too late',

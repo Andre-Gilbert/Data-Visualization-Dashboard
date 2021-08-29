@@ -2,12 +2,13 @@
 import pandas as pd
 import plotly.graph_objects as go
 from app import cache
-from utils.chart_display import format_numbers
+from utils.charts import apply_number_of_orders_flag, format_numbers
 from utils.data_prep import copy_and_apply_filter
 
-from charts.config import (DISPLAY, EMPTY_GRAPH, EMPTY_GRAPH_IBCS, IBCS_HUE_1, IBCS_HUE_2, SAP_FONT, SAP_LABEL_COLOR,
-                           SAP_TEXT_COLOR, SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL, SAP_UI_POINT_CHART_LABEL,
-                           SAP_UI_POINT_CHART_NUMBER, TEMPLATE)
+from charts.config import (DISPLAY, EMPTY_GRAPH, EMPTY_GRAPH_IBCS, IBCS_HUE_1, IBCS_HUE_2, NUMBER_OF_ORDERS,
+                           ORDERED_SPEND, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
+                           SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL, SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER,
+                           TEMPLATE)
 
 pd.options.mode.chained_assignment = None
 
@@ -24,8 +25,8 @@ def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Document Date': 'count',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders',
+        'Net Value': ORDERED_SPEND,
+        'Document Date': NUMBER_OF_ORDERS,
     })
 
     return df_point_charts
@@ -53,18 +54,18 @@ def os_total_by_year_chart(
     """
     df = copy_and_apply_filter(df, company_code, purchasing_org, plant, material_group)
     df = df.groupby('Year').agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
 
     if number_of_orders:
-        displayed = 'Number of Orders'
+        displayed = NUMBER_OF_ORDERS
         number_suffix = ''
     else:
-        displayed = 'Ordered Spend'
+        displayed = ORDERED_SPEND
         number_suffix = '€'
 
     try:
@@ -162,8 +163,8 @@ def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Document Date': 'count',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders',
+        'Net Value': ORDERED_SPEND,
+        'Document Date': NUMBER_OF_ORDERS,
     })
 
     return df_line_charts
@@ -194,8 +195,8 @@ def os_by_month_chart(
         'Year',
         'Month',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
     df.replace(
@@ -222,14 +223,9 @@ def os_by_month_chart(
             return EMPTY_GRAPH_IBCS
         return EMPTY_GRAPH
 
-    if number_of_orders:
-        displayed = 'Number of Orders'
-        subtitle = ''
-    else:
-        displayed = 'Ordered Spend'
-        subtitle = ' | EUR'
+    displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
 
-    title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
+    title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     df_this_year = df.loc[df['Year'] == 2020]
     df_last_year = df.loc[df['Year'] == 2019]
@@ -299,8 +295,8 @@ def os_by_org_chart(
         'Year',
         'Purchasing Org.',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
     if df.empty:
@@ -308,16 +304,11 @@ def os_by_org_chart(
             return EMPTY_GRAPH_IBCS
         return EMPTY_GRAPH
 
-    if number_of_orders:
-        displayed = 'Number of Orders'
-        subtitle = ''
-    else:
-        displayed = 'Ordered Spend'
-        subtitle = ' | EUR'
+    displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
+
+    title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     df[DISPLAY] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
-
-    title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
     sort_array = sort_array.loc[:, 'Purchasing Org.'].drop_duplicates(keep='last')
@@ -342,7 +333,6 @@ def os_by_org_chart(
             name=2019,
             orientation='h',
             text=df_last_year[DISPLAY],
-            textposition='outside',
         ))
 
     fig.add_trace(
@@ -353,7 +343,6 @@ def os_by_org_chart(
             name=2020,
             orientation='h',
             text=df_this_year[DISPLAY],
-            textposition='outside',
         ))
 
     fig.update_layout(
@@ -390,8 +379,8 @@ def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Document Date': 'count',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
-        'Net Value': 'Ordered Spend',
-        'Document Date': 'Number of Orders',
+        'Net Value': ORDERED_SPEND,
+        'Document Date': NUMBER_OF_ORDERS,
     })
 
     return df_bar_charts
@@ -422,11 +411,11 @@ def os_top_10_suppliers_chart(
         'Year',
         'Supplier Name',
     ]).agg({
-        'Number of Orders': 'sum',
-        'Ordered Spend': 'sum',
+        NUMBER_OF_ORDERS: 'sum',
+        ORDERED_SPEND: 'sum',
     }).reset_index()
 
-    supplier_names = df.nlargest(10, ['Year', 'Ordered Spend'])['Supplier Name']
+    supplier_names = df.nlargest(10, ['Year', ORDERED_SPEND])['Supplier Name']
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
     if df.empty:
@@ -434,16 +423,11 @@ def os_top_10_suppliers_chart(
             return EMPTY_GRAPH_IBCS
         return EMPTY_GRAPH
 
-    if number_of_orders:
-        displayed = 'Number of Orders'
-        subtitle = ''
-    else:
-        displayed = 'Ordered Spend'
-        subtitle = ' | EUR'
+    displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
 
     df[DISPLAY] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
 
-    title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{displayed}{subtitle}</sup>'
+    title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
     sort_array = sort_array.loc[:, 'Supplier Name'].drop_duplicates(keep='last')
@@ -468,7 +452,6 @@ def os_top_10_suppliers_chart(
             name=2019,
             orientation='h',
             text=df_last_year[DISPLAY],
-            textposition='outside',
         ))
 
     fig.add_trace(
@@ -479,7 +462,6 @@ def os_top_10_suppliers_chart(
             name=2020,
             orientation='h',
             text=df_this_year[DISPLAY],
-            textposition='outside',
         ))
 
     fig.update_layout(
