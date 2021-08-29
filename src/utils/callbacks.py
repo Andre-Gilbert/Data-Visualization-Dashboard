@@ -15,9 +15,9 @@ from charts.supplier_performance_charts import (get_data_sp_by_month_charts,
                                                 sp_top_10_suppliers_chart, sp_total_deviation_and_percentage_chart)
 from components.ordered_spend_npc import ordered_spend_npc
 from components.supplier_performance_npc import supplier_performance_npc
-from dash import no_update
-from dash.dependencies import ClientsideFunction, Input, Output
+from dash.dependencies import ClientsideFunction
 from dash.exceptions import PreventUpdate
+from dash_extensions.enrich import Input, Output, ServersideOutput
 from pages.ordered_spend import ordered_spend
 from pages.supplier_performance import supplier_performance
 
@@ -41,6 +41,38 @@ app.clientside_callback(
     Output('header', 'id'),
     Input('header', 'id'),
 )
+
+
+@app.callback(
+    ServersideOutput('store', 'data'),
+    [
+        Input('company-code', 'value'),
+        Input('purchasing-org', 'value'),
+        Input('plant', 'value'),
+        Input('material-group', 'value'),
+    ],
+    memoize=True,
+)
+def update_filter_store(
+    company_code: int,
+    purchasing_org: int,
+    plant: int,
+    material_group: str,
+) -> str:
+    """Update filters based on user input.
+    
+    Args:
+        company_code, purchasing_org, plant, material_group: GUI filters.
+
+    Returns:
+        A dictionary containing the filters.
+    """
+    return {
+        'company_code': company_code,
+        'purchasing_org': purchasing_org,
+        'plant': plant,
+        'material_group': material_group,
+    }
 
 
 @app.callback(
@@ -109,33 +141,23 @@ def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
         Output('plant', 'options'),
         Output('material-group', 'options'),
     ],
-    [
-        Input('company-code', 'value'),
-        Input('purchasing-org', 'value'),
-        Input('plant', 'value'),
-        Input('material-group', 'value'),
-    ],
+    Input('store', 'data'),
 )
-def update_filters(
-    company_code: str,
-    purchasing_org: str,
-    plant: str,
-    material_group: str,
-) -> tuple[list[dict[str, Any]]]:
+def update_filters(store: dict[str, Any]) -> tuple[list[dict[str, Any]]]:
     """Update filters based on user input.
 
     Args:
-        company_code, purchasing_org, plant, material_group: GUI filters.
+        store GUI filters.
 
     Returns:
         A tuple containing lists of dictionaries with the new labels and values of the filters.
     """
     filtered_df = copy_and_apply_filter(
         df=df,
-        company_code=company_code,
-        purchasing_org=purchasing_org,
-        plant=plant,
-        material_group=material_group,
+        company_code=store['company_code'],
+        purchasing_org=store['purchasing_org'],
+        plant=store['plant'],
+        material_group=store['material_group'],
     )
 
     company_code_filter = [{
@@ -176,30 +198,28 @@ def update_filters(
     [
         Input('tabs', 'active_tab'),
         Input('dropdown-menu', 'label'),
-        Input('company-code', 'value'),
-        Input('purchasing-org', 'value'),
-        Input('plant', 'value'),
-        Input('material-group', 'value'),
+        Input('store', 'data'),
     ],
 )
-def update_ordered_spend_charts(
-    active_tab: str,
-    dropdown_label: str,
-    company_code: str,
-    purchasing_org: str,
-    plant: str,
-    material_group: str,
-) -> tuple[go.Figure]:
+def update_ordered_spend_charts(active_tab: str, dropdown_label: str, store: dict[str, Any]) -> tuple[go.Figure]:
     """Callback that updates the ordered spend charts.
 
     Args:
         active_tab: The active tab of the page.
         dropdown_label: The current dropdown label.
-        company_code, purchasing_org, plant, material_group: GUI filters.
+        store: GUI filters.
 
     Returns:
         The updated charts.
     """
+    if active_tab != 'tab-ordered-spend' and active_tab != 'tab-ordered-spend-ibcs':
+        raise PreventUpdate
+
+    company_code = store['company_code']
+    purchasing_org = store['purchasing_org']
+    plant = store['plant']
+    material_group = store['material_group']
+
     if active_tab == 'tab-ordered-spend':
         if dropdown_label == 'Ordered Spend Amount':
             number_of_orders_para = False
@@ -292,9 +312,6 @@ def update_ordered_spend_charts(
             material_group=material_group,
         )
 
-    else:
-        raise PreventUpdate
-
     return (
         total_by_year_chart,
         by_month_chart,
@@ -314,30 +331,28 @@ def update_ordered_spend_charts(
     [
         Input('tabs', 'active_tab'),
         Input('dropdown-menu', 'label'),
-        Input('company-code', 'value'),
-        Input('purchasing-org', 'value'),
-        Input('plant', 'value'),
-        Input('material-group', 'value'),
+        Input('store', 'data'),
     ],
 )
-def update_supplier_performance_charts(
-    active_tab: str,
-    dropdown_label: str,
-    company_code: str,
-    purchasing_org: str,
-    plant: str,
-    material_group: str,
-) -> tuple[go.Figure]:
+def update_supplier_performance_charts(active_tab: str, dropdown_label: str, store: dict[str, Any]) -> tuple[go.Figure]:
     """Callback that updates the supplier performance charts.
 
     Args:
         active_tab: The active_tab of the page.
         dropdown_label: The current dropdown label.
-        company_code, purchasing_org, plant, material_group: GUI filters.
+        store: GUI filters.
 
     Returns:
         The updated charts.
     """
+    if active_tab != 'tab-supplier-performance':
+        raise PreventUpdate
+
+    company_code = store['company_code']
+    purchasing_org = store['purchasing_org']
+    plant = store['plant']
+    material_group = store['material_group']
+
     if active_tab == 'tab-supplier-performance':
         if dropdown_label == 'Ordered Spend Amount':
             number_of_orders_para = False
@@ -389,9 +404,6 @@ def update_supplier_performance_charts(
             plant=plant,
             material_group=material_group,
         )
-
-    else:
-        raise PreventUpdate
 
     return (
         total_deviation_and_percentage_chart,
