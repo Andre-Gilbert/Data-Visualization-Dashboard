@@ -17,7 +17,7 @@ cache = Cache(
     app.server,
     config={
         'CACHE_TYPE': 'FileSystemCache',
-        'CACHE_DIR': 'cache-directory',
+        'CACHE_DIR': 'file_system_store',
         'CACHE_DEFAULT_TIMEOUT': 180,
     },
 )
