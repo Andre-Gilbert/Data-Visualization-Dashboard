@@ -1,5 +1,5 @@
 # Dashboard
-Project Summary
+The goal of this project is to create a dashboard to give a fictitious company a clear overview of its deliveries in terms of volume and quality.
 
 ## Installation
 Before running the application make sure you have **Python 3.9** installed.
@@ -17,7 +17,7 @@ python src/index.py
 View [requirements](requirements.txt).
 
 ## Usage
-How to use
+
 
 ## License
 
