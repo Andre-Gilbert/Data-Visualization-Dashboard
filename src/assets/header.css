@@ -70,10 +70,6 @@
   color: #89919a;
 }
 
-.Select-clear-zone {
-  color: #0854a0;
-}
-
 .is-focused:not(.is-open) > .Select-control {
   border-color: #0854a0;
   -webkit-box-shadow: none;
@@ -88,7 +84,7 @@
 .is-open > .Select-control .Select-arrow {
   top: 0;
   border-color: #0854a0;
-  border-width: 0 0.15rem 0.15rem 0;
+  border-width: 0 0.2rem 0.2rem 0;
 }
 
 .Select-control {
@@ -112,10 +108,10 @@
 
 .Select-arrow {
   border: solid #0854a0;
-  border-width: 0 0.15rem 0.15rem 0;
+  border-width: 0 0.2rem 0.2rem 0;
   display: inline-block;
   padding: 0.3rem;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.3rem;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
@@ -124,8 +120,13 @@
   padding-right: 0.8rem;
 }
 
+.Select-clear {
+  line-height: 1.5;
+}
+
 .Select-clear-zone {
   padding-right: 0.8rem;
+  color: #0854a0;
 }
 
 .Select-menu-outer {
