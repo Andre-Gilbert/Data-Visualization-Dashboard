@@ -47,6 +47,7 @@ def os_total_by_year_chart(
     Args:
         df: DataFrame produced by function get_data_os_total_by_year_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
+        ibcs: Flag that dictates whether to use the IBCS styling.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:
@@ -185,6 +186,7 @@ def os_by_month_chart(
     Args:
         df: DataFrame produced by function get_data_os_by_month_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
+        ibcs: Flag that dictates whether to use the IBCS styling.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:
@@ -284,6 +286,7 @@ def os_by_org_chart(
     Args:
         df: DataFrame produced by function get_data_os_total_by_year_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
+        ibcs: Flag that dictates whether to use the IBCS styling.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:
@@ -400,6 +403,7 @@ def os_top_10_suppliers_chart(
     Args:
         df: DataFrame produced by function get_data_os_top_10_suppliers_charts.
         number_of_orders: Flag that dictates whether to display Ordered Spend or Number of Orders.
+        ibcs: Flag that dictates whether to use the IBCS styling.
         company_code, purchasing_org, plant, material_group: Filters from GUI.
 
     Returns:

@@ -37,6 +37,7 @@ df_sp_by_month_charts = get_data_sp_by_month_charts(df)
 df_sp_by_org_charts = get_data_sp_by_org_charts(df)
 df_sp_top_10_suppliers_charts = get_data_sp_top_10_suppliers_charts(df)
 
+# Function can be found here: assets/sticky_header.js
 app.clientside_callback(
     ClientsideFunction('clientside', 'stickyHeader'),
     Output('header', 'id'),
@@ -61,7 +62,7 @@ def update_filter_store(
     material_group: str,
 ) -> str:
     """Update filters based on user input.
-    
+
     Args:
         company_code, purchasing_org, plant, material_group: GUI filters.
 
