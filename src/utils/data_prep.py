@@ -46,15 +46,15 @@ def copy_and_apply_filter(
     filtered_df = df.copy(deep=True)
 
     if company_code:
-        company_code = int(company_code)
+        # company_code = int(company_code)
         filtered_df = filtered_df.loc[filtered_df['Company Code'] == company_code]
 
     if purchasing_org:
-        purchasing_org = int(purchasing_org)
+        # purchasing_org = int(purchasing_org)
         filtered_df = filtered_df.loc[filtered_df['Purchasing Org.'] == purchasing_org]
 
     if plant:
-        plant = int(plant)
+        # plant = int(plant)
         filtered_df = filtered_df.loc[filtered_df['Plant'] == plant]
 
     if material_group:

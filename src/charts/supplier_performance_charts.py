@@ -236,7 +236,7 @@ def sp_deviation_cause_and_indicator_chart(
     )
 
     fig.update_layout(
-        height=560,
+        height=570,
         barmode='group',
         showlegend=False,
         title=title,
@@ -344,7 +344,7 @@ def sp_by_month_chart(
             ))
 
     fig.update_layout(
-        height=560,
+        height=570,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
@@ -431,8 +431,8 @@ def sp_by_org_chart(
             ))
 
     fig.update_layout(
-        height=560,
         barmode='stack',
+        height=570,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
@@ -529,8 +529,8 @@ def sp_top_10_suppliers_chart(
             ))
 
     fig.update_layout(
-        height=560,
         barmode='stack',
+        height=570,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,

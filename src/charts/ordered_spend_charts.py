@@ -258,7 +258,7 @@ def os_by_month_chart(
         ))
 
     fig.update_layout(
-        height=560,
+        height=570,
         title=title,
         title_font_size=20,
         font_color=SAP_TEXT_COLOR,
@@ -346,7 +346,7 @@ def os_by_org_chart(
         ))
 
     fig.update_layout(
-        height=560,
+        height=570,
         barmode='group',
         title=title,
         title_font_size=20,
@@ -465,7 +465,7 @@ def os_top_10_suppliers_chart(
         ))
 
     fig.update_layout(
-        height=560,
+        height=570,
         barmode='group',
         title=title,
         title_font_size=20,

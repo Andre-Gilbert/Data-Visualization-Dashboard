@@ -1,8 +1,8 @@
-import dash
 import dash_bootstrap_components as dbc
+from dash_extensions.enrich import Dash
 from flask_caching import Cache
 
-app = dash.Dash(
+app = Dash(
     __name__,
     title='Dashboard',
     suppress_callback_exceptions=True,
