@@ -56,10 +56,6 @@
   color: $sap-label-border-color;
 }
 
-.Select-clear-zone {
-  color: $sap-selected-color;
-}
-
 .is-focused:not(.is-open) > .Select-control {
   border-color: $sap-selected-color;
   box-shadow: none;
@@ -73,7 +69,7 @@
 .is-open > .Select-control .Select-arrow {
   top: 0;
   border-color: $sap-selected-color;
-  border-width: 0 0.15rem 0.15rem 0;
+  border-width: 0 0.2rem 0.2rem 0;
 }
 
 .Select-control {
@@ -96,10 +92,10 @@
 
 .Select-arrow {
   border: solid $sap-selected-color;
-  border-width: 0 0.15rem 0.15rem 0;
+  border-width: 0 0.2rem 0.2rem 0;
   display: inline-block;
   padding: 0.3rem;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.3rem;
   transform: rotate(45deg);
 }
 
@@ -107,8 +103,13 @@
   padding-right: 0.8rem;
 }
 
+.Select-clear {
+  line-height: 1.5;
+}
+
 .Select-clear-zone {
   padding-right: 0.8rem;
+  color: $sap-selected-color;
 }
 
 .Select-menu-outer {

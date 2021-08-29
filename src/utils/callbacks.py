@@ -17,7 +17,7 @@ from components.ordered_spend_npc import ordered_spend_npc
 from components.supplier_performance_npc import supplier_performance_npc
 from dash.dependencies import ClientsideFunction
 from dash.exceptions import PreventUpdate
-from dash_extensions.enrich import Input, Output, ServersideOutput
+from dash_extensions.enrich import Input, Output, ServersideOutput, Trigger
 from pages.ordered_spend import ordered_spend
 from pages.supplier_performance import supplier_performance
 
@@ -68,27 +68,27 @@ def update_filter_store(
     Returns:
         A dictionary containing the filters.
     """
+    ctx = dash.callback_context
+    triggered_filter = ctx.triggered[0]['prop_id'].split('.')[0]
+
     return {
         'company_code': company_code,
         'purchasing_org': purchasing_org,
         'plant': plant,
         'material_group': material_group,
+        'triggered': triggered_filter,
     }
 
 
 @app.callback(
     Output('dropdown-menu', 'label'),
     [
-        Input('ordered-spend-amount', 'n_clicks'),
-        Input('number-of-orders', 'n_clicks'),
+        Trigger('ordered-spend-amount', 'n_clicks'),
+        Trigger('number-of-orders', 'n_clicks'),
     ],
 )
-def update_dropdown_label(ordered_spend_amount: int, number_of_orders: int) -> str:
+def update_dropdown_label() -> str:
     """Callback that updates the dropdown label.
-
-    Args:
-        ordered_spend_amount: The number of button clicks.
-        number_of_orders: The number of button clicks.
 
     Returns:
         The updated dropdown label.
@@ -96,7 +96,7 @@ def update_dropdown_label(ordered_spend_amount: int, number_of_orders: int) -> s
     id_lookup = {'ordered-spend-amount': 'Ordered Spend Amount', 'number-of-orders': 'Number of Orders'}
     ctx = dash.callback_context
 
-    if not ordered_spend_amount and not number_of_orders or not ctx.triggered:
+    if not ctx.triggered:
         dropdown_label = 'Ordered Spend Amount'
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
@@ -153,33 +153,75 @@ def update_filters(store: dict[str, Any]) -> tuple[list[dict[str, Any]]]:
     Returns:
         A tuple containing lists of dictionaries with the new labels and values of the filters.
     """
+    company_code = store['company_code']
+    purchasing_org = store['purchasing_org']
+    plant = store['plant']
+    material_group = store['material_group']
+    triggered_filter = store['triggered']
+
     filtered_df = copy_and_apply_filter(
         df=df,
-        company_code=store['company_code'],
-        purchasing_org=store['purchasing_org'],
-        plant=store['plant'],
-        material_group=store['material_group'],
+        company_code=company_code,
+        purchasing_org=purchasing_org,
+        plant=plant,
+        material_group=material_group,
     )
+
+    if company_code and purchasing_org and plant and material_group:
+        cc_df = df['Company Code'].unique()
+        po_df = df['Purchasing Org.'].unique()
+        pl_df = df['Plant'].unique()
+        mg_df = df['Material Group'].unique().astype(str)
+
+    elif triggered_filter == 'company-code':
+        cc_df = df['Company Code'].unique()
+        po_df = filtered_df['Purchasing Org.'].unique()
+        pl_df = filtered_df['Plant'].unique()
+        mg_df = filtered_df['Material Group'].unique().astype(str)
+
+    elif triggered_filter == 'purchasing-org':
+        cc_df = filtered_df['Company Code'].unique()
+        po_df = df['Purchasing Org.'].unique()
+        pl_df = filtered_df['Plant'].unique()
+        mg_df = filtered_df['Material Group'].unique().astype(str)
+
+    elif triggered_filter == 'plant':
+        cc_df = filtered_df['Company Code'].unique()
+        po_df = filtered_df['Purchasing Org.'].unique()
+        pl_df = df['Plant'].unique()
+        mg_df = filtered_df['Material Group'].unique().astype(str)
+
+    elif triggered_filter == 'material-group':
+        cc_df = filtered_df['Company Code'].unique()
+        po_df = filtered_df['Purchasing Org.'].unique()
+        pl_df = filtered_df['Plant'].unique()
+        mg_df = df['Material Group'].unique().astype(str)
+
+    else:
+        cc_df = filtered_df['Company Code'].unique()
+        po_df = filtered_df['Purchasing Org.'].unique()
+        pl_df = filtered_df['Plant'].unique()
+        mg_df = filtered_df['Material Group'].unique().astype(str)
 
     company_code_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(filtered_df['Company Code'].unique())]
+    } for label in sorted(cc_df)]
 
     purchasing_org_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(filtered_df['Purchasing Org.'].unique())]
+    } for label in sorted(po_df)]
 
     plant_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(filtered_df['Plant'].unique())]
+    } for label in sorted(pl_df)]
 
     material_group_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(filtered_df['Material Group'].unique().astype(str))]
+    } for label in sorted(mg_df)]
 
     return (
         company_code_filter,
