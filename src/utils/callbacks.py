@@ -4,6 +4,14 @@ import dash
 import dash_html_components as html
 import plotly.graph_objects as go
 from app import app
+from components.ordered_spend_npc import ordered_spend_npc
+from components.supplier_performance_npc import supplier_performance_npc
+from dash.dependencies import ClientsideFunction
+from dash.exceptions import PreventUpdate
+from dash_extensions.enrich import Input, Output, ServersideOutput, Trigger
+from pages.ordered_spend import ordered_spend
+from pages.supplier_performance import supplier_performance
+
 from charts.ordered_spend_charts import (get_data_os_by_month_charts, get_data_os_top_10_suppliers_charts,
                                          get_data_os_total_by_year_charts, os_by_month_chart, os_by_org_chart,
                                          os_top_10_suppliers_chart, os_total_by_year_chart)
@@ -13,14 +21,6 @@ from charts.supplier_performance_charts import (get_data_sp_by_month_charts, get
                                                 get_data_sp_total_deviation_and_percentage_charts, sp_by_month_chart,
                                                 sp_by_org_chart, sp_deviation_cause_and_indicator_chart,
                                                 sp_top_10_suppliers_chart, sp_total_deviation_and_percentage_chart)
-from components.ordered_spend_npc import ordered_spend_npc
-from components.supplier_performance_npc import supplier_performance_npc
-from dash.dependencies import ClientsideFunction
-from dash.exceptions import PreventUpdate
-from dash_extensions.enrich import Input, Output, ServersideOutput, Trigger
-from pages.ordered_spend import ordered_spend
-from pages.supplier_performance import supplier_performance
-
 from utils.data_prep import copy_and_apply_filter, get_data
 
 df = get_data()
@@ -68,15 +68,11 @@ def update_filter_store(
     Returns:
         A dictionary containing the filters.
     """
-    ctx = dash.callback_context
-    triggered_filter = ctx.triggered[0]['prop_id'].split('.')[0]
-
     return {
         'company_code': company_code,
         'purchasing_org': purchasing_org,
         'plant': plant,
         'material_group': material_group,
-        'triggered': triggered_filter,
     }
 
 
@@ -157,7 +153,6 @@ def update_filters(store: dict[str, Any]) -> tuple[list[dict[str, Any]]]:
     purchasing_org = store['purchasing_org']
     plant = store['plant']
     material_group = store['material_group']
-    triggered_filter = store['triggered']
 
     filtered_df = copy_and_apply_filter(
         df=df,
@@ -167,61 +162,25 @@ def update_filters(store: dict[str, Any]) -> tuple[list[dict[str, Any]]]:
         material_group=material_group,
     )
 
-    if company_code and purchasing_org and plant and material_group:
-        cc_df = df['Company Code'].unique()
-        po_df = df['Purchasing Org.'].unique()
-        pl_df = df['Plant'].unique()
-        mg_df = df['Material Group'].unique().astype(str)
-
-    elif triggered_filter == 'company-code':
-        cc_df = df['Company Code'].unique()
-        po_df = filtered_df['Purchasing Org.'].unique()
-        pl_df = filtered_df['Plant'].unique()
-        mg_df = filtered_df['Material Group'].unique().astype(str)
-
-    elif triggered_filter == 'purchasing-org':
-        cc_df = filtered_df['Company Code'].unique()
-        po_df = df['Purchasing Org.'].unique()
-        pl_df = filtered_df['Plant'].unique()
-        mg_df = filtered_df['Material Group'].unique().astype(str)
-
-    elif triggered_filter == 'plant':
-        cc_df = filtered_df['Company Code'].unique()
-        po_df = filtered_df['Purchasing Org.'].unique()
-        pl_df = df['Plant'].unique()
-        mg_df = filtered_df['Material Group'].unique().astype(str)
-
-    elif triggered_filter == 'material-group':
-        cc_df = filtered_df['Company Code'].unique()
-        po_df = filtered_df['Purchasing Org.'].unique()
-        pl_df = filtered_df['Plant'].unique()
-        mg_df = df['Material Group'].unique().astype(str)
-
-    else:
-        cc_df = filtered_df['Company Code'].unique()
-        po_df = filtered_df['Purchasing Org.'].unique()
-        pl_df = filtered_df['Plant'].unique()
-        mg_df = filtered_df['Material Group'].unique().astype(str)
-
     company_code_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(cc_df)]
+    } for label in sorted(filtered_df['Company Code'].unique())]
 
     purchasing_org_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(po_df)]
+    } for label in sorted(filtered_df['Purchasing Org.'].unique())]
 
     plant_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(pl_df)]
+    } for label in sorted(filtered_df['Plant'].unique())]
 
     material_group_filter = [{
         'label': label,
         'value': label,
-    } for label in sorted(mg_df)]
+    } for label in sorted(filtered_df['Material Group'].unique().astype(str))]
 
     return (
         company_code_filter,
