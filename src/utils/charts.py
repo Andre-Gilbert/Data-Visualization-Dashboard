@@ -1,13 +1,17 @@
+import pandas as pd
+
 from charts.config import (NUMBER_OF_ORDERS, ORDERED_SPEND, SUBTITLE_NUMBER_OF_ORDERS, SUBTITLE_ORDERED_SPEND)
 
 
-def format_numbers(row, displayed):
+def format_numbers(row: pd.Series, displayed: str) -> str:
+    """Format numbers to be displayed."""
     suffices = ['', 'k', 'M', 'B', 'T']
     counter = 0
     number = row[displayed]
 
-    if (number < 1000) and (type(number) == int):
+    if number < 1000 and isinstance(number, int):
         return f'{int(number)}'
+
     while number >= 1000:
         number /= 1000
         counter += 1
