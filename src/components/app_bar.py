@@ -26,16 +26,8 @@ def app_bar() -> html.Div:
                             ),
                             dbc.DropdownMenu(
                                 children=[
-                                    dbc.DropdownMenuItem(
-                                        'Ordered Spend Amount',
-                                        id='ordered-spend-amount',
-                                        n_clicks=0,
-                                    ),
-                                    dbc.DropdownMenuItem(
-                                        'Number of Orders',
-                                        id='number-of-orders',
-                                        n_clicks=0,
-                                    )
+                                    dbc.DropdownMenuItem('Ordered Spend Amount', id='ordered-spend-amount'),
+                                    dbc.DropdownMenuItem('Number of Orders', id='number-of-orders')
                                 ],
                                 id='dropdown-menu',
                                 label='Ordered Spend',
