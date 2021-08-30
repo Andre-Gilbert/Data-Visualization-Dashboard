@@ -15,8 +15,8 @@ from charts.config import (CHART_HEIGHT, CHART_MARGIN, DEVIATION_CAUSE_COLORS, D
 def get_data_sp_total_deviation_and_percentage_charts(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     """Create DataFrames for total deviation and percentage of deviation by purchasing organisation."""
     group_columns = ['Company Code', 'Purchasing Org.', 'Plant', 'Material Group']
-    aggregate_functions = {'Document Date': 'count', 'Net Value': 'sum'}
-    rename_columns = {'Net Value': ORDERED_SPEND, 'Document Date': NUMBER_OF_ORDERS}
+    aggregate_functions = {'Purchasing Doc.': 'nunique', 'Net Value': 'sum'}
+    rename_columns = {'Net Value': ORDERED_SPEND, 'Purchasing Doc.': NUMBER_OF_ORDERS}
 
     # DataFrame containing sum and count of all orders of 2020
     df_total_deviation_and_percentage_charts = df.loc[df['Year'] == 2020]
@@ -146,11 +146,11 @@ def get_data_sp_deviation_cause_and_indicator_charts(df: pd.DataFrame) -> pd.Dat
         'Plant',
         'Material Group',
     ]).agg({
-        'Document Date': 'count',
+        'Purchasing Doc.': 'nunique',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': ORDERED_SPEND,
-        'Document Date': NUMBER_OF_ORDERS,
+        'Purchasing Doc.': NUMBER_OF_ORDERS,
     })
 
     return df_bar_charts
@@ -263,11 +263,11 @@ def get_data_sp_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Material Group',
         'Deviation Cause Text',
     ]).agg({
-        'Document Date': 'count',
+        'Purchasing Doc.': 'nunique',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': ORDERED_SPEND,
-        'Document Date': NUMBER_OF_ORDERS,
+        'Purchasing Doc.': NUMBER_OF_ORDERS,
     })
 
     return df_line_charts
@@ -367,11 +367,11 @@ def get_data_sp_by_org_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Material Group',
         'Deviation Cause Text',
     ]).agg({
-        'Document Date': 'count',
+        'Purchasing Doc.': 'nunique',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': ORDERED_SPEND,
-        'Document Date': NUMBER_OF_ORDERS,
+        'Purchasing Doc.': NUMBER_OF_ORDERS,
     })
 
     return df_bar_charts
@@ -461,11 +461,11 @@ def get_data_sp_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Material Group',
         'Deviation Cause Text',
     ]).agg({
-        'Document Date': 'count',
+        'Purchasing Doc.': 'nunique',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': ORDERED_SPEND,
-        'Document Date': NUMBER_OF_ORDERS,
+        'Purchasing Doc.': NUMBER_OF_ORDERS,
     })
 
     return df_bar_charts

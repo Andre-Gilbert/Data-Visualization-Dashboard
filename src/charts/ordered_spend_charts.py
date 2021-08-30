@@ -23,11 +23,11 @@ def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Plant',
         'Material Group',
     ]).agg({
-        'Document Date': 'count',
+        'Purchasing Doc.': 'nunique',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': ORDERED_SPEND,
-        'Document Date': NUMBER_OF_ORDERS,
+        'Purchasing Doc.': NUMBER_OF_ORDERS,
     })
 
     return df_point_charts
@@ -162,11 +162,11 @@ def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Plant',
         'Material Group',
     ]).agg({
-        'Document Date': 'count',
+        'Purchasing Doc.': 'nunique',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': ORDERED_SPEND,
-        'Document Date': NUMBER_OF_ORDERS,
+        'Purchasing Doc.': NUMBER_OF_ORDERS,
     })
 
     return df_line_charts
@@ -379,11 +379,11 @@ def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
         'Plant',
         'Material Group',
     ]).agg({
-        'Document Date': 'count',
+        'Purchasing Doc.': 'nunique',
         'Net Value': 'sum',
     }).reset_index().rename(columns={
         'Net Value': ORDERED_SPEND,
-        'Document Date': NUMBER_OF_ORDERS,
+        'Purchasing Doc.': NUMBER_OF_ORDERS,
     })
 
     return df_bar_charts

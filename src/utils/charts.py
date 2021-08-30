@@ -1,6 +1,16 @@
+from typing import Union
+
+import numpy as np
 import pandas as pd
 
 from charts.config import (NUMBER_OF_ORDERS, ORDERED_SPEND, SUBTITLE_NUMBER_OF_ORDERS, SUBTITLE_ORDERED_SPEND)
+
+
+def __numpy_float_is_int(x_float: Union[float, np.float64]) -> bool:
+    """Checks if float number is approximately an integer."""
+    x_int = int(x_float)
+    x_res = x_float % x_int
+    return np.isclose(x_res, 0.0)
 
 
 def format_numbers(row: pd.Series, displayed: str) -> str:
@@ -9,7 +19,7 @@ def format_numbers(row: pd.Series, displayed: str) -> str:
     counter = 0
     number = row[displayed]
 
-    if number < 1000 and isinstance(number, int):
+    if number < 1000 and (isinstance(number, int) or (__numpy_float_is_int(number))):
         return f'{int(number)}'
 
     while number >= 1000:
