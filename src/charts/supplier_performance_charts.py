@@ -6,9 +6,9 @@ from plotly.subplots import make_subplots
 from utils.charts import apply_number_of_orders_flag, format_numbers
 from utils.data_prep import copy_and_apply_filter
 
-from charts.config import (DEVIATION_CAUSE_COLORS, DISPLAY, EMPTY_GRAPH, NUMBER_OF_ORDERS, ORDERED_SPEND, SAP_FONT,
-                           SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER,
-                           TEMPLATE)
+from charts.config import (CHART_HEIGHT, CHART_MARGIN, DEVIATION_CAUSE_COLORS, DISPLAY, EMPTY_GRAPH, NUMBER_OF_ORDERS,
+                           ORDERED_SPEND, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR, SAP_UI_POINT_CHART_LABEL,
+                           SAP_UI_POINT_CHART_NUMBER, TEMPLATE, TITLE_FONT_SIZE)
 
 
 @cache.memoize()
@@ -122,9 +122,9 @@ def sp_total_deviation_and_percentage_chart(
     )
 
     fig.update_layout(
-        height=95,
+        height=93,
         margin={
-            't': 66,
+            't': 62,
             'b': 0,
             'l': 10,
             'r': 10
@@ -236,15 +236,15 @@ def sp_deviation_cause_and_indicator_chart(
     )
 
     fig.update_layout(
-        height=570,
+        height=CHART_HEIGHT,
         barmode='group',
         showlegend=False,
         title=title,
-        title_font_size=20,
+        title_font_size=TITLE_FONT_SIZE,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
-        margin_b=50,
+        margin=CHART_MARGIN,
     )
 
     fig.update_yaxes(categoryorder='total ascending')
@@ -344,13 +344,13 @@ def sp_by_month_chart(
             ))
 
     fig.update_layout(
-        height=570,
+        height=CHART_HEIGHT,
         title=title,
-        title_font_size=20,
+        title_font_size=TITLE_FONT_SIZE,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
-        margin_b=50,
+        margin=CHART_MARGIN,
     )
 
     return fig
@@ -432,13 +432,13 @@ def sp_by_org_chart(
 
     fig.update_layout(
         barmode='stack',
-        height=570,
+        height=CHART_HEIGHT,
         title=title,
-        title_font_size=20,
+        title_font_size=TITLE_FONT_SIZE,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
-        margin_b=50,
+        margin=CHART_MARGIN,
     )
 
     fig.update_yaxes(
@@ -530,13 +530,13 @@ def sp_top_10_suppliers_chart(
 
     fig.update_layout(
         barmode='stack',
-        height=570,
+        height=CHART_HEIGHT,
         title=title,
-        title_font_size=20,
+        title_font_size=TITLE_FONT_SIZE,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
-        margin_b=50,
+        margin=CHART_MARGIN,
     )
 
     fig.update_yaxes(categoryorder='total ascending')

@@ -5,10 +5,10 @@ from app import cache
 from utils.charts import apply_number_of_orders_flag, format_numbers
 from utils.data_prep import copy_and_apply_filter
 
-from charts.config import (DISPLAY, EMPTY_GRAPH, EMPTY_GRAPH_IBCS, IBCS_HUE_1, IBCS_HUE_2, NUMBER_OF_ORDERS,
-                           ORDERED_SPEND, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
+from charts.config import (CHART_HEIGHT, CHART_MARGIN, DISPLAY, EMPTY_GRAPH, EMPTY_GRAPH_IBCS, IBCS_HUE_1, IBCS_HUE_2,
+                           NUMBER_OF_ORDERS, ORDERED_SPEND, SAP_FONT, SAP_LABEL_COLOR, SAP_TEXT_COLOR,
                            SAP_UI_CHART_PALETTE_SEMANTIC_NEUTRAL, SAP_UI_POINT_CHART_LABEL, SAP_UI_POINT_CHART_NUMBER,
-                           TEMPLATE)
+                           TEMPLATE, TITLE_FONT_SIZE)
 
 pd.options.mode.chained_assignment = None
 
@@ -139,7 +139,7 @@ def os_total_by_year_chart(
     )
 
     fig.update_layout(
-        height=95,
+        height=93,
         margin={
             't': 50,
             'b': 0,
@@ -260,13 +260,13 @@ def os_by_month_chart(
         ))
 
     fig.update_layout(
-        height=570,
+        height=CHART_HEIGHT,
         title=title,
-        title_font_size=20,
+        title_font_size=TITLE_FONT_SIZE,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
-        margin_b=50,
+        margin=CHART_MARGIN,
     )
 
     return fig
@@ -348,15 +348,15 @@ def os_by_org_chart(
         ))
 
     fig.update_layout(
-        height=570,
+        height=CHART_HEIGHT,
         barmode='group',
         title=title,
-        title_font_size=20,
+        title_font_size=TITLE_FONT_SIZE,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
         legend_traceorder='reversed',
-        margin_b=50,
+        margin=CHART_MARGIN,
     )
 
     fig.update_yaxes(
@@ -468,15 +468,15 @@ def os_top_10_suppliers_chart(
         ))
 
     fig.update_layout(
-        height=570,
+        height=CHART_HEIGHT,
         barmode='group',
         title=title,
-        title_font_size=20,
+        title_font_size=TITLE_FONT_SIZE,
         font_color=SAP_TEXT_COLOR,
         font_family=SAP_FONT,
         template=TEMPLATE,
         legend_traceorder='reversed',
-        margin_b=50,
+        margin=CHART_MARGIN,
     )
 
     fig.update_yaxes(

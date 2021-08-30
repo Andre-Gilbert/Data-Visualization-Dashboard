@@ -1,4 +1,7 @@
 # Style
+CHART_HEIGHT = 560
+TITLE_FONT_SIZE = 18
+CHART_MARGIN = {'t': 70, 'b': 40, 'l': 80, 'r': 80}
 SAP_FONT = "'72', '72full', Arial, Helvetica, sans-serif"
 SAP_TEXT_COLOR = '#32363a'
 SAP_LABEL_COLOR = '#89919a'

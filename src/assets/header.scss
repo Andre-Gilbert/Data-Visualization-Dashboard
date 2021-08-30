@@ -13,7 +13,7 @@
 
 #header.sticky {
   position: sticky;
-  top: 0;
+  top: 4.4rem;
   z-index: 1000;
 }
 
@@ -29,13 +29,12 @@
 }
 
 .header-flex-container {
-  max-width: 66rem;
   flex: 1 1 100%;
 }
 
 .page-title {
   margin: 0 0 0.8rem;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 400;
   color: $sap-text-color;
 }

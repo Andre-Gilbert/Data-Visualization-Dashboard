@@ -18,7 +18,7 @@ def ordered_spend_npc() -> html.Div:
             dcc.Loading(
                 dcc.Graph(
                     id='ordered-spend-total-by-year-chart',
-                    style={'height': '9.5rem'},
+                    style={'height': '9.3rem'},
                 ),
                 color=INDICATOR_COLOR,
                 type=INDICATOR_TYPE,
