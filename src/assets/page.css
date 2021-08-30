@@ -40,10 +40,26 @@
   }
 }
 
-/* large size screen
+/* medium screen height
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (min-height: 1024px) {
+@media screen and (min-height: 1000px) {
   .page {
-    padding: 0 2.4rem 42rem;
+    padding: 0 2.4rem 30rem;
+  }
+}
+
+/* large screen height
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-height: 1100px) {
+  .page {
+    padding: 0 2.4rem 40rem;
+  }
+}
+
+/* ultra large screen height
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-height: 1300px) {
+  .page {
+    padding: 0 2.4rem 60rem;
   }
 }
