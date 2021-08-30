@@ -55,12 +55,12 @@ app.clientside_callback(
     ],
     memoize=True,
 )
-def update_filter_store(
+def update_store(
     company_code: int,
     purchasing_org: int,
     plant: int,
     material_group: str,
-) -> str:
+) -> dict[str, Any]:
     """Update filters based on user input.
 
     Args:
@@ -199,7 +199,11 @@ def update_filters(store: dict[str, Any]) -> tuple[list[dict[str, Any]]]:
         Input('store', 'data'),
     ],
 )
-def update_ordered_spend_charts(active_tab: str, dropdown_label: str, store: dict[str, Any]) -> tuple[go.Figure]:
+def update_ordered_spend_charts(
+    active_tab: str,
+    dropdown_label: str,
+    store: dict[str, Any],
+) -> tuple[go.Figure]:
     """Callback that updates the ordered spend charts.
 
     Args:
@@ -332,7 +336,11 @@ def update_ordered_spend_charts(active_tab: str, dropdown_label: str, store: dic
         Input('store', 'data'),
     ],
 )
-def update_supplier_performance_charts(active_tab: str, dropdown_label: str, store: dict[str, Any]) -> tuple[go.Figure]:
+def update_supplier_performance_charts(
+    active_tab: str,
+    dropdown_label: str,
+    store: dict[str, Any],
+) -> tuple[go.Figure]:
     """Callback that updates the supplier performance charts.
 
     Args:

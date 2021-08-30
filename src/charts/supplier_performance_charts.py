@@ -194,11 +194,10 @@ def sp_deviation_cause_and_indicator_chart(
         return EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
-
-    df_dev_cause['Color'] = df_dev_cause['Deviation Cause Text'].map(DEVIATION_CAUSE_COLORS)
-
     title = ('Deviated Orders by Deviation Cause and Indicator<br>'
              f'<sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>')
+
+    df_dev_cause['Color'] = df_dev_cause['Deviation Cause Text'].map(DEVIATION_CAUSE_COLORS)
 
     df_dev_cause[DISPLAY] = df_dev_cause.apply(lambda row: format_numbers(row, displayed), axis=1)
     df_dev_indicator[DISPLAY] = df_dev_indicator.apply(lambda row: format_numbers(row, displayed), axis=1)
@@ -317,13 +316,13 @@ def sp_by_month_chart(
                 12: 'Dec'
             }
         },
-        inplace=True)
+        inplace=True,
+    )
 
     if df.empty:
         return EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
-
     title = f'Deviated Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     fig = go.Figure()
@@ -408,7 +407,6 @@ def sp_by_org_chart(
         return EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
-
     title = (f'Deviated Orders by Purchasing Organisation'
              f'<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>')
 
@@ -507,7 +505,6 @@ def sp_top_10_suppliers_chart(
     df.sort_values(ORDERED_SPEND, ascending=False, inplace=True)
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
-
     title = f'Deviated Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     fig = go.Figure()

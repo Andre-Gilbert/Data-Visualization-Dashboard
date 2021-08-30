@@ -218,7 +218,8 @@ def os_by_month_chart(
                 12: 'Dec'
             }
         },
-        inplace=True)
+        inplace=True,
+    )
 
     if df.empty:
         if ibcs:
@@ -226,7 +227,6 @@ def os_by_month_chart(
         return EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
-
     title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     df_this_year = df.loc[df['Year'] == 2020]
@@ -307,7 +307,6 @@ def os_by_org_chart(
         return EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
-
     title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     df[DISPLAY] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
@@ -427,10 +426,9 @@ def os_top_10_suppliers_chart(
         return EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
+    title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     df[DISPLAY] = df.apply(lambda row: format_numbers(row, displayed), axis=1)
-
-    title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
 
     sort_array = df.sort_values(['Year', displayed], ascending=True)
     sort_array = sort_array.loc[:, 'Supplier Name'].drop_duplicates(keep='last')

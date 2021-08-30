@@ -14,22 +14,20 @@ def navbar() -> html.Div:
     Returns:
         The html containing the tabs.
     """
-    navbar = html.Div([
+    navbar = html.Div(
         html.Div(
-            html.Div(
-                dbc.Tabs(
-                    [
-                        dbc.Tab(label='Ordered Spend', tab_id='tab-ordered-spend'),
-                        dbc.Tab(label='Supplier Performance', tab_id='tab-supplier-performance'),
-                        dbc.Tab(label='Ordered Spend IBCS', tab_id='tab-ordered-spend-ibcs'),
-                    ],
-                    id='tabs',
-                    active_tab='tab-ordered-spend',
-                ),
-                className='navbar-container',
+            dbc.Tabs(
+                [
+                    dbc.Tab(label='Ordered Spend', tab_id='tab-ordered-spend'),
+                    dbc.Tab(label='Supplier Performance', tab_id='tab-supplier-performance'),
+                    dbc.Tab(label='Ordered Spend IBCS', tab_id='tab-ordered-spend-ibcs'),
+                ],
+                id='tabs',
+                active_tab='tab-ordered-spend',
             ),
-            className='navbar',
-        )
-    ])
+            className='navbar-container',
+        ),
+        className='navbar',
+    )
 
     return navbar

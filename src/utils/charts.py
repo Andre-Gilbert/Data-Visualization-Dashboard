@@ -7,7 +7,7 @@ from charts.config import (NUMBER_OF_ORDERS, ORDERED_SPEND, SUBTITLE_NUMBER_OF_O
 
 
 def __numpy_float_is_int(x_float: Union[float, np.float64]) -> bool:
-    """Checks if float number is approximately an integer."""
+    """Check if float number is approximately an integer."""
     x_int = np.around(x_float, 0)
     x_res = x_float % x_int
     return np.isclose(x_res, 0.0)

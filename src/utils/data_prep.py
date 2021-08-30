@@ -9,8 +9,8 @@ from app import cache
 def get_data() -> pd.DataFrame:
     """Read and prepare the data.
 
-    Reads the data from an Excel-File, applies the preparation required for the Dashboard
-    and returns the data frame. Should be the only function called from outside.
+    Reads the data from an Excel-File, applies
+    the preparation required for the Dashboardand returns the data frame.
 
     Returns:
         Prepared DataFrame.
@@ -29,9 +29,9 @@ def get_data() -> pd.DataFrame:
 @cache.memoize()
 def copy_and_apply_filter(
     df: pd.DataFrame,
-    company_code: str,
-    purchasing_org: str,
-    plant: str,
+    company_code: int,
+    purchasing_org: int,
+    plant: int,
     material_group: str,
 ) -> pd.DataFrame:
     """Copy the DataFrame and apply the filters from the GUI.
@@ -93,7 +93,7 @@ def __calculate_month_and_year(df: pd.DataFrame) -> None:
     df['Year/Month'] = pd.to_datetime(df['Document Date']).dt.to_period('M')
 
 
-def __determine_delivery_indicator(row: pd.DataFrame) -> str:
+def __determine_delivery_indicator(row: pd.Series) -> str:
     """Return the delivery indicator."""
     if row['Delivery Deviation (Days)'] <= 0:
         return 'in time'
