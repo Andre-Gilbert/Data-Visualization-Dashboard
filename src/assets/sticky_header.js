@@ -6,8 +6,6 @@ window.dash_clientside.clientside = {
     let header = document.getElementById('header');
     let sticky = header.offsetTop - 43;
 
-    console.log(sticky)
-
     window.onscroll = function() {
 
       // Only enabled for large screen sizes
