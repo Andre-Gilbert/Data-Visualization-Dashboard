@@ -3,7 +3,7 @@
 .page {
   display: block;
   position: relative;
-  padding: 0 1.2rem 10rem;
+  padding: 0 1.2rem 20rem;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
@@ -35,6 +35,14 @@
 /* large size screen
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-width: 1024px) {
+  .page {
+    padding: 0 2.4rem 20rem;
+  }
+}
+
+/* large size screen
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (min-height: 1024px) {
   .page {
     padding: 0 2.4rem 42rem;
   }
