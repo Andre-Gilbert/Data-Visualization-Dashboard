@@ -4,10 +4,12 @@ window.dash_clientside.clientside = {
 
   stickyHeader: function(id) {
     let header = document.getElementById('header');
-    let sticky = header.offsetTop - 44;
+    let sticky = header.offsetTop - 43;
+
+    console.log(sticky)
 
     window.onscroll = function() {
-      
+
       // Only enabled for large screen sizes
       if (window.innerWidth >= 1024 && window.pageYOffset > sticky) {
         header.classList.add('sticky');

@@ -24,28 +24,28 @@ def header() -> html.Div:
                                     html.Div(
                                         [
                                             html.P('Company Code:', className='filter-bar-label'),
-                                            dcc.Dropdown(id='company-code'),
+                                            dcc.Dropdown(id='company-code', placeholder='All'),
                                         ],
                                         className='filter-bar-container',
                                     ),
                                     html.Div(
                                         [
                                             html.P('Purchasing Org.:', className='filter-bar-label'),
-                                            dcc.Dropdown(id='purchasing-org'),
+                                            dcc.Dropdown(id='purchasing-org', placeholder='All'),
                                         ],
                                         className='filter-bar-container',
                                     ),
                                     html.Div(
                                         [
                                             html.P('Plant:', className='filter-bar-label'),
-                                            dcc.Dropdown(id='plant'),
+                                            dcc.Dropdown(id='plant', placeholder='All'),
                                         ],
                                         className='filter-bar-container',
                                     ),
                                     html.Div(
                                         [
                                             html.P('Material Group:', className='filter-bar-label'),
-                                            dcc.Dropdown(id='material-group'),
+                                            dcc.Dropdown(id='material-group', placeholder='All'),
                                         ],
                                         className='filter-bar-container',
                                     )
