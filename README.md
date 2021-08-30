@@ -16,7 +16,16 @@ python src/index.py
 ## Requirements
 View [requirements](requirements.txt).
 
-## Usage
+## Responsive
+
+### Mobile
+<img src="img/mobile_view.png" alt="mobile-view" width="300"/>
+
+### Desktop
+<img src="img/mobile_view.png" alt="desktop-view" width="1000"/>
+
+
+
 
 
 ## License
