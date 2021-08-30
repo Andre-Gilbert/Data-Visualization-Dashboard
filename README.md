@@ -22,7 +22,7 @@ View [requirements](requirements.txt).
 <img src="img/mobile_view.png" alt="mobile-view" width="300"/>
 
 ### Desktop
-<img src="img/mobile_view.png" alt="desktop-view" width="1000"/>
+<img src="img/desktop_view.png" alt="desktop-view" width="1000"/>
 
 
 
