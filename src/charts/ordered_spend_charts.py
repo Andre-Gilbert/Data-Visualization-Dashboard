@@ -139,7 +139,7 @@ def os_total_by_year_chart(
     )
 
     fig.update_layout(
-        height=97,
+        height=95,
         margin={
             't': 50,
             'b': 0,

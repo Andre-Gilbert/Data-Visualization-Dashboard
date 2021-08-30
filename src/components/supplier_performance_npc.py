@@ -18,7 +18,7 @@ def supplier_performance_npc() -> html.Div:
             dcc.Loading(
                 dcc.Graph(
                     id='supplier-performance-total-deviation-and-percentage-chart',
-                    style={'height': '9.7rem'},
+                    style={'height': '9.5rem'},
                 ),
                 color=INDICATOR_COLOR,
                 type=INDICATOR_TYPE,
