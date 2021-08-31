@@ -4,8 +4,8 @@
   display: block;
   position: relative;
   padding: 0 1.2rem 20rem;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: padding 0.2s;
+  transition: padding 0.2s;
 }
 
 .page-main {
