@@ -4,7 +4,7 @@ window.dash_clientside.clientside = {
 
   stickyHeader: function(id) {
     let header = document.getElementById('header');
-    let sticky = header.offsetTop - 43;
+    let sticky = header.offsetTop - 44;
 
     window.onscroll = function() {
 
