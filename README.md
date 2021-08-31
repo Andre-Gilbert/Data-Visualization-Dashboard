@@ -15,6 +15,9 @@ python src/index.py
 ## Requirements
 View [requirements](requirements.txt).
 
+## Design Guidelines
+View [SAP Fiori Guidelines](https://experience.sap.com/fiori-design-web/).
+
 ## App
 
 ### Mobile View
