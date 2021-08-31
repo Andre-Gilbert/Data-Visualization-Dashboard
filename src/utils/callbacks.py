@@ -81,12 +81,16 @@ def update_store(
 @app.callback(
     Output('dropdown-menu', 'label'),
     [
+        Input('dropdown-menu', 'label'),
         Trigger('ordered-spend-amount', 'n_clicks'),
         Trigger('number-of-orders', 'n_clicks'),
     ],
 )
-def update_dropdown_label() -> str:
+def update_dropdown_label(current_label: str) -> str:
     """Callback that updates the dropdown label.
+
+    Args: 
+        current_label: The current label of the dropdown menu.
 
     Returns:
         The updated dropdown label.
@@ -99,6 +103,9 @@ def update_dropdown_label() -> str:
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
         dropdown_label = id_lookup[button_id]
+
+    if current_label == dropdown_label:
+        raise PreventUpdate
 
     return dropdown_label
 
