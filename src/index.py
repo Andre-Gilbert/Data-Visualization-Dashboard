@@ -1,3 +1,8 @@
+"""App.
+
+This component is the skeleton around the actual pages, and should only
+contain code that should be seen on all pages. (e.g. navigation bar).
+"""
 import dash_core_components as dcc
 import dash_html_components as html
 
@@ -15,5 +20,6 @@ app.layout = html.Div([
     dcc.Store(id='store'),
 ])
 
+# Start application
 if __name__ == '__main__':
     app.run_server(debug=True)

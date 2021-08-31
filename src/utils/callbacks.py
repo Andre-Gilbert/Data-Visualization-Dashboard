@@ -1,3 +1,4 @@
+"""Dashboard Callbacks."""
 from typing import Any
 
 import dash
@@ -61,7 +62,7 @@ def update_store(
     plant: int,
     material_group: str,
 ) -> dict[str, Any]:
-    """Update filters based on user input.
+    """Update store based on user input.
 
     Args:
         company_code, purchasing_org, plant, material_group: GUI filters.

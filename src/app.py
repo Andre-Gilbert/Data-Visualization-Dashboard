@@ -1,3 +1,8 @@
+"""app.py
+
+This is the entry file for the application, and
+should only contain setup and boilerplate code.
+"""
 import dash_bootstrap_components as dbc
 from dash_extensions.enrich import Dash
 from flask_caching import Cache

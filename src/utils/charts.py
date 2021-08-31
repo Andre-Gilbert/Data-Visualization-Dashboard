@@ -1,7 +1,9 @@
+"""Chart Functions."""
 from typing import Union
 
 import numpy as np
 import pandas as pd
+from app import cache
 
 from charts.config import (NUMBER_OF_ORDERS, ORDERED_SPEND, SUBTITLE_NUMBER_OF_ORDERS, SUBTITLE_ORDERED_SPEND)
 
@@ -13,6 +15,7 @@ def __numpy_float_is_int(x_float: Union[float, np.float64]) -> bool:
     return np.isclose(x_res, 0.0)
 
 
+@cache.memoize()
 def format_numbers(row: pd.Series, displayed: str) -> str:
     """Format numbers to be displayed."""
     suffices = ['', 'k', 'M', 'B', 'T']
