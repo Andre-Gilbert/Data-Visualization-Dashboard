@@ -35,10 +35,7 @@ def app_bar() -> html.Div:
                         ],
                         className='app-bar-container',
                     ),
-                    html.Div(
-                        html.P('SF', className='icon-text'),
-                        className='user-icon',
-                    )
+                    html.Div('SF', className='user-icon')
                 ],
                 className='app-bar-main',
             )

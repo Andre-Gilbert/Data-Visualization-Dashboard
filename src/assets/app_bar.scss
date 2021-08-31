@@ -108,9 +108,9 @@
   height: 3.6rem;
   border-radius: 50%;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
 
   color: $sap-user-icon-color;
   background-color: $sap-user-icon-background-color;
