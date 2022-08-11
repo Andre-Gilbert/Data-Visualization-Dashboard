@@ -18,10 +18,10 @@ def get_data() -> pd.DataFrame:
     data_path = os.path.join(os.path.dirname(__file__), '../../data/Daten I.xlsx')
     df = pd.read_excel(data_path)
 
-    __rename_columns(df)
-    __drop_unnecessary_columns(df)
-    __calculate_month_and_year(df)
-    __calculate_delivery_details(df)
+    _rename_columns(df)
+    _drop_unnecessary_columns(df)
+    _calculate_month_and_year(df)
+    _calculate_delivery_details(df)
 
     return df
 
@@ -60,7 +60,7 @@ def copy_and_apply_filter(
     return filtered_df
 
 
-def __rename_columns(df: pd.DataFrame) -> None:
+def _rename_columns(df: pd.DataFrame) -> None:
     """Rename columns of the DataFrame."""
     name_dict = {
         'supplier delivery date': 'Supplier Delivery Date',
@@ -77,23 +77,22 @@ def __rename_columns(df: pd.DataFrame) -> None:
         'deviation cause': 'Deviation Cause',
         'deviation cause text': 'Deviation Cause Text'
     }
-
     df.rename(columns=name_dict, inplace=True)
 
 
-def __drop_unnecessary_columns(df: pd.DataFrame) -> None:
+def _drop_unnecessary_columns(df: pd.DataFrame) -> None:
     """Drop unnecessary columns of the DataFrame."""
     df.drop(columns=df.columns[-2:], axis=1, inplace=True)
 
 
-def __calculate_month_and_year(df: pd.DataFrame) -> None:
+def _calculate_month_and_year(df: pd.DataFrame) -> None:
     """Fill the missing values for the columns concerning month and year."""
     df['Year'] = df['Document Date'].dt.year
     df['Month'] = df['Document Date'].dt.month
     df['Year/Month'] = pd.to_datetime(df['Document Date']).dt.to_period('M')
 
 
-def __determine_delivery_indicator(row: pd.Series) -> str:
+def _determine_delivery_indicator(row: pd.Series) -> str:
     """Return the delivery indicator."""
     if row['Delivery Deviation (Days)'] <= 0:
         return 'in time'
@@ -105,7 +104,7 @@ def __determine_delivery_indicator(row: pd.Series) -> str:
     return 'late: 5 to 10 days'
 
 
-def __calculate_delivery_details(df: pd.DataFrame) -> None:
+def _calculate_delivery_details(df: pd.DataFrame) -> None:
     """Calculate the delivery deviation and classify the corresponding indicator."""
     df['Delivery Deviation (Days)'] = (df['Delivery Date'] - df['Supplier Delivery Date']).dt.days
-    df['Deviation Indicator'] = df.apply(__determine_delivery_indicator, axis=1)
+    df['Deviation Indicator'] = df.apply(_determine_delivery_indicator, axis=1)

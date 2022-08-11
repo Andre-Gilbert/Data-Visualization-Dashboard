@@ -89,7 +89,7 @@ def update_store(
 def update_dropdown_label(current_label: str) -> str:
     """Callback that updates the dropdown label.
 
-    Args: 
+    Args:
         current_label: The current label of the dropdown menu.
 
     Returns:
@@ -127,7 +127,7 @@ def update_page(active_tab: str) -> tuple[str, html.Div, html.Div]:
     Returns:
         The page header, numeric point charts and the page content.
     """
-    if active_tab == 'tab-ordered-spend' or active_tab == 'tab-ordered-spend-ibcs':
+    if active_tab in ('tab-ordered-spend', 'tab-ordered-spend-ibcs'):
         page_header = 'Ordered Spend'
         page_numeric_point_chart = ordered_spend_npc()
         page_content = ordered_spend()
@@ -222,7 +222,7 @@ def update_ordered_spend_charts(
     Returns:
         The updated charts.
     """
-    if active_tab != 'tab-ordered-spend' and active_tab != 'tab-ordered-spend-ibcs':
+    if active_tab not in ('tab-ordered-spend', 'tab-ordered-spend-ibcs'):
         raise PreventUpdate
 
     company_code = store['company_code']

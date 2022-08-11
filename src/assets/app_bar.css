@@ -9,7 +9,6 @@
   top: 0;
   z-index: 1500;
   background-color: #354a5f;
-  -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
@@ -18,29 +17,16 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .app-bar-container {
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .logo {
@@ -58,7 +44,7 @@
 .dropdown-toggle::after {
   margin-left: 0.5rem;
   vertical-align: 0.25rem;
-  content: '';
+  content: "";
   border-top: 0.6rem solid #d1e8ff;
   border-right: 0.5rem solid transparent;
   border-bottom: 0;
@@ -77,8 +63,7 @@
 .btn-secondary:not(:disabled):not(.disabled).active:focus,
 .btn-secondary:not(:disabled):not(.disabled):active:focus,
 .show > .btn-secondary.dropdown-toggle:focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 .btn-secondary:not(:disabled):not(.disabled).active,
@@ -94,17 +79,14 @@
   font-size: 1rem;
   border: none;
   border-radius: 0.4rem;
-  -webkit-box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
 }
-
 .dropdown-menu button {
   font-size: 1.4rem !important;
   padding: 0.5rem 5rem 0.5rem 1rem;
   color: #32363a;
   border-radius: 0.4rem;
 }
-
 .dropdown-menu button:focus {
   outline: none;
 }
@@ -120,7 +102,6 @@
   width: 3.6rem;
   height: 3.6rem;
   border-radius: 50%;
-  display: -ms-grid;
   display: grid;
   place-items: center;
   font-size: 1.8rem;

@@ -8,7 +8,6 @@
   background-color: #ffffff;
   border-top: solid 0.1rem transparent;
   border-bottom: solid 0.1rem #d9d9d9;
-  -webkit-transition: padding 0.2s;
   transition: padding 0.2s;
 }
 
@@ -17,20 +16,13 @@
   width: 100%;
   min-height: 100%;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .nav {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   font-size: 1.4rem;
 }
 

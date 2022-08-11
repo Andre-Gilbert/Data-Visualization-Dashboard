@@ -4,7 +4,6 @@
   display: block;
   position: relative;
   padding: 0 1.2rem 20rem;
-  -webkit-transition: padding 0.2s;
   transition: padding 0.2s;
 }
 
@@ -19,17 +18,11 @@
   width: 100%;
   margin: 2.4rem 0 0;
   border-radius: 0.4rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   color: #32363a;
   background-color: #ffffff;
-  -webkit-box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.1);
 }
 
 /* large size screen
@@ -39,7 +32,6 @@
     padding: 0 2.4rem 20rem;
   }
 }
-
 /* medium screen height
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-height: 1000px) {
@@ -47,7 +39,6 @@
     padding: 0 2.4rem 30rem;
   }
 }
-
 /* large screen height
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-height: 1100px) {
@@ -55,7 +46,6 @@
     padding: 0 2.4rem 40rem;
   }
 }
-
 /* ultra large screen height
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (min-height: 1300px) {

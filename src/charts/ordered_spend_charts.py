@@ -1,7 +1,7 @@
 """Ordered Spend Charts."""
 import pandas as pd
 import plotly.graph_objects as go
-from app import cache
+
 from utils.charts import apply_number_of_orders_flag, format_numbers
 from utils.data_prep import copy_and_apply_filter
 
@@ -13,7 +13,7 @@ from charts.config import (CHART_HEIGHT, CHART_MARGIN, DISPLAY, EMPTY_GRAPH, EMP
 pd.options.mode.chained_assignment = None
 
 
-@cache.memoize()
+
 def get_data_os_total_by_year_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for total Ordered Spend by year charts."""
     df_point_charts = df.groupby([
@@ -151,7 +151,7 @@ def os_total_by_year_chart(
     return fig
 
 
-@cache.memoize()
+
 def get_data_os_by_month_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for the Ordered Spend by month chart."""
     df_line_charts = df.groupby([
@@ -222,9 +222,7 @@ def os_by_month_chart(
     )
 
     if df.empty:
-        if ibcs:
-            return EMPTY_GRAPH_IBCS
-        return EMPTY_GRAPH
+        return EMPTY_GRAPH_IBCS if ibcs else EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
     title = f'Orders by Month<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
@@ -302,9 +300,7 @@ def os_by_org_chart(
     }).reset_index()
 
     if df.empty:
-        if ibcs:
-            return EMPTY_GRAPH_IBCS
-        return EMPTY_GRAPH
+        return EMPTY_GRAPH_IBCS if ibcs else EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
     title = f'Orders by Purchasing Organisation<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
@@ -367,7 +363,7 @@ def os_by_org_chart(
     return fig
 
 
-@cache.memoize()
+
 def get_data_os_top_10_suppliers_charts(df: pd.DataFrame) -> pd.DataFrame:
     """Create DataFrame for the Ordered Spend by top 10 suppliers chart."""
     df_bar_charts = df.groupby([
@@ -421,9 +417,7 @@ def os_top_10_suppliers_chart(
     df = df.loc[df['Supplier Name'].isin(supplier_names)]
 
     if df.empty:
-        if ibcs:
-            return EMPTY_GRAPH_IBCS
-        return EMPTY_GRAPH
+        return EMPTY_GRAPH_IBCS if ibcs else EMPTY_GRAPH
 
     displayed, subtitle = apply_number_of_orders_flag(number_of_orders)
     title = f'Orders of Top Ten Suppliers<br><sup style="color: {SAP_LABEL_COLOR}">{subtitle}</sup>'
